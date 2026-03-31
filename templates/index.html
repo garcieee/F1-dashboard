@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+{% block title %}F1 Dashboard — ML Race Prediction{% endblock %}
+
+{% block content %}
+
+<!-- ── Hero ── -->
+<section class="relative pt-10 pb-16 animate-fade-up">
+
+  <!-- Background number decoration -->
+  <div class="absolute -top-4 right-0 font-display font-800 text-[12rem] leading-none text-white opacity-[0.025] select-none pointer-events-none">
+    F1
+  </div>
+
+  <!-- Label -->
+  <div class="section-sub mb-3">
+    <span class="pulse-dot mr-2"></span>Machine Learning · Formula 1 · Race Intelligence
+  </div>
+
+  <!-- Title -->
+  <h1 class="section-heading text-5xl md:text-7xl mb-4">
+    Race <span class="accent">Prediction</span><br/>Command Centre
+  </h1>
+
+  <p class="font-ui text-lg text-f1dim max-w-2xl leading-relaxed mb-8">
+    Four independent ML models trained on FastF1 historical data from 2018 to present.
+    Select a module, input your parameters, and receive instant race intelligence.
+  </p>
+
+  <!-- Quick stat bar -->
+  <div class="flex flex-wrap gap-8 mt-2 mb-12">
+    {% for label, value in [("Models Active","4"), ("Seasons Covered","7+"), ("Data Source","FastF1"), ("Framework","scikit-learn")] %}
+    <div class="flex flex-col gap-1">
+      <span class="font-mono text-xs text-f1muted tracking-widest uppercase">{{ label }}</span>
+      <span class="font-display font-700 text-2xl text-f1bright">{{ value }}</span>
+    </div>
+    {% endfor %}
+  </div>
+
+  <hr class="hud-line mb-12" />
+</section>
+
+<!-- ── Module cards ── -->
+<section>
+  <div class="section-sub mb-2">Select a Prediction Module</div>
+  <h2 class="font-display font-700 text-3xl uppercase tracking-wide mb-8">
+    Available <span style="color:#E8002D">Models</span>
+  </h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <!-- Card 1: Finishing Position -->
+    <a href="/finishing" class="panel p-6 group relative cursor-pointer block transition-all duration-300 hover:border-f1red animate-fade-up-d1"
+       style="clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));">
+      <span class="bracket bracket-tl group-hover:opacity-100 opacity-50 transition-opacity"></span>
+      <span class="bracket bracket-br group-hover:opacity-100 opacity-50 transition-opacity"></span>
+
+      <!-- Model number -->
+      <div class="font-mono text-xs text-f1muted mb-4 tracking-widest">MODEL 01</div>
+
+      <!-- Icon -->
+      <div class="w-12 h-12 flex items-center justify-center mb-4" style="background:rgba(232,0,45,0.1); border:1px solid rgba(232,0,45,0.2);">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8002D" stroke-width="1.5">
+          <path d="M3 17l3-8 4 4 3-6 4 8"/>
+          <circle cx="20" cy="17" r="2"/>
+          <path d="M3 20h18"/>
+        </svg>
+      </div>
+
+      <h3 class="font-display font-700 text-2xl uppercase tracking-wide mb-2 group-hover:text-f1red transition-colors">
+        Finishing Position
+      </h3>
+      <p class="font-ui text-f1dim text-sm leading-relaxed mb-5">
+        Predict a driver's race finishing position using Random Forest Classifier. Input driver, circuit, and season.
+      </p>
+
+      <!-- Tags -->
+      <div class="flex flex-wrap gap-2 mb-5">
+        <span class="data-badge">Random Forest</span>
+        <span class="data-badge">Classification</span>
+      </div>
+
+      <!-- Inputs preview -->
+      <div class="font-mono text-xs text-f1muted space-y-1 border-t border-f1border pt-4">
+        <div class="flex items-center gap-2"><span class="text-f1red">→</span> Driver</div>
+        <div class="flex items-center gap-2"><span class="text-f1red">→</span> Circuit</div>
+        <div class="flex items-center gap-2"><span class="text-f1red">→</span> Season</div>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-5 flex items-center gap-2 font-display font-600 text-sm uppercase tracking-widest text-f1red">
+        Run Prediction <span class="transition-transform group-hover:translate-x-1 inline-block">→</span>
+      </div>
+    </a>
+
+    <!-- Card 2: Lap Time -->
+    <a href="/laptime" class="panel p-6 group relative cursor-pointer block transition-all duration-300 hover:border-f1red animate-fade-up-d2"
+       style="clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));">
+      <span class="bracket bracket-tl group-hover:opacity-100 opacity-50 transition-opacity"></span>
+      <span class="bracket bracket-br group-hover:opacity-100 opacity-50 transition-opacity"></span>
+
+      <div class="font-mono text-xs text-f1muted mb-4 tracking-widest">MODEL 02</div>
+
+      <div class="w-12 h-12 flex items-center justify-center mb-4" style="background:rgba(232,0,45,0.1); border:1px solid rgba(232,0,45,0.2);">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8002D" stroke-width="1.5">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 7v5l3 3"/>
+        </svg>
+      </div>
+
+      <h3 class="font-display font-700 text-2xl uppercase tracking-wide mb-2 group-hover:text-f1red transition-colors">
+        Lap Time Estimator
+      </h3>
+      <p class="font-ui text-f1dim text-sm leading-relaxed mb-5">
+        Estimate lap time for a driver given tire compound and lap number using Linear Regression.
+      </p>
+
+      <div class="flex flex-wrap gap-2 mb-5">
+        <span class="data-badge">Linear Regression</span>
+        <span class="data-badge">Regression</span>
+      </div>
+
+      <div class="font-mono text-xs text-f1muted space-y-1 border-t border-f1border pt-4">
+        <div class="flex items-center gap-2"><span class="text-f1red">→</span> Driver</div>
+        <div class="flex items-center gap-2"><span class="text-f1red">→</span> Tire Compound</div>
+        <div class="flex items-center gap-2"><span class="text-f1red">→</span> Lap Number</div>
+      </div>
+
+      <div class="mt-5 flex items-center gap-2 font-display font-600 text-sm uppercase tracking-widest text-f1red">
+        Run Prediction <span class="transition-transform group-hover:translate-x-1 inline-block">→</span>
+      </div>
+    </a>
+
+    <!-- Card 3: Overtake & SC -->
+    <a href="/overtake" class="panel p-6 group relative cursor-pointer block transition-all duration-300 hover:border-f1red animate-fade-up-d2"
+       style="clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));">
+      <span class="bracket bracket-tl group-hover:opacity-100 opacity-50 transition-opacity"></span>
+      <span class="bracket bracket-br group-hover:opacity-100 opacity-50 transition-opacity"></span>
+
+      <div class="font-mono text-xs text-f1muted mb-4 tracking-widest">MODEL 03</div>
+
+      <div class="w-12 h-12 flex items-center justify-center mb-4" style="background:rgba(232,0,45,0.1); border:1px solid rgba(232,0,45,0.2);">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8002D" stroke-width="1.5">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+        </svg>
+      </div>
+
+      <h3 class="font-display font-700 text-2xl uppercase tracking-wide mb-2 group-hover:text-f1red transition-colors">
+        Overtake &amp; Safety Car
+      </h3>
+      <p class="font-ui text-f1dim text-sm leading-relaxed mb-5">
+        Estimate overtake probability and safety car deployment chance for a circuit using Logistic Regression.
+      </p>
+
+      <div class="flex flex-wrap gap-2 mb-5">
+        <span class="data-badge">Logistic Regression</span>
+        <span class="data-badge">Probability</span>
+      </div>
+
+      <div class="font-mono text-xs text-f1muted space-y-1 border-t border-f1border pt-4">
+        <div class="flex items-center gap-2"><span class="text-f1red">→</span> Circuit</div>
+        <div class="flex items-center gap-2"><span class="text-f1red">→</span> Weather Condition</div>
+      </div>
+
+      <div class="mt-5 flex items-center gap-2 font-display font-600 text-sm uppercase tracking-widest text-f1red">
+        Run Prediction <span class="transition-transform group-hover:translate-x-1 inline-block">→</span>
+      </div>
+    </a>
+
+    <!-- Card 4: Constructor -->
+    <a href="/constructor" class="panel p-6 group relative cursor-pointer block transition-all duration-300 hover:border-f1red animate-fade-up-d3"
+       style="clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));">
+      <span class="bracket bracket-tl group-hover:opacity-100 opacity-50 transition-opacity"></span>
+      <span class="bracket bracket-br group-hover:opacity-100 opacity-50 transition-opacity"></span>
+
+      <div class="font-mono text-xs text-f1muted mb-4 tracking-widest">MODEL 04</div>
+
+      <div class="w-12 h-12 flex items-center justify-center mb-4" style="background:rgba(232,0,45,0.1); border:1px solid rgba(232,0,45,0.2);">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8002D" stroke-width="1.5">
+          <rect x="3" y="12" width="4" height="9"/><rect x="10" y="7" width="4" height="14"/>
+          <rect x="17" y="3" width="4" height="18"/>
+        </svg>
+      </div>
+
+      <h3 class="font-display font-700 text-2xl uppercase tracking-wide mb-2 group-hover:text-f1red transition-colors">
+        Constructor Championship
+      </h3>
+      <p class="font-ui text-f1dim text-sm leading-relaxed mb-5">
+        Project final constructor standings for a season using Linear Regression on historical team performance.
+      </p>
+
+      <div class="flex flex-wrap gap-2 mb-5">
+        <span class="data-badge">Linear Regression</span>
+        <span class="data-badge">Ranking</span>
+      </div>
+
+      <div class="font-mono text-xs text-f1muted space-y-1 border-t border-f1border pt-4">
+        <div class="flex items-center gap-2"><span class="text-f1red">→</span> Season Year</div>
+      </div>
+
+      <div class="mt-5 flex items-center gap-2 font-display font-600 text-sm uppercase tracking-widest text-f1red">
+        Run Prediction <span class="transition-transform group-hover:translate-x-1 inline-block">→</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ── Tech stack bar ── -->
+<section class="mt-16 animate-fade-up-d3">
+  <hr class="hud-line mb-8" />
+  <div class="section-sub mb-4">System Stack</div>
+  <div class="flex flex-wrap gap-3">
+    {% for tech in ["Python 3.11", "FastF1", "scikit-learn", "pandas", "numpy", "joblib", "Flask", "Tailwind CSS"] %}
+    <span class="font-mono text-xs text-f1dim border border-f1border px-3 py-1.5 tracking-widest uppercase hover:border-f1red hover:text-f1bright transition-colors">
+      {{ tech }}
+    </span>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

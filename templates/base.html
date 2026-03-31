@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}F1 Dashboard{% endblock %}</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Rajdhani (display) + Share Tech Mono (mono/data) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            f1red:   '#E8002D',
+            f1dark:  '#08090A',
+            f1panel: '#0E1014',
+            f1card:  '#13161C',
+            f1border:'#1E2330',
+            f1muted: '#3A3F50',
+            f1dim:   '#6B7280',
+            f1bright:'#F5F5F5',
+          },
+          fontFamily: {
+            display: ['Barlow Condensed', 'sans-serif'],
+            ui:      ['Rajdhani', 'sans-serif'],
+            mono:    ['Share Tech Mono', 'monospace'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ── Global reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: #08090A;
+      color: #F5F5F5;
+      font-family: 'Rajdhani', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Carbon fibre background ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 2px,
+          rgba(255,255,255,0.012) 2px,
+          rgba(255,255,255,0.012) 4px
+        );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Racing stripe accent (top) ── */
+    .top-stripe {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #E8002D 0%, #FF4060 40%, #E8002D 60%, transparent 100%);
+      z-index: 100;
+    }
+
+    /* ── Navbar ── */
+    nav {
+      background: rgba(8,9,10,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid #1E2330;
+      position: sticky;
+      top: 0;
+      z-index: 90;
+    }
+
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-logo span { color: #E8002D; }
+
+    .nav-link {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #6B7280;
+      padding: 0.4rem 1rem;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #F5F5F5;
+      border-color: #1E2330;
+      background: rgba(232,0,45,0.08);
+    }
+
+    .nav-link.active::before {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 0; right: 0;
+      height: 2px;
+      background: #E8002D;
+    }
+
+    /* ── Page wrapper ── */
+    .page-wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* ── Section heading ── */
+    .section-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 2.5rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .section-heading .accent { color: #E8002D; }
+
+    .section-sub {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      color: #E8002D;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── Panel / card ── */
+    .panel {
+      background: #13161C;
+      border: 1px solid #1E2330;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #E8002D, transparent);
+    }
+
+    /* ── Form elements ── */
+    .f1-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #6B7280;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    .f1-select {
+      width: 100%;
+      background: #08090A;
+      border: 1px solid #1E2330;
+      color: #F5F5F5;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.65rem 1rem;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23E8002D' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+    }
+
+    .f1-select:focus {
+      outline: none;
+      border-color: #E8002D;
+      box-shadow: 0 0 0 2px rgba(232,0,45,0.15);
+    }
+
+    .f1-select option {
+      background: #13161C;
+    }
+
+    /* ── Submit button ── */
+    .f1-btn {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: #E8002D;
+      color: #fff;
+      border: none;
+      padding: 0.85rem 2.5rem;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.2s, transform 0.1s;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    }
+
+    .f1-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0);
+      transition: background 0.15s;
+    }
+
+    .f1-btn:hover {
+      background: #FF1F3D;
+      transform: translateY(-1px);
+    }
+
+    .f1-btn:hover::after { background: rgba(255,255,255,0.06); }
+    .f1-btn:active { transform: translateY(0); }
+
+    /* ── Result card ── */
+    .result-glow {
+      box-shadow: 0 0 60px rgba(232,0,45,0.12), 0 0 120px rgba(232,0,45,0.05);
+    }
+
+    /* ── Data badge ── */
+    .data-badge {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: rgba(232,0,45,0.1);
+      color: #E8002D;
+      border: 1px solid rgba(232,0,45,0.25);
+      padding: 0.2rem 0.6rem;
+      display: inline-block;
+    }
+
+    /* ── Separator line ── */
+    .hud-line {
+      border: none;
+      border-top: 1px solid #1E2330;
+      position: relative;
+    }
+
+    .hud-line::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 0;
+      width: 60px;
+      height: 1px;
+      background: #E8002D;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scanline {
+      from { transform: translateY(-100%); }
+      to   { transform: translateY(100vh); }
+    }
+
+    @keyframes pulse-red {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.4; }
+    }
+
+    .animate-fade-up { animation: fadeSlideUp 0.5s ease forwards; }
+    .animate-fade-up-d1 { animation: fadeSlideUp 0.5s 0.1s ease both; }
+    .animate-fade-up-d2 { animation: fadeSlideUp 0.5s 0.2s ease both; }
+    .animate-fade-up-d3 { animation: fadeSlideUp 0.5s 0.3s ease both; }
+
+    .pulse-dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #E8002D;
+      animation: pulse-red 1.4s ease-in-out infinite;
+    }
+
+    /* ── Scanline overlay ── */
+    .scanline-wrap {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .scanline-wrap::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      height: 2px;
+      background: rgba(232,0,45,0.04);
+      animation: scanline 8s linear infinite;
+    }
+
+    /* ── Corner bracket decoration ── */
+    .bracket {
+      position: absolute;
+      width: 16px; height: 16px;
+      border-color: #E8002D;
+      border-style: solid;
+    }
+
+    .bracket-tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+    .bracket-tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; }
+    .bracket-bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; }
+    .bracket-br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+    /* ── Mobile nav toggle ── */
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: flex; }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #08090A; }
+    ::-webkit-scrollbar-thumb { background: #1E2330; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #E8002D; }
+  </style>
+</head>
+<body>
+
+<!-- Scanline overlay -->
+<div class="scanline-wrap"></div>
+
+<!-- Top racing stripe -->
+<div class="top-stripe"></div>
+
+<!-- ── Navigation ── -->
+<nav class="pt-1">
+  <div class="max-w-screen-xl mx-auto px-6 py-3 flex items-center justify-between">
+
+    <!-- Logo -->
+    <a href="/" class="nav-logo flex items-center gap-2">
+      <svg width="28" height="20" viewBox="0 0 28 20" fill="none">
+        <polygon points="0,20 6,0 14,8 22,0 28,20 21,14 14,20 7,14" fill="#E8002D"/>
+      </svg>
+      F1<span>DASHBOARD</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <div class="hidden md:flex items-center gap-1">
+      <a href="/"            class="nav-link {% if request.endpoint == 'index'       %}active{% endif %}">Home</a>
+      <a href="/finishing"   class="nav-link {% if request.endpoint == 'finishing'   %}active{% endif %}">Finishing Pos.</a>
+      <a href="/laptime"     class="nav-link {% if request.endpoint == 'laptime'     %}active{% endif %}">Lap Time</a>
+      <a href="/overtake"    class="nav-link {% if request.endpoint == 'overtake'    %}active{% endif %}">Overtake / SC</a>
+      <a href="/constructor" class="nav-link {% if request.endpoint == 'constructor' %}active{% endif %}">Constructor</a>
+    </div>
+
+    <!-- Live indicator -->
+    <div class="hidden md:flex items-center gap-2 font-mono text-xs text-f1dim">
+      <span class="pulse-dot"></span>
+      <span>ML ENGINE READY</span>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button id="hamburger" class="md:hidden text-f1dim hover:text-f1bright transition-colors" onclick="toggleMenu()">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <path d="M3 5h16M3 11h16M3 17h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="flex-col border-t border-f1border md:hidden">
+    <a href="/"            class="nav-link py-3 border-b border-f1border {% if request.endpoint == 'index'       %}active{% endif %}">Home</a>
+    <a href="/finishing"   class="nav-link py-3 border-b border-f1border {% if request.endpoint == 'finishing'   %}active{% endif %}">Finishing Position</a>
+    <a href="/laptime"     class="nav-link py-3 border-b border-f1border {% if request.endpoint == 'laptime'     %}active{% endif %}">Lap Time</a>
+    <a href="/overtake"    class="nav-link py-3 border-b border-f1border {% if request.endpoint == 'overtake'    %}active{% endif %}">Overtake / Safety Car</a>
+    <a href="/constructor" class="nav-link py-3                           {% if request.endpoint == 'constructor' %}active{% endif %}">Constructor</a>
+  </div>
+</nav>
+
+<!-- ── Main content ── -->
+<main class="page-wrapper">
+  {% block content %}{% endblock %}
+</main>
+
+<!-- ── Footer ── -->
+<footer class="relative z-10 border-t border-f1border mt-8 py-6">
+  <div class="max-w-screen-xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-3">
+    <p class="font-mono text-xs text-f1muted tracking-widest uppercase">
+      F1 Dashboard &mdash; ML Prediction System
+    </p>
+    <p class="font-mono text-xs text-f1muted tracking-wider">
+      Powered by FastF1 &middot; scikit-learn &middot; Flask
+    </p>
+    <p class="font-mono text-xs text-f1muted">
+      For educational use only
+    </p>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    const m = document.getElementById('mobile-menu');
+    m.classList.toggle('open');
+  }
+</script>
+
+{% block scripts %}{% endblock %}
+</body>
+</html>

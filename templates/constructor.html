@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+{% block title %}Constructor Championship — F1 Dashboard{% endblock %}
+
+{% block content %}
+
+<!-- Page header -->
+<div class="animate-fade-up mb-10">
+  <div class="section-sub mb-2">
+    <a href="/" class="hover:text-f1bright transition-colors">Home</a>
+    <span class="mx-2 opacity-40">›</span> Model 04
+  </div>
+  <h1 class="section-heading text-4xl md:text-6xl mb-3">
+    Constructor <span class="accent">Championship</span>
+  </h1>
+  <p class="font-ui text-f1dim max-w-xl">
+    Linear Regression · Project final constructor standings and points totals for a selected season.
+  </p>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+
+  <!-- ── Input form ── -->
+  <div class="lg:col-span-2 animate-fade-up-d1">
+    <div class="panel p-6 relative" style="clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);">
+      <span class="bracket bracket-tl"></span>
+
+      <div class="font-mono text-xs text-f1muted tracking-widest mb-5 flex items-center gap-2">
+        <span class="pulse-dot"></span> INPUT PARAMETERS
+      </div>
+
+      <form method="POST" action="/constructor" id="predictForm">
+
+        <!-- Season -->
+        <div class="mb-8">
+          <label class="f1-label" for="season">Season</label>
+          <select class="f1-select" name="season" id="season" required>
+            <option value="" disabled {% if not inputs.season %}selected{% endif %}>Select season…</option>
+            {% for s in seasons %}
+            <option value="{{ s }}" {% if inputs.season == s %}selected{% endif %}>{{ s }} Season</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <button type="submit" class="f1-btn w-full" id="submitBtn">
+          <span id="btnText">Run Projection</span>
+        </button>
+
+      </form>
+
+      <div class="mt-6 pt-5 border-t border-f1border font-mono text-xs text-f1muted space-y-1">
+        <div class="flex justify-between"><span>Algorithm</span><span class="text-f1bright">Linear Regression</span></div>
+        <div class="flex justify-between"><span>Type</span><span class="text-f1bright">Ranking + Points</span></div>
+        <div class="flex justify-between"><span>Constructors</span><span class="text-f1bright">10 teams</span></div>
+      </div>
+    </div>
+
+    <!-- Info box -->
+    <div class="panel p-5 mt-6" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 16px 100%, 0 calc(100% - 16px));">
+      <div class="font-mono text-xs text-f1muted tracking-widest mb-3">PROJECTION BASIS</div>
+      <div class="space-y-2 font-mono text-xs text-f1muted">
+        <div class="flex gap-2"><span class="text-f1red">·</span> Historical points trends per team</div>
+        <div class="flex gap-2"><span class="text-f1red">·</span> Season-over-season performance delta</div>
+        <div class="flex gap-2"><span class="text-f1red">·</span> Constructor consistency scoring</div>
+        <div class="flex gap-2"><span class="text-f1red">·</span> Mid-season upgrade factor modeling</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Result pane ── -->
+  <div class="lg:col-span-3 animate-fade-up-d2">
+
+    {% if result %}
+    <div class="panel p-6 result-glow relative"
+         style="clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));">
+      <span class="bracket bracket-tl"></span>
+      <span class="bracket bracket-br"></span>
+
+      <div class="font-mono text-xs text-f1red tracking-widest mb-2 flex items-center gap-2">
+        <span class="pulse-dot"></span> PROJECTION OUTPUT
+      </div>
+
+      <div class="font-display font-800 text-3xl uppercase tracking-wide mb-6">
+        {{ result.season }} <span style="color:#E8002D;">Season</span> Standings
+      </div>
+
+      <!-- Find max points for bar scaling -->
+      {% set max_pts = result.standings[0][1] %}
+
+      <!-- Standings table -->
+      <div class="space-y-2">
+        {% for i, (team, pts) in enumerate(result.standings) %}
+        {% set rank = i + 1 %}
+        {% set bar_pct = (pts / max_pts * 100) | round(1) %}
+
+        <div class="relative flex items-center gap-3 py-3 px-3 transition-colors hover:bg-white/[0.02]"
+             style="border:1px solid {% if rank == 1 %}rgba(232,0,45,0.3){% else %}#1E2330{% endif %};">
+
+          <!-- Rank badge -->
+          <div class="font-display font-700 text-xl w-8 text-center shrink-0"
+               style="color:{% if rank == 1 %}#E8002D{% elif rank == 2 %}#C0C0C0{% elif rank == 3 %}#CD7F32{% else %}#3A3F50{% endif %};">
+            P{{ rank }}
+          </div>
+
+          <!-- Team name + bar -->
+          <div class="flex-1 min-w-0">
+            <div class="flex justify-between items-center mb-1">
+              <span class="font-ui font-600 text-sm
+                {% if rank == 1 %}text-f1bright{% else %}text-f1dim{% endif %}">
+                {{ team }}
+              </span>
+              <span class="font-mono text-sm font-bold
+                {% if rank == 1 %}text-f1red{% else %}text-f1dim{% endif %}">
+                {{ pts }} pts
+              </span>
+            </div>
+            <div class="h-1.5 bg-f1border overflow-hidden">
+              <div class="h-full transition-all duration-700"
+                   style="
+                     width: {{ bar_pct }}%;
+                     background: {% if rank == 1 %}#E8002D{% elif rank == 2 %}#C0C0C0{% elif rank == 3 %}#CD7F32{% else %}#3A3F50{% endif %};
+                     transition-delay: {{ (i * 0.06)|round(2) }}s;
+                   ">
+              </div>
+            </div>
+          </div>
+
+          <!-- Champion badge -->
+          {% if rank == 1 %}
+          <div class="shrink-0">
+            <span class="data-badge text-xs">CHAMPION</span>
+          </div>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+
+      <p class="mt-6 font-mono text-xs text-f1muted">
+        ⚠ Dummy model active. Swap <code class="text-f1bright">models/constructor.pkl</code> to enable trained predictions.
+      </p>
+    </div>
+
+    {% else %}
+    <div class="panel p-8 flex flex-col items-center justify-center min-h-80 text-center"
+         style="border-style: dashed; clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));">
+      <div class="w-16 h-16 flex items-center justify-center mb-4" style="background:rgba(232,0,45,0.08); border:1px solid rgba(232,0,45,0.15);">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8002D" stroke-width="1.2" opacity="0.6">
+          <rect x="3" y="12" width="4" height="9"/><rect x="10" y="7" width="4" height="14"/>
+          <rect x="17" y="3" width="4" height="18"/>
+        </svg>
+      </div>
+      <div class="font-mono text-xs text-f1muted tracking-widest mb-2">AWAITING INPUT</div>
+      <p class="font-ui text-f1dim text-sm">
+        Select a season and click<br/><span class="text-f1bright font-600">Run Projection</span> to see standings.
+      </p>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.getElementById('predictForm').addEventListener('submit', function() {
+    const btn  = document.getElementById('submitBtn');
+    const text = document.getElementById('btnText');
+    btn.disabled = true;
+    text.textContent = 'Processing…';
+    btn.style.opacity = '0.7';
+  });
+</script>
+{% endblock %}

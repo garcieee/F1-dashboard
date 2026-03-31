@@ -1,0 +1,228 @@
+{% extends "base.html" %}
+{% block title %}Overtake & Safety Car — F1 Dashboard{% endblock %}
+
+{% block content %}
+
+<!-- Page header -->
+<div class="animate-fade-up mb-10">
+  <div class="section-sub mb-2">
+    <a href="/" class="hover:text-f1bright transition-colors">Home</a>
+    <span class="mx-2 opacity-40">›</span> Model 03
+  </div>
+  <h1 class="section-heading text-4xl md:text-6xl mb-3">
+    Overtake &amp; <span class="accent">Safety Car</span>
+  </h1>
+  <p class="font-ui text-f1dim max-w-xl">
+    Logistic Regression · Estimate overtake probability and safety car deployment chance for a given circuit and weather.
+  </p>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+
+  <!-- ── Input form ── -->
+  <div class="lg:col-span-2 animate-fade-up-d1">
+    <div class="panel p-6 relative" style="clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);">
+      <span class="bracket bracket-tl"></span>
+
+      <div class="font-mono text-xs text-f1muted tracking-widest mb-5 flex items-center gap-2">
+        <span class="pulse-dot"></span> INPUT PARAMETERS
+      </div>
+
+      <form method="POST" action="/overtake" id="predictForm">
+
+        <!-- Circuit -->
+        <div class="mb-5">
+          <label class="f1-label" for="circuit">Circuit</label>
+          <select class="f1-select" name="circuit" id="circuit" required>
+            <option value="" disabled {% if not inputs.circuit %}selected{% endif %}>Select circuit…</option>
+            {% for c in circuits %}
+            <option value="{{ c }}" {% if inputs.circuit == c %}selected{% endif %}>{{ c }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <!-- Weather -->
+        <div class="mb-8">
+          <label class="f1-label" for="weather">Weather Condition</label>
+          <select class="f1-select" name="weather" id="weather" required>
+            <option value="" disabled {% if not inputs.weather %}selected{% endif %}>Select weather…</option>
+            {% for w in weathers %}
+            <option value="{{ w }}" {% if inputs.weather == w %}selected{% endif %}>{{ w }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <button type="submit" class="f1-btn w-full" id="submitBtn">
+          <span id="btnText">Run Prediction</span>
+        </button>
+
+      </form>
+
+      <div class="mt-6 pt-5 border-t border-f1border font-mono text-xs text-f1muted space-y-1">
+        <div class="flex justify-between"><span>Algorithm</span><span class="text-f1bright">Logistic Regression</span></div>
+        <div class="flex justify-between"><span>Type</span><span class="text-f1bright">Binary Probability</span></div>
+        <div class="flex justify-between"><span>Outputs</span><span class="text-f1bright">2 probabilities</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Result pane ── -->
+  <div class="lg:col-span-3 animate-fade-up-d2">
+
+    {% if result %}
+    <div class="panel p-8 result-glow relative"
+         style="clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));">
+      <span class="bracket bracket-tl"></span>
+      <span class="bracket bracket-br"></span>
+
+      <div class="font-mono text-xs text-f1red tracking-widest mb-6 flex items-center gap-2">
+        <span class="pulse-dot"></span> PREDICTION OUTPUT
+      </div>
+
+      <!-- Two big probability gauges -->
+      <div class="grid grid-cols-2 gap-6 mb-8">
+
+        <!-- Overtake % -->
+        <div class="text-center">
+          <div class="font-mono text-xs text-f1muted mb-3 tracking-widest">OVERTAKE PROB.</div>
+
+          <!-- Circular gauge -->
+          <div class="relative inline-flex items-center justify-center mb-3">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+              <!-- Track -->
+              <circle cx="60" cy="60" r="50" fill="none" stroke="#1E2330" stroke-width="8"/>
+              <!-- Progress -->
+              <circle cx="60" cy="60" r="50" fill="none" stroke="#E8002D" stroke-width="8"
+                stroke-dasharray="{{ (result.overtake_pct / 100 * 314.16)|round(1) }} 314.16"
+                stroke-linecap="butt"
+                transform="rotate(-90 60 60)"
+                style="transition: stroke-dasharray 1s ease;"/>
+              <!-- Value -->
+              <text x="60" y="55" text-anchor="middle" font-family="Share Tech Mono" font-size="22" fill="#F5F5F5">
+                {{ result.overtake_pct }}
+              </text>
+              <text x="60" y="72" text-anchor="middle" font-family="Share Tech Mono" font-size="10" fill="#6B7280">
+                %
+              </text>
+            </svg>
+          </div>
+
+          <!-- Risk label -->
+          {% set ov = result.overtake_pct %}
+          <div class="font-display font-700 text-lg uppercase tracking-wide
+            {% if ov >= 65 %}text-green-400{% elif ov >= 40 %}text-yellow-400{% else %}text-f1dim{% endif %}">
+            {% if ov >= 65 %}High{% elif ov >= 40 %}Medium{% else %}Low{% endif %}
+          </div>
+          <div class="font-mono text-xs text-f1muted tracking-wider">Overtake Activity</div>
+        </div>
+
+        <!-- Safety Car % -->
+        <div class="text-center">
+          <div class="font-mono text-xs text-f1muted mb-3 tracking-widest">SAFETY CAR PROB.</div>
+
+          <div class="relative inline-flex items-center justify-center mb-3">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="50" fill="none" stroke="#1E2330" stroke-width="8"/>
+              <circle cx="60" cy="60" r="50" fill="none" stroke="#F5C400" stroke-width="8"
+                stroke-dasharray="{{ (result.safety_pct / 100 * 314.16)|round(1) }} 314.16"
+                stroke-linecap="butt"
+                transform="rotate(-90 60 60)"/>
+              <text x="60" y="55" text-anchor="middle" font-family="Share Tech Mono" font-size="22" fill="#F5F5F5">
+                {{ result.safety_pct }}
+              </text>
+              <text x="60" y="72" text-anchor="middle" font-family="Share Tech Mono" font-size="10" fill="#6B7280">
+                %
+              </text>
+            </svg>
+          </div>
+
+          {% set sc = result.safety_pct %}
+          <div class="font-display font-700 text-lg uppercase tracking-wide
+            {% if sc >= 50 %}text-yellow-400{% elif sc >= 25 %}text-orange-400{% else %}text-green-400{% endif %}">
+            {% if sc >= 50 %}Likely{% elif sc >= 25 %}Possible{% else %}Unlikely{% endif %}
+          </div>
+          <div class="font-mono text-xs text-f1muted tracking-wider">SC Deployment</div>
+        </div>
+      </div>
+
+      <hr class="hud-line mb-6" />
+
+      <!-- Input summary -->
+      <div class="font-mono text-xs text-f1muted mb-4 tracking-widest">INPUT SUMMARY</div>
+      <div class="grid grid-cols-2 gap-4 mb-6">
+        {% for label, val in [("Circuit", inputs.circuit), ("Weather", inputs.weather)] %}
+        <div class="p-3" style="background:#08090A; border:1px solid #1E2330;">
+          <div class="text-xs text-f1muted mb-1">{{ label }}</div>
+          <div class="font-ui font-600 text-f1bright text-sm">{{ val }}</div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Bar comparison -->
+      <div class="space-y-3">
+        <div>
+          <div class="flex justify-between font-mono text-xs text-f1muted mb-1">
+            <span>OVERTAKE PROBABILITY</span><span class="text-f1bright">{{ result.overtake_pct }}%</span>
+          </div>
+          <div class="h-2 bg-f1border overflow-hidden">
+            <div class="h-full bg-f1red" style="width:{{ result.overtake_pct }}%; transition:width 0.8s ease;"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between font-mono text-xs text-f1muted mb-1">
+            <span>SAFETY CAR PROBABILITY</span><span class="text-f1bright">{{ result.safety_pct }}%</span>
+          </div>
+          <div class="h-2 bg-f1border overflow-hidden">
+            <div class="h-full" style="background:#F5C400; width:{{ result.safety_pct }}%; transition:width 0.8s 0.2s ease;"></div>
+          </div>
+        </div>
+      </div>
+
+      <p class="mt-6 font-mono text-xs text-f1muted">
+        ⚠ Dummy model active. Swap <code class="text-f1bright">models/overtake.pkl</code> to enable trained predictions.
+      </p>
+    </div>
+
+    {% else %}
+    <div class="panel p-8 flex flex-col items-center justify-center min-h-64 text-center"
+         style="border-style: dashed; clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));">
+      <div class="w-16 h-16 flex items-center justify-center mb-4" style="background:rgba(232,0,45,0.08); border:1px solid rgba(232,0,45,0.15);">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8002D" stroke-width="1.2" opacity="0.6">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+        </svg>
+      </div>
+      <div class="font-mono text-xs text-f1muted tracking-widest mb-2">AWAITING INPUT</div>
+      <p class="font-ui text-f1dim text-sm">
+        Select a circuit and weather condition<br/>then click <span class="text-f1bright font-600">Run Prediction</span>.
+      </p>
+    </div>
+    {% endif %}
+
+    <!-- Context info -->
+    <div class="panel p-5 mt-6" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 16px 100%, 0 calc(100% - 16px));">
+      <div class="font-mono text-xs text-f1muted tracking-widest mb-4">CIRCUIT OVERTAKING FACTORS</div>
+      <div class="grid grid-cols-2 gap-3 font-mono text-xs text-f1muted">
+        <div class="flex gap-2"><span class="text-f1red">·</span> DRS Zone Count</div>
+        <div class="flex gap-2"><span class="text-f1red">·</span> Track Width</div>
+        <div class="flex gap-2"><span class="text-f1red">·</span> Long Straights</div>
+        <div class="flex gap-2"><span class="text-f1red">·</span> Braking Zones</div>
+        <div class="flex gap-2"><span class="text-f1red">·</span> Weather Impact</div>
+        <div class="flex gap-2"><span class="text-f1red">·</span> Historical SC Rate</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.getElementById('predictForm').addEventListener('submit', function() {
+    const btn  = document.getElementById('submitBtn');
+    const text = document.getElementById('btnText');
+    btn.disabled = true;
+    text.textContent = 'Processing…';
+    btn.style.opacity = '0.7';
+  });
+</script>
+{% endblock %}
