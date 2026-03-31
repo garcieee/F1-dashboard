@@ -1,0 +1,113 @@
+# ═══════════════════════════════════════════════════════════════════════
+# F1 Dashboard .gitignore
+# ═══════════════════════════════════════════════════════════════════════
+
+# ── Python ──────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ── Virtual Environment ─────────────────────────────────────────────────
+.venv
+venv
+env
+ENV
+
+# ── Flask ───────────────────────────────────────────────────────────────
+instance/
+.webassets-cache
+
+# ── IDEs & Editors ──────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.project
+.pydevproject
+.settings/
+*.sublime-project
+*.sublime-workspace
+.atom/
+.emacs.d/
+*.vim
+
+# ── OS Files ────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.directory
+Desktop.ini
+
+# ── Environment & Config ───────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+.flaskenv
+config.local.py
+
+# ── Testing & Coverage ─────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+
+# ── Database ────────────────────────────────────────────────────────────
+*.db
+*.sqlite
+*.sqlite3
+instance/
+
+# ── Logs ────────────────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Node modules (if using any frontend tooling) ────────────────────────
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# ── macOS ───────────────────────────────────────────────────────────────
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# ── Temporary Files ────────────────────────────────────────────────────
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# ── Python Poetry (if used) ────────────────────────────────────────────
+poetry.lock
+
+# ── Pipenv (if used) ────────────────────────────────────────────────────
+Pipfile.lock

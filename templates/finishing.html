@@ -79,7 +79,7 @@
   </div>
 
   <!-- ── Result pane ── -->
-  <div class="lg:col-span-3 animate-fade-up-d2">
+  <div class="lg:col-span-3">
 
     {% if result %}
     <!-- Result card -->
@@ -96,7 +96,7 @@
       <div class="flex items-end gap-4 mb-8">
         <div>
           <div class="font-mono text-xs text-f1muted mb-1 tracking-widest">PREDICTED POSITION</div>
-          <div class="font-display font-800 leading-none" style="font-size:7rem; color:#E8002D; line-height:1;">
+          <div class="font-display font-800 leading-none" style="font-size:7rem; color:#C0392B; line-height:1;">
             P{{ result.position }}
           </div>
         </div>
@@ -130,8 +130,9 @@
           <span class="text-f1bright">{{ result.confidence }}%</span>
         </div>
         <div class="h-2 bg-f1border rounded-none overflow-hidden">
-          <div class="h-full bg-f1red transition-all duration-1000"
-               style="width: {{ result.confidence }}%;"></div>
+          <div class="h-full bg-f1red transition-all duration-1000 confidence-bar"
+               data-bar="{{ result.confidence }}"
+               style="width:{{ result.confidence }}%;"></div>
         </div>
       </div>
 
@@ -146,7 +147,7 @@
     <div class="panel p-8 flex flex-col items-center justify-center min-h-64 text-center"
          style="border-style: dashed; clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));">
       <div class="w-16 h-16 flex items-center justify-center mb-4" style="background:rgba(232,0,45,0.08); border:1px solid rgba(232,0,45,0.15);">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8002D" stroke-width="1.2" opacity="0.6">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="1.2" opacity="0.6">
           <path d="M3 17l3-8 4 4 3-6 4 8"/><circle cx="20" cy="17" r="2"/>
           <path d="M3 20h18"/>
         </svg>
@@ -184,6 +185,11 @@
 
 {% block scripts %}
 <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const bar = document.querySelector('.confidence-bar');
+    if (bar) bar.style.width = bar.dataset.confidence + '%';
+  });
+
   document.getElementById('predictForm').addEventListener('submit', function() {
     const btn  = document.getElementById('submitBtn');
     const text = document.getElementById('btnText');

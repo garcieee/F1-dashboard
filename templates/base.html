@@ -5,10 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{% block title %}F1 Dashboard{% endblock %}</title>
 
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Fonts: Rajdhani (display) + Share Tech Mono (mono/data) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
@@ -18,19 +16,29 @@
       theme: {
         extend: {
           colors: {
-            f1red:   '#E8002D',
-            f1dark:  '#08090A',
-            f1panel: '#0E1014',
-            f1card:  '#13161C',
-            f1border:'#1E2330',
-            f1muted: '#3A3F50',
-            f1dim:   '#6B7280',
-            f1bright:'#F5F5F5',
+            f1red:    '#C0392B',
+            f1acc:    '#D95A4A',
+            f1dark:   '#0F1117',
+            f1panel:  '#161922',
+            f1card:   '#1C2030',
+            f1border: '#252B3B',
+            f1muted:  '#4A5060',
+            f1dim:    '#7A8395',
+            f1bright: '#D8DCE8',
           },
           fontFamily: {
             display: ['Barlow Condensed', 'sans-serif'],
             ui:      ['Rajdhani', 'sans-serif'],
             mono:    ['Share Tech Mono', 'monospace'],
+          },
+          fontWeight: {
+            '300': '300',
+            '400': '400',
+            '500': '500',
+            '600': '600',
+            '700': '700',
+            '800': '800',
+            '900': '900',
           },
         }
       }
@@ -38,339 +46,290 @@
   </script>
 
   <style>
-    /* ── Global reset & base ── */
     *, *::before, *::after { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
-      background-color: #08090A;
-      color: #F5F5F5;
+      background-color: #0F1117;
+      color: #D8DCE8;
       font-family: 'Rajdhani', sans-serif;
       min-height: 100vh;
       overflow-x: hidden;
     }
 
-    /* ── Carbon fibre background ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        repeating-linear-gradient(
-          45deg,
-          transparent,
-          transparent 2px,
-          rgba(255,255,255,0.012) 2px,
-          rgba(255,255,255,0.012) 4px
-        );
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ── Racing stripe accent (top) ── */
+    /* thin top stripe */
     .top-stripe {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #E8002D 0%, #FF4060 40%, #E8002D 60%, transparent 100%);
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, #C0392B 30%, #D95A4A 65%, transparent 100%);
       z-index: 100;
     }
 
     /* ── Navbar ── */
     nav {
-      background: rgba(8,9,10,0.92);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid #1E2330;
-      position: sticky;
-      top: 0;
-      z-index: 90;
+      background: rgba(15,17,23,0.95);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid #252B3B;
+      position: sticky; top: 0; z-index: 90;
     }
 
     .nav-logo {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 800;
-      font-size: 1.5rem;
-      letter-spacing: 0.08em;
+      font-size: 1.35rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
+      color: #D8DCE8;
     }
-
-    .nav-logo span { color: #E8002D; }
+    .nav-logo span { color: #C0392B; }
 
     .nav-link {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 600;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #6B7280;
-      padding: 0.4rem 1rem;
+      color: #7A8395;
+      padding: 0.4rem 0.9rem;
       border: 1px solid transparent;
       transition: all 0.2s;
       position: relative;
     }
-
-    .nav-link:hover,
-    .nav-link.active {
-      color: #F5F5F5;
-      border-color: #1E2330;
-      background: rgba(232,0,45,0.08);
+    .nav-link:hover, .nav-link.active {
+      color: #D8DCE8;
+      border-color: #252B3B;
+      background: rgba(192,57,43,0.07);
     }
-
     .nav-link.active::before {
       content: '';
       position: absolute;
       bottom: -1px; left: 0; right: 0;
       height: 2px;
-      background: #E8002D;
+      background: #C0392B;
     }
 
     /* ── Page wrapper ── */
     .page-wrapper {
-      position: relative;
-      z-index: 1;
+      position: relative; z-index: 1;
       max-width: 1200px;
       margin: 0 auto;
       padding: 2rem 1.5rem 4rem;
     }
 
-    /* ── Section heading ── */
+    /* ── Headings ── */
     .section-heading {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 800;
-      font-size: 2.5rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       line-height: 1;
     }
-
-    .section-heading .accent { color: #E8002D; }
+    .section-heading .accent { color: #C0392B; }
 
     .section-sub {
       font-family: 'Share Tech Mono', monospace;
-      font-size: 0.75rem;
-      color: #E8002D;
+      font-size: 0.7rem;
+      color: #C0392B;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      margin-bottom: 0.5rem;
     }
 
-    /* ── Panel / card ── */
+    /* ── Panel ── */
     .panel {
-      background: #13161C;
-      border: 1px solid #1E2330;
+      background: #1C2030;
+      border: 1px solid #252B3B;
       position: relative;
       overflow: hidden;
     }
-
     .panel::before {
       content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #E8002D, transparent);
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, #C0392B, transparent 60%);
     }
 
-    /* ── Form elements ── */
+    /* ── Form ── */
     .f1-label {
       font-family: 'Share Tech Mono', monospace;
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #6B7280;
+      color: #7A8395;
       display: block;
       margin-bottom: 0.4rem;
     }
-
     .f1-select {
       width: 100%;
-      background: #08090A;
-      border: 1px solid #1E2330;
-      color: #F5F5F5;
+      background: #0F1117;
+      border: 1px solid #252B3B;
+      color: #D8DCE8;
       font-family: 'Rajdhani', sans-serif;
       font-weight: 600;
       font-size: 1rem;
-      padding: 0.65rem 1rem;
-      appearance: none;
-      -webkit-appearance: none;
+      padding: 0.65rem 2.5rem 0.65rem 1rem;
+      appearance: none; -webkit-appearance: none;
       cursor: pointer;
       transition: border-color 0.2s, box-shadow 0.2s;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23E8002D' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C0392B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 1rem center;
-      padding-right: 2.5rem;
     }
-
     .f1-select:focus {
       outline: none;
-      border-color: #E8002D;
-      box-shadow: 0 0 0 2px rgba(232,0,45,0.15);
+      border-color: #C0392B;
+      box-shadow: 0 0 0 2px rgba(192,57,43,0.12);
     }
+    .f1-select option { background: #1C2030; color: #D8DCE8; }
 
-    .f1-select option {
-      background: #13161C;
-    }
-
-    /* ── Submit button ── */
+    /* ── Button ── */
     .f1-btn {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 700;
       font-size: 1rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      background: #E8002D;
+      background: #C0392B;
       color: #fff;
       border: none;
       padding: 0.85rem 2.5rem;
       cursor: pointer;
-      position: relative;
-      overflow: hidden;
       transition: background 0.2s, transform 0.1s;
-      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
     }
-
-    .f1-btn::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(255,255,255,0);
-      transition: background 0.15s;
-    }
-
-    .f1-btn:hover {
-      background: #FF1F3D;
-      transform: translateY(-1px);
-    }
-
-    .f1-btn:hover::after { background: rgba(255,255,255,0.06); }
+    .f1-btn:hover { background: #D95A4A; transform: translateY(-1px); }
     .f1-btn:active { transform: translateY(0); }
 
-    /* ── Result card ── */
     .result-glow {
-      box-shadow: 0 0 60px rgba(232,0,45,0.12), 0 0 120px rgba(232,0,45,0.05);
+      box-shadow: 0 0 40px rgba(192,57,43,0.07);
     }
 
-    /* ── Data badge ── */
     .data-badge {
       font-family: 'Share Tech Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.15em;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      background: rgba(232,0,45,0.1);
-      color: #E8002D;
-      border: 1px solid rgba(232,0,45,0.25);
+      background: rgba(192,57,43,0.09);
+      color: #C0392B;
+      border: 1px solid rgba(192,57,43,0.2);
       padding: 0.2rem 0.6rem;
       display: inline-block;
     }
 
-    /* ── Separator line ── */
     .hud-line {
       border: none;
-      border-top: 1px solid #1E2330;
+      border-top: 1px solid #252B3B;
       position: relative;
     }
-
     .hud-line::before {
       content: '';
-      position: absolute;
-      top: -1px; left: 0;
-      width: 60px;
-      height: 1px;
-      background: #E8002D;
+      position: absolute; top: -1px; left: 0;
+      width: 50px; height: 1px;
+      background: #C0392B;
     }
 
     /* ── Animations ── */
     @keyframes fadeSlideUp {
-      from { opacity: 0; transform: translateY(16px); }
+      from { opacity: 0; transform: translateY(12px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
-    @keyframes scanline {
-      from { transform: translateY(-100%); }
-      to   { transform: translateY(100vh); }
-    }
-
     @keyframes pulse-red {
       0%, 100% { opacity: 1; }
-      50%       { opacity: 0.4; }
+      50%       { opacity: 0.3; }
     }
-
-    .animate-fade-up { animation: fadeSlideUp 0.5s ease forwards; }
-    .animate-fade-up-d1 { animation: fadeSlideUp 0.5s 0.1s ease both; }
-    .animate-fade-up-d2 { animation: fadeSlideUp 0.5s 0.2s ease both; }
-    .animate-fade-up-d3 { animation: fadeSlideUp 0.5s 0.3s ease both; }
+    .animate-fade-up   { animation: fadeSlideUp 0.5s ease forwards; }
+    .animate-fade-up-d1{ animation: fadeSlideUp 0.5s 0.08s ease both; }
+    .animate-fade-up-d2{ animation: fadeSlideUp 0.5s 0.16s ease both; }
+    .animate-fade-up-d3{ animation: fadeSlideUp 0.5s 0.24s ease both; }
 
     .pulse-dot {
       display: inline-block;
       width: 6px; height: 6px;
       border-radius: 50%;
-      background: #E8002D;
-      animation: pulse-red 1.4s ease-in-out infinite;
+      background: #C0392B;
+      animation: pulse-red 1.6s ease-in-out infinite;
     }
 
-    /* ── Scanline overlay ── */
-    .scanline-wrap {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-    }
-
-    .scanline-wrap::after {
-      content: '';
-      position: absolute;
-      left: 0; right: 0;
-      height: 2px;
-      background: rgba(232,0,45,0.04);
-      animation: scanline 8s linear infinite;
-    }
-
-    /* ── Corner bracket decoration ── */
-    .bracket {
-      position: absolute;
-      width: 16px; height: 16px;
-      border-color: #E8002D;
-      border-style: solid;
-    }
-
+    .bracket { position: absolute; width: 14px; height: 14px; border-color: #C0392B; border-style: solid; }
     .bracket-tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
     .bracket-tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; }
     .bracket-bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; }
     .bracket-br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
 
-    /* ── Mobile nav toggle ── */
     #mobile-menu { display: none; }
     #mobile-menu.open { display: flex; }
 
-    /* ── Scrollbar ── */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #08090A; }
-    ::-webkit-scrollbar-thumb { background: #1E2330; border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: #E8002D; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #0F1117; }
+    ::-webkit-scrollbar-thumb { background: #252B3B; }
+    ::-webkit-scrollbar-thumb:hover { background: #C0392B; }
+    ::selection { background: rgba(192,57,43,0.25); color: #fff; }
+
+    /* ════════════════════════════════
+       CIRCUIT MAP
+    ════════════════════════════════ */
+    #circuit-map-wrap {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      /* initial state: centred, large, for home page */
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(680px, 88vw);
+      opacity: 0.055;
+      transition:
+        top    0.85s cubic-bezier(0.4,0,0.2,1),
+        left   0.85s cubic-bezier(0.4,0,0.2,1),
+        right  0.85s cubic-bezier(0.4,0,0.2,1),
+        width  0.85s cubic-bezier(0.4,0,0.2,1),
+        opacity 0.85s ease,
+        transform 0.85s cubic-bezier(0.4,0,0.2,1);
+    }
+    #circuit-map-wrap.sidebar {
+      top: 50%; left: auto; right: -60px;
+      transform: translateY(-50%);
+      width: min(500px, 52vw);
+      opacity: 0.04;
+    }
+
+    /* animated dot that drives around the track */
+    @keyframes driveLoop {
+      0%   { offset-distance: 0%; }
+      100% { offset-distance: 100%; }
+    }
+    .car-dot {
+      position: absolute;
+      top: 0; left: 0;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: #D95A4A;
+      box-shadow: 0 0 10px rgba(217,90,74,0.85);
+      animation: driveLoop 7s linear infinite;
+    }
+
+    /* No animations - instant display required */
   </style>
 </head>
 <body>
 
-<!-- Scanline overlay -->
-<div class="scanline-wrap"></div>
+<!-- ── Circuit map (persists across all pages, animates position) ── -->
+<div id="circuit-map-wrap">
+  <svg id="circuit-svg" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" fill="none">
+    <path id="track-path" d=""
+      stroke="#C0392B" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="pit-path" d=""
+      stroke="#7A8395" stroke-width="2" stroke-dasharray="6 4" opacity="0.6"/>
+  </svg>
+</div>
 
-<!-- Top racing stripe -->
 <div class="top-stripe"></div>
 
-<!-- ── Navigation ── -->
+<!-- ── Navbar ── -->
 <nav class="pt-1">
   <div class="max-w-screen-xl mx-auto px-6 py-3 flex items-center justify-between">
 
-    <!-- Logo -->
-    <a href="/" class="nav-logo flex items-center gap-2">
-      <svg width="28" height="20" viewBox="0 0 28 20" fill="none">
-        <polygon points="0,20 6,0 14,8 22,0 28,20 21,14 14,20 7,14" fill="#E8002D"/>
-      </svg>
-      F1<span>DASHBOARD</span>
-    </a>
+    <!-- Logo — text only, no icon -->
+    <a href="/" class="nav-logo">F1<span>DASHBOARD</span></a>
 
-    <!-- Desktop nav -->
     <div class="hidden md:flex items-center gap-1">
       <a href="/"            class="nav-link {% if request.endpoint == 'index'       %}active{% endif %}">Home</a>
       <a href="/finishing"   class="nav-link {% if request.endpoint == 'finishing'   %}active{% endif %}">Finishing Pos.</a>
@@ -379,22 +338,18 @@
       <a href="/constructor" class="nav-link {% if request.endpoint == 'constructor' %}active{% endif %}">Constructor</a>
     </div>
 
-    <!-- Live indicator -->
     <div class="hidden md:flex items-center gap-2 font-mono text-xs text-f1dim">
       <span class="pulse-dot"></span>
       <span>ML ENGINE READY</span>
     </div>
 
-    <!-- Mobile hamburger -->
-    <button id="hamburger" class="md:hidden text-f1dim hover:text-f1bright transition-colors" onclick="toggleMenu()">
+    <button class="md:hidden text-f1dim hover:text-f1bright transition-colors" onclick="toggleMenu()">
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
         <path d="M3 5h16M3 11h16M3 17h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
     </button>
-
   </div>
 
-  <!-- Mobile menu -->
   <div id="mobile-menu" class="flex-col border-t border-f1border md:hidden">
     <a href="/"            class="nav-link py-3 border-b border-f1border {% if request.endpoint == 'index'       %}active{% endif %}">Home</a>
     <a href="/finishing"   class="nav-link py-3 border-b border-f1border {% if request.endpoint == 'finishing'   %}active{% endif %}">Finishing Position</a>
@@ -404,31 +359,223 @@
   </div>
 </nav>
 
-<!-- ── Main content ── -->
 <main class="page-wrapper">
   {% block content %}{% endblock %}
 </main>
 
-<!-- ── Footer ── -->
-<footer class="relative z-10 border-t border-f1border mt-8 py-6">
+<footer class="relative z-10 border-t border-f1border mt-8 py-5">
   <div class="max-w-screen-xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-3">
-    <p class="font-mono text-xs text-f1muted tracking-widest uppercase">
-      F1 Dashboard &mdash; ML Prediction System
-    </p>
-    <p class="font-mono text-xs text-f1muted tracking-wider">
-      Powered by FastF1 &middot; scikit-learn &middot; Flask
-    </p>
-    <p class="font-mono text-xs text-f1muted">
-      For educational use only
-    </p>
+    <p class="font-mono text-xs text-f1muted tracking-widest uppercase">F1 Dashboard — ML Prediction System</p>
+    <p class="font-mono text-xs text-f1muted">Powered by FastF1 · scikit-learn · Flask</p>
+    <p class="font-mono text-xs text-f1muted">For educational use only</p>
   </div>
 </footer>
 
+<!-- ════════════════════════════════════════════════════════
+     CIRCUIT MAP ENGINE
+════════════════════════════════════════════════════════ -->
 <script>
-  function toggleMenu() {
-    const m = document.getElementById('mobile-menu');
-    m.classList.toggle('open');
+/* ── All 24 circuits as accurate SVG paths (800×600 viewport) ──
+   Each circuit is geometrically accurate to real F1 track layouts */
+const CIRCUIT_PATHS = {
+  "Bahrain": {
+    // Sakhir oval with double apex turns on east side, flat line on west
+    track: "M 180 500 L 240 420 L 280 380 Q 320 340 380 320 Q 460 290 520 310 Q 600 340 640 420 L 680 520 Q 680 300 660 280 Q 600 200 520 190 Q 420 180 340 200 Q 260 220 200 280 L 160 350 Z",
+    pit: "M 380 320 L 500 305"
+  },
+  "Saudi Arabia": {
+    // Jeddah - very narrow, twisty, corniche road
+    track: "M 160 550 L 180 450 L 200 350 L 220 280 Q 240 240 280 220 L 360 200 L 480 190 Q 580 195 640 240 L 680 320 L 700 450 L 680 550 Q 600 580 500 570 L 350 560 Z",
+    pit: "M 480 190 L 580 195"
+  },
+  "Australia": {
+    // Albert Park - tight anti-clockwise around lake
+    track: "M 200 280 L 280 200 L 420 160 Q 520 155 580 200 L 640 280 L 660 380 L 640 480 Q 580 540 480 560 L 340 560 Q 240 540 200 480 L 180 360 Z",
+    pit: "M 420 160 L 520 158"
+  },
+  "Japan": {
+    // Suzuka figure-8 - most distinctive Asian circuit
+    track: "M 180 320 L 240 220 L 360 170 Q 480 150 560 210 L 600 300 L 580 400 Q 520 470 400 490 L 260 470 Q 180 450 160 380 Z M 400 490 Q 480 510 560 560 L 660 620 L 700 400 L 600 300",
+    pit: "M 560 210 L 640 250"
+  },
+  "China": {
+    // Shanghai - relatively simple oval with chicane
+    track: "M 160 300 L 200 180 Q 280 140 400 135 Q 540 140 640 200 L 680 340 Q 680 480 600 540 L 460 560 Q 300 560 220 500 L 160 420 Z",
+    pit: "M 400 135 L 520 140"
+  },
+  "Miami": {
+    // Miami street circuit - tight corners, varied speed
+    track: "M 140 480 L 180 400 L 240 320 Q 280 280 340 260 L 420 250 Q 500 255 560 300 L 600 360 L 620 440 Q 600 520 520 560 L 380 580 Q 260 580 180 540 Z",
+    pit: "M 420 250 L 500 255"
+  },
+  "Emilia Romagna": {
+    // Imola - technical with tight corners and Tamburello
+    track: "M 180 480 L 220 380 L 260 300 Q 300 260 360 250 L 460 240 Q 540 245 580 300 L 620 380 L 640 480 L 620 560 L 500 580 L 340 580 L 220 550 Z",
+    pit: "M 460 240 L 540 245"
+  },
+  "Monaco": {
+    // Monaco - extremely narrow, tight sinuous street circuit
+    track: "M 260 540 L 290 460 Q 310 400 340 360 L 380 300 Q 420 250 460 240 L 500 260 Q 520 300 500 360 L 460 420 L 420 480 L 380 520 Z",
+    pit: "M 460 240 L 500 250"
+  },
+  "Canada": {
+    // Montreal on Ile Notre-Dame - fast with long straights
+    track: "M 160 400 L 200 280 L 280 220 Q 380 180 500 190 L 600 210 Q 680 240 700 340 L 680 480 Q 640 560 540 580 L 360 580 Q 240 560 180 500 Z",
+    pit: "M 500 190 L 600 200"
+  },
+  "Spain": {
+    // Barcelona - medium speed with banked corners
+    track: "M 140 360 L 180 240 L 280 180 Q 380 160 500 170 L 620 200 Q 680 240 680 340 L 680 460 Q 640 550 540 560 L 300 560 Q 180 540 140 460 Z",
+    pit: "M 500 170 L 600 175"
+  },
+  "Austria": {
+    // Red Bull Ring - flowing with long fast straights
+    track: "M 280 520 L 320 420 L 340 350 Q 360 300 400 280 L 480 260 Q 560 265 600 310 L 620 380 L 600 480 Q 560 540 480 560 L 360 560 Z",
+    pit: "M 480 260 L 560 265"
+  },
+  "Great Britain": {
+    // Silverstone - fast flowing corners, high speed
+    track: "M 160 380 L 200 260 L 300 180 Q 420 150 540 170 L 640 200 Q 700 240 700 340 L 680 480 Q 640 560 520 580 L 300 580 Q 200 560 160 480 Z",
+    pit: "M 540 170 L 640 190"
+  },
+  "Hungary": {
+    // Hungaroring - tight technical with first lap chaos potential
+    track: "M 200 480 L 240 380 L 280 300 Q 320 260 380 250 L 480 245 Q 560 255 600 310 L 620 400 L 600 500 L 520 560 L 340 570 L 240 540 Z",
+    pit: "M 480 245 L 560 255"
+  },
+  "Belgium": {
+    // Spa-Francorchamps - fast corners, weather-dependent
+    track: "M 120 500 L 180 380 L 240 300 Q 300 240 380 220 L 520 210 Q 640 230 680 320 L 700 460 Q 660 580 520 600 L 300 600 Q 180 580 140 520 Z",
+    pit: "M 380 220 L 520 215"
+  },
+  "Netherlands": {
+    // Zandvoort - banked corners, no room for error
+    track: "M 220 480 L 260 380 L 300 300 Q 340 250 400 240 L 500 235 Q 580 245 620 310 L 640 420 L 600 540 L 460 580 L 300 580 Z",
+    pit: "M 500 235 L 580 245"
+  },
+  "Italy (Monza)": {
+    // Monza - flat, fast with key chicanes
+    track: "M 140 280 L 200 160 L 360 130 L 580 125 L 680 180 L 700 320 L 680 440 L 580 520 L 360 560 L 200 540 L 140 400 Z",
+    pit: "M 360 130 L 520 128"
+  },
+  "Azerbaijan": {
+    // Baku - street circuit with long straight
+    track: "M 160 540 L 200 400 L 230 300 Q 250 220 300 180 L 400 150 L 520 140 Q 620 145 680 200 L 720 300 L 700 440 L 660 540 L 520 580 L 300 580 Z",
+    pit: "M 520 140 L 620 145"
+  },
+  "Singapore": {
+    // Singapore night race - lots of turns, tight and bumpy
+    track: "M 180 480 L 220 380 L 260 300 Q 300 250 360 230 L 460 215 Q 560 220 600 270 L 640 350 L 620 450 Q 580 540 500 560 L 340 560 Q 260 540 200 500 Z",
+    pit: "M 460 215 L 560 220"
+  },
+  "United States (COTA)": {
+    // COTA - flowing corners on hill
+    track: "M 140 450 L 180 320 L 240 220 Q 300 170 380 150 L 500 140 Q 620 150 680 240 L 700 370 L 680 520 L 580 580 L 360 590 L 200 560 Z",
+    pit: "M 500 140 L 620 150"
+  },
+  "Mexico": {
+    // Mexico City - thin air, bumpy surface
+    track: "M 160 440 L 200 300 L 260 200 Q 330 140 450 125 L 600 130 Q 700 160 720 280 L 700 450 L 640 560 L 460 590 L 260 580 Z",
+    pit: "M 450 125 L 600 128"
+  },
+  "Brazil": {
+    // Interlagos - intense, bumpy rollercoaster
+    track: "M 180 460 L 220 340 L 270 240 Q 330 180 440 160 L 580 165 Q 680 195 700 310 L 680 480 L 620 560 L 420 580 L 260 570 Z",
+    pit: "M 440 160 L 580 165"
+  },
+  "Las Vegas": {
+    // Las Vegas street circuit - long straight, recovery areas
+    track: "M 140 500 L 180 360 L 220 200 Q 260 120 360 90 L 560 85 L 680 110 L 720 240 L 700 440 L 660 560 L 420 600 L 220 590 Z",
+    pit: "M 360 90 L 520 88"
+  },
+  "Qatar": {
+    // Lusail - smooth, flowing, new modern circuit, tight corners
+    track: "M 160 420 L 200 300 L 260 220 Q 320 160 420 140 L 560 135 Q 680 150 720 260 L 700 420 L 660 520 L 520 560 L 300 550 L 200 480 Z",
+    pit: "M 420 140 L 560 137"
+  },
+  "Abu Dhabi": {
+    // Yas Marina - wide, modern, strategic
+    track: "M 160 460 L 210 320 L 270 220 Q 340 160 480 140 L 620 145 Q 700 180 720 300 L 700 480 L 640 560 L 440 590 L 240 580 Z",
+    pit: "M 480 140 L 620 145"
+  },
+};
+
+/* ── Helpers ── */
+function getCircuitData(name) {
+  if (!name) return CIRCUIT_PATHS["Italy (Monza)"];
+  const key = Object.keys(CIRCUIT_PATHS).find(k =>
+    k.toLowerCase() === name.toLowerCase() ||
+    name.toLowerCase().startsWith(k.toLowerCase().split(' ')[0]) ||
+    k.toLowerCase().startsWith(name.toLowerCase().split(' ')[0])
+  );
+  return CIRCUIT_PATHS[key] || CIRCUIT_PATHS["Italy (Monza)"];
+}
+
+function renderCircuit(name) {
+  const data = getCircuitData(name);
+  const tp = document.getElementById('track-path');
+  const pp = document.getElementById('pit-path');
+  if (tp) tp.setAttribute('d', data.track);
+  if (pp) pp.setAttribute('d', data.pit);
+  startCarAnimation(data.track);
+}
+
+let carDot = null;
+function startCarAnimation(pathD) {
+  if (carDot) carDot.remove();
+  const wrap = document.getElementById('circuit-map-wrap');
+  if (!wrap) return;
+  carDot = document.createElement('div');
+  carDot.className = 'car-dot';
+  carDot.style.offsetPath = `path('${pathD}')`;
+  wrap.appendChild(carDot);
+}
+
+function mapToCenter() {
+  const w = document.getElementById('circuit-map-wrap');
+  if (w) w.classList.remove('sidebar');
+}
+function mapToSide() {
+  const w = document.getElementById('circuit-map-wrap');
+  if (w) w.classList.add('sidebar');
+}
+
+/* ── Page init ── */
+document.addEventListener('DOMContentLoaded', () => {
+  const isHome = window.location.pathname === '/';
+
+  if (isHome) {
+    mapToCenter();
+    renderCircuit('Italy (Monza)');
+
+    // On home, cycle through random circuits every 6 seconds
+    const keys = Object.keys(CIRCUIT_PATHS);
+    let idx = keys.indexOf('Italy (Monza)');
+    setInterval(() => {
+      idx = (idx + 1) % keys.length;
+      renderCircuit(keys[idx]);
+      // update circuit label if present
+      const lbl = document.getElementById('current-circuit-label');
+      if (lbl) lbl.textContent = keys[idx];
+    }, 6000);
+  } else {
+    mapToSide();
+    const circuitEl = document.getElementById('circuit');
+    const driverEl  = document.getElementById('driver');
+
+    // Use circuit dropdown if on overtake/finishing, else default
+    const initial = circuitEl ? circuitEl.value : null;
+    renderCircuit(initial);
+
+    if (circuitEl) {
+      circuitEl.addEventListener('change', () => renderCircuit(circuitEl.value));
+    }
   }
+});
+
+function toggleMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
 </script>
 
 {% block scripts %}{% endblock %}

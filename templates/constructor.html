@@ -67,7 +67,7 @@
   </div>
 
   <!-- ── Result pane ── -->
-  <div class="lg:col-span-3 animate-fade-up-d2">
+  <div class="lg:col-span-3">
 
     {% if result %}
     <div class="panel p-6 result-glow relative"
@@ -80,7 +80,7 @@
       </div>
 
       <div class="font-display font-800 text-3xl uppercase tracking-wide mb-6">
-        {{ result.season }} <span style="color:#E8002D;">Season</span> Standings
+        {{ result.season }} <span style="color:#C0392B;">Season</span> Standings
       </div>
 
       <!-- Find max points for bar scaling -->
@@ -88,16 +88,18 @@
 
       <!-- Standings table -->
       <div class="space-y-2">
-        {% for i, (team, pts) in enumerate(result.standings) %}
-        {% set rank = i + 1 %}
+        {% for team, pts in result.standings %}
+        {% set rank = loop.index %}
         {% set bar_pct = (pts / max_pts * 100) | round(1) %}
 
-        <div class="relative flex items-center gap-3 py-3 px-3 transition-colors hover:bg-white/[0.02]"
-             style="border:1px solid {% if rank == 1 %}rgba(232,0,45,0.3){% else %}#1E2330{% endif %};">
+        <div class=\"relative flex items-center gap-3 py-3 px-3 transition-colors hover:bg-white/[0.02] rank-row\"
+             data-rank=\"{{ rank }}\"
+             style=\"border:1px solid #1E2330;\">
 
           <!-- Rank badge -->
-          <div class="font-display font-700 text-xl w-8 text-center shrink-0"
-               style="color:{% if rank == 1 %}#E8002D{% elif rank == 2 %}#C0C0C0{% elif rank == 3 %}#CD7F32{% else %}#3A3F50{% endif %};">
+          <div class=\"font-display font-700 text-xl w-8 text-center shrink-0 rank-badge\"
+               data-rank=\"{{ rank }}\"
+               style=\"color:#3A3F50;\">
             P{{ rank }}
           </div>
 
@@ -114,12 +116,11 @@
               </span>
             </div>
             <div class="h-1.5 bg-f1border overflow-hidden">
-              <div class="h-full transition-all duration-700"
-                   style="
-                     width: {{ bar_pct }}%;
-                     background: {% if rank == 1 %}#E8002D{% elif rank == 2 %}#C0C0C0{% elif rank == 3 %}#CD7F32{% else %}#3A3F50{% endif %};
-                     transition-delay: {{ (i * 0.06)|round(2) }}s;
-                   ">
+              <div class="h-full transition-all duration-700 rank-bar"
+                   data-pct="{{ bar_pct }}"
+                   data-rank="{{ rank }}"
+                   data-delay="{{ (loop.index0 * 0.06)|round(2) }}"
+                   style="width:0%; background:#3A3F50;">
               </div>
             </div>
           </div>
@@ -143,7 +144,7 @@
     <div class="panel p-8 flex flex-col items-center justify-center min-h-80 text-center"
          style="border-style: dashed; clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));">
       <div class="w-16 h-16 flex items-center justify-center mb-4" style="background:rgba(232,0,45,0.08); border:1px solid rgba(232,0,45,0.15);">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8002D" stroke-width="1.2" opacity="0.6">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="1.2" opacity="0.6">
           <rect x="3" y="12" width="4" height="9"/><rect x="10" y="7" width="4" height="14"/>
           <rect x="17" y="3" width="4" height="18"/>
         </svg>
@@ -161,6 +162,29 @@
 
 {% block scripts %}
 <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.rank-row').forEach(el => {
+      const rank = parseInt(el.dataset.rank);
+      if (rank === 1) el.style.borderColor = 'rgba(232,0,45,0.3)';
+    });
+    document.querySelectorAll('.rank-badge').forEach(el => {
+      const rank = parseInt(el.dataset.rank);
+      if (rank === 1) el.style.color = '#C0392B';
+      else if (rank === 2) el.style.color = '#C0C0C0';
+      else if (rank === 3) el.style.color = '#CD7F32';
+    });
+    document.querySelectorAll('.rank-bar').forEach(el => {
+      const pct = parseFloat(el.dataset.pct);
+      const rank = parseInt(el.dataset.rank);
+      el.style.width = pct + '%';
+      const delay = parseFloat(el.dataset.delay);
+      el.style.transitionDelay = delay + 's';
+      if (rank === 1) el.style.background = '#C0392B';
+      else if (rank === 2) el.style.background = '#C0C0C0';
+      else if (rank === 3) el.style.background = '#CD7F32';
+    });
+  });
+
   document.getElementById('predictForm').addEventListener('submit', function() {
     const btn  = document.getElementById('submitBtn');
     const text = document.getElementById('btnText');

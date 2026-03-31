@@ -67,7 +67,7 @@
   </div>
 
   <!-- ── Result pane ── -->
-  <div class="lg:col-span-3 animate-fade-up-d2">
+  <div class="lg:col-span-3">
 
     {% if result %}
     <div class="panel p-8 result-glow relative"
@@ -92,7 +92,7 @@
               <!-- Track -->
               <circle cx="60" cy="60" r="50" fill="none" stroke="#1E2330" stroke-width="8"/>
               <!-- Progress -->
-              <circle cx="60" cy="60" r="50" fill="none" stroke="#E8002D" stroke-width="8"
+              <circle cx="60" cy="60" r="50" fill="none" stroke="#C0392B" stroke-width="8"
                 stroke-dasharray="{{ (result.overtake_pct / 100 * 314.16)|round(1) }} 314.16"
                 stroke-linecap="butt"
                 transform="rotate(-90 60 60)"
@@ -187,7 +187,7 @@
     <div class="panel p-8 flex flex-col items-center justify-center min-h-64 text-center"
          style="border-style: dashed; clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));">
       <div class="w-16 h-16 flex items-center justify-center mb-4" style="background:rgba(232,0,45,0.08); border:1px solid rgba(232,0,45,0.15);">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8002D" stroke-width="1.2" opacity="0.6">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="1.2" opacity="0.6">
           <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
         </svg>
       </div>
