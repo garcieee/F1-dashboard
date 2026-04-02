@@ -3,7 +3,6 @@
 
 {% block content %}
 
-<!-- Page header -->
 <div class="animate-fade-up mb-10">
   <div class="section-sub mb-2">
     <a href="/" class="hover:text-f1bright transition-colors">Home</a>
@@ -30,7 +29,6 @@
 
       <form method="POST" action="/finishing" id="predictForm">
 
-        <!-- Driver -->
         <div class="mb-5">
           <label class="f1-label" for="driver">Driver</label>
           <select class="f1-select" name="driver" id="driver" required>
@@ -41,7 +39,6 @@
           </select>
         </div>
 
-        <!-- Circuit -->
         <div class="mb-5">
           <label class="f1-label" for="circuit">Circuit</label>
           <select class="f1-select" name="circuit" id="circuit" required>
@@ -52,7 +49,6 @@
           </select>
         </div>
 
-        <!-- Season -->
         <div class="mb-8">
           <label class="f1-label" for="season">Season</label>
           <select class="f1-select" name="season" id="season" required>
@@ -69,11 +65,10 @@
 
       </form>
 
-      <!-- Model info footer -->
       <div class="mt-6 pt-5 border-t border-f1border font-mono text-xs text-f1muted space-y-1">
         <div class="flex justify-between"><span>Algorithm</span><span class="text-f1bright">Random Forest</span></div>
         <div class="flex justify-between"><span>Type</span><span class="text-f1bright">Classifier</span></div>
-        <div class="flex justify-between"><span>Data Range</span><span class="text-f1bright">2018–Present</span></div>
+        <div class="flex justify-between"><span>Data Range</span><span class="text-f1bright">2018–2022</span></div>
       </div>
     </div>
   </div>
@@ -82,7 +77,6 @@
   <div class="lg:col-span-3">
 
     {% if result %}
-    <!-- Result card -->
     <div class="panel p-8 result-glow relative"
          style="clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));">
       <span class="bracket bracket-tl"></span>
@@ -92,7 +86,6 @@
         <span class="pulse-dot"></span> PREDICTION OUTPUT
       </div>
 
-      <!-- Big position display -->
       <div class="flex items-end gap-4 mb-8">
         <div>
           <div class="font-mono text-xs text-f1muted mb-1 tracking-widest">PREDICTED POSITION</div>
@@ -112,41 +105,44 @@
 
       <hr class="hud-line mb-6" />
 
-      <!-- Input summary -->
       <div class="font-mono text-xs text-f1muted mb-4 tracking-widest">INPUT SUMMARY</div>
       <div class="grid grid-cols-3 gap-4">
         {% for label, val in [("Driver", inputs.driver), ("Circuit", inputs.circuit), ("Season", inputs.season)] %}
-        <div class="p-3" style="background:#08090A; border:1px solid #1E2330;">
+        <div class="p-3" style="background:#0F1117; border:1px solid #252B3B;">
           <div class="text-xs text-f1muted mb-1">{{ label }}</div>
           <div class="font-ui font-600 text-f1bright text-sm">{{ val }}</div>
         </div>
         {% endfor %}
       </div>
 
-      <!-- Confidence bar -->
       <div class="mt-6">
         <div class="flex justify-between font-mono text-xs text-f1muted mb-2">
           <span>MODEL CONFIDENCE</span>
           <span class="text-f1bright">{{ result.confidence }}%</span>
         </div>
         <div class="h-2 bg-f1border rounded-none overflow-hidden">
-          <div class="h-full bg-f1red transition-all duration-1000 confidence-bar"
-               data-bar="{{ result.confidence }}"
+          <div class="h-full bg-f1red confidence-bar"
+               data-confidence="{{ result.confidence }}"
                style="width:{{ result.confidence }}%;"></div>
         </div>
       </div>
 
-      <!-- Disclaimer -->
-      <p class="mt-6 font-mono text-xs text-f1muted leading-relaxed">
-        ⚠ Dummy model active. Swap <code class="text-f1bright">models/finishing.pkl</code> to enable trained predictions.
-      </p>
+      <!-- Model status badge -->
+      <div class="mt-5 flex items-center gap-2">
+        {% if result.model_live %}
+        <span class="data-badge" style="color:#2E8B57; background:rgba(46,139,87,0.1); border-color:rgba(46,139,87,0.25);">
+          ✓ LIVE MODEL — RandomForest 2018–2024
+        </span>
+        {% else %}
+        <span class="data-badge">⚠ DUMMY MODEL — models/finishing.pkl not found</span>
+        {% endif %}
+      </div>
     </div>
 
     {% else %}
-    <!-- Placeholder -->
     <div class="panel p-8 flex flex-col items-center justify-center min-h-64 text-center"
          style="border-style: dashed; clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));">
-      <div class="w-16 h-16 flex items-center justify-center mb-4" style="background:rgba(232,0,45,0.08); border:1px solid rgba(232,0,45,0.15);">
+      <div class="w-16 h-16 flex items-center justify-center mb-4" style="background:rgba(192,57,43,0.08); border:1px solid rgba(192,57,43,0.15);">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="1.2" opacity="0.6">
           <path d="M3 17l3-8 4 4 3-6 4 8"/><circle cx="20" cy="17" r="2"/>
           <path d="M3 20h18"/>
@@ -159,14 +155,13 @@
     </div>
     {% endif %}
 
-    <!-- How it works box -->
     <div class="panel p-5 mt-6" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 16px 100%, 0 calc(100% - 16px));">
       <div class="font-mono text-xs text-f1muted tracking-widest mb-4">HOW IT WORKS</div>
       <div class="space-y-3">
         {% for step, desc in [
           ("01 · Feature Encoding", "Driver, circuit, and season are label-encoded into numeric IDs."),
-          ("02 · Random Forest", "An ensemble of decision trees votes on the most likely finishing position."),
-          ("03 · Output", "The majority class (finishing position P1–P20) is returned as prediction.")
+          ("02 · Random Forest", "An ensemble of 200 decision trees votes on the most likely finishing position."),
+          ("03 · Output", "The majority class (P1–P20) is returned with a confidence score.")
         ] %}
         <div class="flex gap-3">
           <div class="font-mono text-xs text-f1red shrink-0 mt-0.5">{{ step.split("·")[0] }}</div>
@@ -187,7 +182,11 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const bar = document.querySelector('.confidence-bar');
-    if (bar) bar.style.width = bar.dataset.confidence + '%';
+    if (bar) {
+      const val = bar.dataset.confidence;
+      bar.style.width = '0%';
+      setTimeout(() => { bar.style.transition = 'width 1s ease'; bar.style.width = val + '%'; }, 100);
+    }
   });
 
   document.getElementById('predictForm').addEventListener('submit', function() {

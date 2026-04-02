@@ -15,7 +15,7 @@
   </h1>
 
   <p class="font-ui text-lg text-f1dim max-w-2xl leading-relaxed mb-6">
-    Four independent ML models trained on FastF1 historical data from 2018 to present.
+    ML-powered race predictions built on FastF1 historical data from 2018 to 2024.
     Select a module, input your parameters, and receive instant race intelligence.
   </p>
 
@@ -27,7 +27,7 @@
 
   <!-- Stat bar -->
   <div class="flex flex-wrap gap-10 mb-10">
-    {% for label, value in [("Models Active","4"), ("Seasons Covered","7+"), ("Data Source","FastF1"), ("Framework","scikit-learn")] %}
+    {% for label, value in [("Models Active","1"), ("Seasons Covered","7"), ("Data Source","FastF1"), ("Framework","scikit-learn")] %}
     <div class="flex flex-col gap-1">
       <span class="font-mono text-xs text-f1muted tracking-widest uppercase">{{ label }}</span>
       <span class="font-display font-700 text-2xl text-f1bright">{{ value }}</span>
@@ -109,11 +109,11 @@
         Lap Time Estimator
       </h3>
       <p class="font-ui text-f1dim text-sm leading-relaxed mb-5">
-        Estimate lap time for a driver given tire compound and lap number using Linear Regression.
+        Estimate lap time for a driver given tire compound and lap number.
       </p>
 
       <div class="flex flex-wrap gap-2 mb-5">
-        <span class="data-badge">Linear Regression</span>
+        <span class="data-badge">⚠ Demo</span>
         <span class="data-badge">Regression</span>
       </div>
 
@@ -148,11 +148,11 @@
         Overtake &amp; Safety Car
       </h3>
       <p class="font-ui text-f1dim text-sm leading-relaxed mb-5">
-        Estimate overtake probability and safety car deployment chance using Logistic Regression.
+        Estimate overtake probability and safety car deployment chance per circuit and weather condition.
       </p>
 
       <div class="flex flex-wrap gap-2 mb-5">
-        <span class="data-badge">Logistic Regression</span>
+        <span class="data-badge">⚠ Demo</span>
         <span class="data-badge">Probability</span>
       </div>
 
@@ -188,11 +188,11 @@
         Constructor Championship
       </h3>
       <p class="font-ui text-f1dim text-sm leading-relaxed mb-5">
-        Project final constructor standings for a season using Linear Regression on historical team performance.
+        Project final constructor standings for a season based on historical team performance.
       </p>
 
       <div class="flex flex-wrap gap-2 mb-5">
-        <span class="data-badge">Linear Regression</span>
+        <span class="data-badge">⚠ Demo</span>
         <span class="data-badge">Ranking</span>
       </div>
 

@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 
   <script>
     tailwind.config = {
@@ -518,5 +519,6 @@ function toggleMenu() {
 </script>
 
 {% block scripts %}{% endblock %}
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

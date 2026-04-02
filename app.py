@@ -2,6 +2,8 @@ from flask import Flask, render_template, request
 import random
 import joblib
 import numpy as np
+import os
+
 app = Flask(__name__)
 
 # ── Data for dropdowns ────────────────────────────────────────────────────────
@@ -42,6 +44,7 @@ DRIVERS = [
     "Valtteri Bottas",
     "Yuki Tsunoda",
 ]
+
 CIRCUITS = [
     "Austin",
     "Baku",
@@ -100,9 +103,10 @@ except Exception as e:
     FINISHING_MODEL = None
     print(f"✗ Finishing model not loaded: {e}")
 
-# ── Dummy prediction helpers ──────────────────────────────────────────────────
+# ── Prediction functions ───────────────────────────────────────────────────────
 
 def predict_finishing_position(driver, circuit, season):
+    """Use trained Random Forest. Falls back to dummy if model not loaded."""
     if FINISHING_MODEL is None:
         seed = hash(f"{driver}{circuit}{season}") % 20
         return (seed % 10) + 1, 55.0
@@ -122,12 +126,12 @@ def predict_finishing_position(driver, circuit, season):
         return position, confidence
 
     except ValueError:
+        # Driver or circuit not seen during training
         seed = hash(f"{driver}{circuit}{season}") % 20
         return (seed % 10) + 1, 50.0
 
 
 def dummy_lap_time(driver, compound, lap_number):
-    """Return a fake lap time in mm:ss.mmm format."""
     base_ms = {
         "Soft": 88000, "Medium": 89500, "Hard": 91000,
         "Intermediate": 95000, "Wet": 102000,
@@ -141,7 +145,6 @@ def dummy_lap_time(driver, compound, lap_number):
 
 
 def dummy_overtake_safety(circuit, weather):
-    """Return overtake% and safety car% as integers."""
     seed = hash(f"{circuit}{weather}") % 100
     overtake = max(10, min(90, seed + random.randint(-10, 10)))
     safety = max(5, min(70, (100 - seed) // 2 + random.randint(-5, 5)))
@@ -149,7 +152,6 @@ def dummy_overtake_safety(circuit, weather):
 
 
 def dummy_constructor_standings(season):
-    """Return a fake ranked list of (constructor, points)."""
     constructors = [
         "McLaren", "Ferrari", "Red Bull", "Mercedes",
         "Aston Martin", "Alpine", "Williams", "AlphaTauri",
@@ -184,10 +186,11 @@ def finishing():
         position, confidence = predict_finishing_position(driver, circuit, season)
         suffix = {1: "st", 2: "nd", 3: "rd"}.get(position, "th")
         result = {
-            "position": position,
-            "label":    f"P{position}",
-            "suffix":   suffix,
+            "position":   position,
+            "label":      f"P{position}",
+            "suffix":     suffix,
             "confidence": confidence,
+            "model_live": FINISHING_MODEL is not None,
         }
     return render_template(
         "finishing.html",
