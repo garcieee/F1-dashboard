@@ -1,0 +1,1939 @@
+season,circuit,driver,grid_position,finishing_position
+2018,Melbourne,Sebastian Vettel,3,1
+2018,Melbourne,Lewis Hamilton,1,2
+2018,Melbourne,Kimi Räikkönen,2,3
+2018,Melbourne,Daniel Ricciardo,8,4
+2018,Melbourne,Fernando Alonso,10,5
+2018,Melbourne,Max Verstappen,4,6
+2018,Melbourne,Nico Hulkenberg,7,7
+2018,Melbourne,Valtteri Bottas,15,8
+2018,Melbourne,Stoffel Vandoorne,11,9
+2018,Melbourne,Carlos Sainz,9,10
+2018,Melbourne,Sergio Perez,12,11
+2018,Melbourne,Esteban Ocon,14,12
+2018,Melbourne,Charles Leclerc,18,13
+2018,Melbourne,Lance Stroll,13,14
+2018,Melbourne,Brendon Hartley,16,15
+2018,Melbourne,Romain Grosjean,6,16
+2018,Melbourne,Kevin Magnussen,5,17
+2018,Melbourne,Pierre Gasly,20,18
+2018,Melbourne,Marcus Ericsson,17,19
+2018,Melbourne,Sergey Sirotkin,19,20
+2018,Sakhir,Sebastian Vettel,1,1
+2018,Sakhir,Valtteri Bottas,3,2
+2018,Sakhir,Lewis Hamilton,9,3
+2018,Sakhir,Pierre Gasly,5,4
+2018,Sakhir,Kevin Magnussen,6,5
+2018,Sakhir,Nico Hulkenberg,7,6
+2018,Sakhir,Fernando Alonso,13,7
+2018,Sakhir,Stoffel Vandoorne,14,8
+2018,Sakhir,Marcus Ericsson,17,9
+2018,Sakhir,Esteban Ocon,8,10
+2018,Sakhir,Carlos Sainz,10,11
+2018,Sakhir,Charles Leclerc,19,12
+2018,Sakhir,Romain Grosjean,16,13
+2018,Sakhir,Lance Stroll,20,14
+2018,Sakhir,Sergey Sirotkin,18,15
+2018,Sakhir,Sergio Perez,12,16
+2018,Sakhir,Brendon Hartley,11,17
+2018,Sakhir,Kimi Räikkönen,2,18
+2018,Sakhir,Max Verstappen,15,19
+2018,Sakhir,Daniel Ricciardo,4,20
+2018,Shanghai,Daniel Ricciardo,6,1
+2018,Shanghai,Valtteri Bottas,3,2
+2018,Shanghai,Kimi Räikkönen,2,3
+2018,Shanghai,Lewis Hamilton,4,4
+2018,Shanghai,Max Verstappen,5,5
+2018,Shanghai,Nico Hulkenberg,7,6
+2018,Shanghai,Fernando Alonso,13,7
+2018,Shanghai,Sebastian Vettel,1,8
+2018,Shanghai,Carlos Sainz,9,9
+2018,Shanghai,Kevin Magnussen,11,10
+2018,Shanghai,Esteban Ocon,12,11
+2018,Shanghai,Sergio Perez,8,12
+2018,Shanghai,Stoffel Vandoorne,14,13
+2018,Shanghai,Lance Stroll,18,14
+2018,Shanghai,Sergey Sirotkin,16,15
+2018,Shanghai,Marcus Ericsson,20,16
+2018,Shanghai,Romain Grosjean,10,17
+2018,Shanghai,Pierre Gasly,17,18
+2018,Shanghai,Charles Leclerc,19,19
+2018,Shanghai,Brendon Hartley,15,20
+2018,Baku,Lewis Hamilton,2,1
+2018,Baku,Kimi Räikkönen,6,2
+2018,Baku,Sergio Perez,8,3
+2018,Baku,Sebastian Vettel,1,4
+2018,Baku,Carlos Sainz,9,5
+2018,Baku,Charles Leclerc,13,6
+2018,Baku,Fernando Alonso,12,7
+2018,Baku,Lance Stroll,10,8
+2018,Baku,Stoffel Vandoorne,16,9
+2018,Baku,Brendon Hartley,19,10
+2018,Baku,Marcus Ericsson,18,11
+2018,Baku,Pierre Gasly,17,12
+2018,Baku,Kevin Magnussen,15,13
+2018,Baku,Valtteri Bottas,3,14
+2018,Baku,Romain Grosjean,20,15
+2018,Baku,Max Verstappen,5,16
+2018,Baku,Daniel Ricciardo,4,17
+2018,Baku,Nico Hulkenberg,14,18
+2018,Baku,Esteban Ocon,7,19
+2018,Baku,Sergey Sirotkin,11,20
+2018,Barcelona,Lewis Hamilton,1,1
+2018,Barcelona,Valtteri Bottas,2,2
+2018,Barcelona,Max Verstappen,5,3
+2018,Barcelona,Sebastian Vettel,3,4
+2018,Barcelona,Daniel Ricciardo,6,5
+2018,Barcelona,Kevin Magnussen,7,6
+2018,Barcelona,Carlos Sainz,9,7
+2018,Barcelona,Fernando Alonso,8,8
+2018,Barcelona,Sergio Perez,15,9
+2018,Barcelona,Charles Leclerc,14,10
+2018,Barcelona,Lance Stroll,18,11
+2018,Barcelona,Brendon Hartley,20,12
+2018,Barcelona,Marcus Ericsson,17,13
+2018,Barcelona,Sergey Sirotkin,19,14
+2018,Barcelona,Stoffel Vandoorne,11,15
+2018,Barcelona,Esteban Ocon,13,16
+2018,Barcelona,Kimi Räikkönen,4,17
+2018,Barcelona,Romain Grosjean,10,18
+2018,Barcelona,Pierre Gasly,12,19
+2018,Barcelona,Nico Hulkenberg,16,20
+2018,Monte Carlo,Daniel Ricciardo,1,1
+2018,Monte Carlo,Sebastian Vettel,2,2
+2018,Monte Carlo,Lewis Hamilton,3,3
+2018,Monte Carlo,Kimi Räikkönen,4,4
+2018,Monte Carlo,Valtteri Bottas,5,5
+2018,Monte Carlo,Esteban Ocon,6,6
+2018,Monte Carlo,Pierre Gasly,10,7
+2018,Monte Carlo,Nico Hulkenberg,11,8
+2018,Monte Carlo,Max Verstappen,20,9
+2018,Monte Carlo,Carlos Sainz,8,10
+2018,Monte Carlo,Marcus Ericsson,16,11
+2018,Monte Carlo,Sergio Perez,9,12
+2018,Monte Carlo,Kevin Magnussen,19,13
+2018,Monte Carlo,Stoffel Vandoorne,12,14
+2018,Monte Carlo,Romain Grosjean,18,15
+2018,Monte Carlo,Sergey Sirotkin,13,16
+2018,Monte Carlo,Lance Stroll,17,17
+2018,Monte Carlo,Charles Leclerc,14,18
+2018,Monte Carlo,Brendon Hartley,15,19
+2018,Monte Carlo,Fernando Alonso,7,20
+2018,Montréal,Sebastian Vettel,1,1
+2018,Montréal,Valtteri Bottas,2,2
+2018,Montréal,Max Verstappen,3,3
+2018,Montréal,Daniel Ricciardo,6,4
+2018,Montréal,Lewis Hamilton,4,5
+2018,Montréal,Kimi Räikkönen,5,6
+2018,Montréal,Nico Hulkenberg,7,7
+2018,Montréal,Carlos Sainz,9,8
+2018,Montréal,Esteban Ocon,8,9
+2018,Montréal,Charles Leclerc,13,10
+2018,Montréal,Pierre Gasly,16,11
+2018,Montréal,Romain Grosjean,20,12
+2018,Montréal,Kevin Magnussen,11,13
+2018,Montréal,Sergio Perez,10,14
+2018,Montréal,Marcus Ericsson,19,15
+2018,Montréal,Stoffel Vandoorne,15,16
+2018,Montréal,Sergey Sirotkin,18,17
+2018,Montréal,Fernando Alonso,14,18
+2018,Montréal,Brendon Hartley,12,19
+2018,Montréal,Lance Stroll,17,20
+2018,Le Castellet,Lewis Hamilton,1,1
+2018,Le Castellet,Max Verstappen,4,2
+2018,Le Castellet,Kimi Räikkönen,6,3
+2018,Le Castellet,Daniel Ricciardo,5,4
+2018,Le Castellet,Sebastian Vettel,3,5
+2018,Le Castellet,Kevin Magnussen,9,6
+2018,Le Castellet,Valtteri Bottas,2,7
+2018,Le Castellet,Carlos Sainz,7,8
+2018,Le Castellet,Nico Hulkenberg,12,9
+2018,Le Castellet,Charles Leclerc,8,10
+2018,Le Castellet,Romain Grosjean,10,11
+2018,Le Castellet,Stoffel Vandoorne,17,12
+2018,Le Castellet,Marcus Ericsson,15,13
+2018,Le Castellet,Brendon Hartley,20,14
+2018,Le Castellet,Sergey Sirotkin,18,15
+2018,Le Castellet,Fernando Alonso,16,16
+2018,Le Castellet,Lance Stroll,19,17
+2018,Le Castellet,Sergio Perez,13,18
+2018,Le Castellet,Esteban Ocon,11,19
+2018,Le Castellet,Pierre Gasly,14,20
+2018,Spielberg,Max Verstappen,4,1
+2018,Spielberg,Kimi Räikkönen,3,2
+2018,Spielberg,Sebastian Vettel,6,3
+2018,Spielberg,Romain Grosjean,5,4
+2018,Spielberg,Kevin Magnussen,8,5
+2018,Spielberg,Esteban Ocon,11,6
+2018,Spielberg,Sergio Perez,16,7
+2018,Spielberg,Fernando Alonso,13,8
+2018,Spielberg,Charles Leclerc,18,9
+2018,Spielberg,Marcus Ericsson,20,10
+2018,Spielberg,Pierre Gasly,12,11
+2018,Spielberg,Carlos Sainz,9,12
+2018,Spielberg,Sergey Sirotkin,17,13
+2018,Spielberg,Lance Stroll,14,14
+2018,Spielberg,Stoffel Vandoorne,15,15
+2018,Spielberg,Lewis Hamilton,2,16
+2018,Spielberg,Brendon Hartley,19,17
+2018,Spielberg,Daniel Ricciardo,7,18
+2018,Spielberg,Valtteri Bottas,1,19
+2018,Spielberg,Nico Hulkenberg,10,20
+2018,Silverstone,Sebastian Vettel,2,1
+2018,Silverstone,Lewis Hamilton,1,2
+2018,Silverstone,Kimi Räikkönen,3,3
+2018,Silverstone,Valtteri Bottas,4,4
+2018,Silverstone,Daniel Ricciardo,6,5
+2018,Silverstone,Nico Hulkenberg,11,6
+2018,Silverstone,Esteban Ocon,10,7
+2018,Silverstone,Fernando Alonso,13,8
+2018,Silverstone,Kevin Magnussen,7,9
+2018,Silverstone,Sergio Perez,12,10
+2018,Silverstone,Stoffel Vandoorne,17,11
+2018,Silverstone,Lance Stroll,19,12
+2018,Silverstone,Pierre Gasly,14,13
+2018,Silverstone,Sergey Sirotkin,18,14
+2018,Silverstone,Max Verstappen,5,15
+2018,Silverstone,Romain Grosjean,8,16
+2018,Silverstone,Carlos Sainz,16,17
+2018,Silverstone,Marcus Ericsson,15,18
+2018,Silverstone,Charles Leclerc,9,19
+2018,Silverstone,Brendon Hartley,0,20
+2018,Hockenheim,Lewis Hamilton,14,1
+2018,Hockenheim,Valtteri Bottas,2,2
+2018,Hockenheim,Kimi Räikkönen,3,3
+2018,Hockenheim,Max Verstappen,4,4
+2018,Hockenheim,Nico Hulkenberg,7,5
+2018,Hockenheim,Romain Grosjean,6,6
+2018,Hockenheim,Sergio Perez,10,7
+2018,Hockenheim,Esteban Ocon,15,8
+2018,Hockenheim,Marcus Ericsson,13,9
+2018,Hockenheim,Brendon Hartley,17,10
+2018,Hockenheim,Kevin Magnussen,5,11
+2018,Hockenheim,Carlos Sainz,8,12
+2018,Hockenheim,Stoffel Vandoorne,19,13
+2018,Hockenheim,Pierre Gasly,16,14
+2018,Hockenheim,Charles Leclerc,9,15
+2018,Hockenheim,Fernando Alonso,11,16
+2018,Hockenheim,Lance Stroll,18,17
+2018,Hockenheim,Sebastian Vettel,1,18
+2018,Hockenheim,Sergey Sirotkin,12,19
+2018,Hockenheim,Daniel Ricciardo,20,20
+2018,Budapest,Lewis Hamilton,1,1
+2018,Budapest,Sebastian Vettel,4,2
+2018,Budapest,Kimi Räikkönen,3,3
+2018,Budapest,Daniel Ricciardo,12,4
+2018,Budapest,Valtteri Bottas,2,5
+2018,Budapest,Pierre Gasly,6,6
+2018,Budapest,Kevin Magnussen,9,7
+2018,Budapest,Fernando Alonso,11,8
+2018,Budapest,Carlos Sainz,5,9
+2018,Budapest,Romain Grosjean,10,10
+2018,Budapest,Brendon Hartley,8,11
+2018,Budapest,Nico Hulkenberg,13,12
+2018,Budapest,Esteban Ocon,18,13
+2018,Budapest,Sergio Perez,19,14
+2018,Budapest,Marcus Ericsson,14,15
+2018,Budapest,Sergey Sirotkin,20,16
+2018,Budapest,Lance Stroll,15,17
+2018,Budapest,Stoffel Vandoorne,16,18
+2018,Budapest,Max Verstappen,7,19
+2018,Budapest,Charles Leclerc,17,20
+2018,Spa-Francorchamps,Sebastian Vettel,2,1
+2018,Spa-Francorchamps,Lewis Hamilton,1,2
+2018,Spa-Francorchamps,Max Verstappen,7,3
+2018,Spa-Francorchamps,Valtteri Bottas,19,4
+2018,Spa-Francorchamps,Sergio Perez,4,5
+2018,Spa-Francorchamps,Esteban Ocon,3,6
+2018,Spa-Francorchamps,Romain Grosjean,5,7
+2018,Spa-Francorchamps,Kevin Magnussen,9,8
+2018,Spa-Francorchamps,Pierre Gasly,10,9
+2018,Spa-Francorchamps,Marcus Ericsson,13,10
+2018,Spa-Francorchamps,Carlos Sainz,14,11
+2018,Spa-Francorchamps,Sergey Sirotkin,16,12
+2018,Spa-Francorchamps,Lance Stroll,17,13
+2018,Spa-Francorchamps,Brendon Hartley,11,14
+2018,Spa-Francorchamps,Stoffel Vandoorne,18,15
+2018,Spa-Francorchamps,Daniel Ricciardo,8,16
+2018,Spa-Francorchamps,Kimi Räikkönen,6,17
+2018,Spa-Francorchamps,Charles Leclerc,12,18
+2018,Spa-Francorchamps,Fernando Alonso,15,19
+2018,Spa-Francorchamps,Nico Hulkenberg,20,20
+2018,Monza,Lewis Hamilton,3,1
+2018,Monza,Kimi Räikkönen,1,2
+2018,Monza,Valtteri Bottas,4,3
+2018,Monza,Sebastian Vettel,2,4
+2018,Monza,Max Verstappen,5,5
+2018,Monza,Esteban Ocon,8,6
+2018,Monza,Sergio Perez,14,7
+2018,Monza,Carlos Sainz,7,8
+2018,Monza,Lance Stroll,10,9
+2018,Monza,Sergey Sirotkin,12,10
+2018,Monza,Charles Leclerc,15,11
+2018,Monza,Stoffel Vandoorne,17,12
+2018,Monza,Nico Hulkenberg,20,13
+2018,Monza,Pierre Gasly,9,14
+2018,Monza,Marcus Ericsson,18,15
+2018,Monza,Kevin Magnussen,11,16
+2018,Monza,Daniel Ricciardo,19,17
+2018,Monza,Fernando Alonso,13,18
+2018,Monza,Brendon Hartley,16,19
+2018,Monza,Romain Grosjean,6,20
+2018,Singapore,Lewis Hamilton,1,1
+2018,Singapore,Max Verstappen,2,2
+2018,Singapore,Sebastian Vettel,3,3
+2018,Singapore,Valtteri Bottas,4,4
+2018,Singapore,Kimi Räikkönen,5,5
+2018,Singapore,Daniel Ricciardo,6,6
+2018,Singapore,Fernando Alonso,11,7
+2018,Singapore,Carlos Sainz,12,8
+2018,Singapore,Charles Leclerc,13,9
+2018,Singapore,Nico Hulkenberg,10,10
+2018,Singapore,Marcus Ericsson,14,11
+2018,Singapore,Stoffel Vandoorne,18,12
+2018,Singapore,Pierre Gasly,15,13
+2018,Singapore,Lance Stroll,20,14
+2018,Singapore,Romain Grosjean,8,15
+2018,Singapore,Sergio Perez,7,16
+2018,Singapore,Brendon Hartley,17,17
+2018,Singapore,Kevin Magnussen,16,18
+2018,Singapore,Sergey Sirotkin,19,19
+2018,Singapore,Esteban Ocon,9,20
+2018,Sochi,Lewis Hamilton,2,1
+2018,Sochi,Valtteri Bottas,1,2
+2018,Sochi,Sebastian Vettel,3,3
+2018,Sochi,Kimi Räikkönen,4,4
+2018,Sochi,Max Verstappen,19,5
+2018,Sochi,Daniel Ricciardo,18,6
+2018,Sochi,Charles Leclerc,7,7
+2018,Sochi,Kevin Magnussen,5,8
+2018,Sochi,Esteban Ocon,6,9
+2018,Sochi,Sergio Perez,8,10
+2018,Sochi,Romain Grosjean,9,11
+2018,Sochi,Nico Hulkenberg,12,12
+2018,Sochi,Marcus Ericsson,10,13
+2018,Sochi,Fernando Alonso,16,14
+2018,Sochi,Lance Stroll,14,15
+2018,Sochi,Stoffel Vandoorne,15,16
+2018,Sochi,Carlos Sainz,11,17
+2018,Sochi,Sergey Sirotkin,13,18
+2018,Sochi,Pierre Gasly,17,19
+2018,Sochi,Brendon Hartley,20,20
+2018,Suzuka,Lewis Hamilton,1,1
+2018,Suzuka,Valtteri Bottas,2,2
+2018,Suzuka,Max Verstappen,3,3
+2018,Suzuka,Daniel Ricciardo,15,4
+2018,Suzuka,Kimi Räikkönen,4,5
+2018,Suzuka,Sebastian Vettel,8,6
+2018,Suzuka,Sergio Perez,9,7
+2018,Suzuka,Romain Grosjean,5,8
+2018,Suzuka,Esteban Ocon,11,9
+2018,Suzuka,Carlos Sainz,13,10
+2018,Suzuka,Pierre Gasly,7,11
+2018,Suzuka,Marcus Ericsson,20,12
+2018,Suzuka,Brendon Hartley,6,13
+2018,Suzuka,Fernando Alonso,18,14
+2018,Suzuka,Stoffel Vandoorne,19,15
+2018,Suzuka,Sergey Sirotkin,17,16
+2018,Suzuka,Lance Stroll,14,17
+2018,Suzuka,Charles Leclerc,10,18
+2018,Suzuka,Nico Hulkenberg,16,19
+2018,Suzuka,Kevin Magnussen,12,20
+2018,Austin,Kimi Räikkönen,2,1
+2018,Austin,Max Verstappen,18,2
+2018,Austin,Lewis Hamilton,1,3
+2018,Austin,Sebastian Vettel,5,4
+2018,Austin,Valtteri Bottas,3,5
+2018,Austin,Nico Hulkenberg,7,6
+2018,Austin,Carlos Sainz,11,7
+2018,Austin,Sergio Perez,10,8
+2018,Austin,Brendon Hartley,20,9
+2018,Austin,Marcus Ericsson,16,10
+2018,Austin,Stoffel Vandoorne,17,11
+2018,Austin,Pierre Gasly,19,12
+2018,Austin,Sergey Sirotkin,14,13
+2018,Austin,Lance Stroll,15,14
+2018,Austin,Charles Leclerc,9,15
+2018,Austin,Daniel Ricciardo,4,16
+2018,Austin,Romain Grosjean,8,17
+2018,Austin,Fernando Alonso,13,18
+2018,Austin,Esteban Ocon,6,19
+2018,Austin,Kevin Magnussen,12,20
+2018,Mexico City,Max Verstappen,2,1
+2018,Mexico City,Sebastian Vettel,4,2
+2018,Mexico City,Kimi Räikkönen,6,3
+2018,Mexico City,Lewis Hamilton,3,4
+2018,Mexico City,Valtteri Bottas,5,5
+2018,Mexico City,Nico Hulkenberg,7,6
+2018,Mexico City,Charles Leclerc,9,7
+2018,Mexico City,Stoffel Vandoorne,15,8
+2018,Mexico City,Marcus Ericsson,10,9
+2018,Mexico City,Pierre Gasly,20,10
+2018,Mexico City,Esteban Ocon,11,11
+2018,Mexico City,Lance Stroll,17,12
+2018,Mexico City,Sergey Sirotkin,19,13
+2018,Mexico City,Brendon Hartley,14,14
+2018,Mexico City,Kevin Magnussen,16,15
+2018,Mexico City,Romain Grosjean,18,16
+2018,Mexico City,Daniel Ricciardo,1,17
+2018,Mexico City,Sergio Perez,13,18
+2018,Mexico City,Carlos Sainz,8,19
+2018,Mexico City,Fernando Alonso,12,20
+2018,São Paulo,Lewis Hamilton,1,1
+2018,São Paulo,Max Verstappen,5,2
+2018,São Paulo,Kimi Räikkönen,4,3
+2018,São Paulo,Daniel Ricciardo,11,4
+2018,São Paulo,Valtteri Bottas,3,5
+2018,São Paulo,Sebastian Vettel,2,6
+2018,São Paulo,Charles Leclerc,7,7
+2018,São Paulo,Romain Grosjean,8,8
+2018,São Paulo,Kevin Magnussen,10,9
+2018,São Paulo,Sergio Perez,12,10
+2018,São Paulo,Brendon Hartley,16,11
+2018,São Paulo,Carlos Sainz,15,12
+2018,São Paulo,Pierre Gasly,9,13
+2018,São Paulo,Stoffel Vandoorne,20,14
+2018,São Paulo,Esteban Ocon,18,15
+2018,São Paulo,Sergey Sirotkin,14,16
+2018,São Paulo,Fernando Alonso,17,17
+2018,São Paulo,Lance Stroll,19,18
+2018,São Paulo,Nico Hulkenberg,13,19
+2018,São Paulo,Marcus Ericsson,6,20
+2018,Yas Marina,Lewis Hamilton,1,1
+2018,Yas Marina,Sebastian Vettel,3,2
+2018,Yas Marina,Max Verstappen,6,3
+2018,Yas Marina,Daniel Ricciardo,5,4
+2018,Yas Marina,Valtteri Bottas,2,5
+2018,Yas Marina,Carlos Sainz,11,6
+2018,Yas Marina,Charles Leclerc,8,7
+2018,Yas Marina,Sergio Perez,14,8
+2018,Yas Marina,Romain Grosjean,7,9
+2018,Yas Marina,Kevin Magnussen,13,10
+2018,Yas Marina,Fernando Alonso,15,11
+2018,Yas Marina,Brendon Hartley,16,12
+2018,Yas Marina,Lance Stroll,20,13
+2018,Yas Marina,Stoffel Vandoorne,18,14
+2018,Yas Marina,Sergey Sirotkin,19,15
+2018,Yas Marina,Pierre Gasly,17,16
+2018,Yas Marina,Esteban Ocon,9,17
+2018,Yas Marina,Marcus Ericsson,12,18
+2018,Yas Marina,Kimi Räikkönen,4,19
+2018,Yas Marina,Nico Hulkenberg,10,20
+2019,Melbourne,Valtteri Bottas,2,1
+2019,Melbourne,Lewis Hamilton,1,2
+2019,Melbourne,Max Verstappen,4,3
+2019,Melbourne,Sebastian Vettel,3,4
+2019,Melbourne,Charles Leclerc,5,5
+2019,Melbourne,Kevin Magnussen,7,6
+2019,Melbourne,Nico Hulkenberg,11,7
+2019,Melbourne,Kimi Räikkönen,9,8
+2019,Melbourne,Lance Stroll,16,9
+2019,Melbourne,Daniil Kvyat,15,10
+2019,Melbourne,Pierre Gasly,17,11
+2019,Melbourne,Lando Norris,8,12
+2019,Melbourne,Sergio Perez,10,13
+2019,Melbourne,Alexander Albon,13,14
+2019,Melbourne,Antonio Giovinazzi,14,15
+2019,Melbourne,George Russell,19,16
+2019,Melbourne,Robert Kubica,20,17
+2019,Melbourne,Romain Grosjean,6,18
+2019,Melbourne,Daniel Ricciardo,12,19
+2019,Melbourne,Carlos Sainz,18,20
+2019,Sakhir,Lewis Hamilton,3,1
+2019,Sakhir,Valtteri Bottas,4,2
+2019,Sakhir,Charles Leclerc,1,3
+2019,Sakhir,Max Verstappen,5,4
+2019,Sakhir,Sebastian Vettel,2,5
+2019,Sakhir,Lando Norris,9,6
+2019,Sakhir,Kimi Räikkönen,8,7
+2019,Sakhir,Pierre Gasly,13,8
+2019,Sakhir,Alexander Albon,12,9
+2019,Sakhir,Sergio Perez,14,10
+2019,Sakhir,Antonio Giovinazzi,16,11
+2019,Sakhir,Daniil Kvyat,15,12
+2019,Sakhir,Kevin Magnussen,6,13
+2019,Sakhir,Lance Stroll,18,14
+2019,Sakhir,George Russell,19,15
+2019,Sakhir,Robert Kubica,20,16
+2019,Sakhir,Nico Hulkenberg,17,17
+2019,Sakhir,Daniel Ricciardo,10,18
+2019,Sakhir,Carlos Sainz,7,19
+2019,Sakhir,Romain Grosjean,11,20
+2019,Shanghai,Lewis Hamilton,2,1
+2019,Shanghai,Valtteri Bottas,1,2
+2019,Shanghai,Sebastian Vettel,3,3
+2019,Shanghai,Max Verstappen,5,4
+2019,Shanghai,Charles Leclerc,4,5
+2019,Shanghai,Pierre Gasly,6,6
+2019,Shanghai,Daniel Ricciardo,7,7
+2019,Shanghai,Sergio Perez,12,8
+2019,Shanghai,Kimi Räikkönen,13,9
+2019,Shanghai,Alexander Albon,0,10
+2019,Shanghai,Romain Grosjean,10,11
+2019,Shanghai,Lance Stroll,16,12
+2019,Shanghai,Kevin Magnussen,9,13
+2019,Shanghai,Carlos Sainz,14,14
+2019,Shanghai,Antonio Giovinazzi,19,15
+2019,Shanghai,George Russell,17,16
+2019,Shanghai,Robert Kubica,18,17
+2019,Shanghai,Lando Norris,15,18
+2019,Shanghai,Daniil Kvyat,11,19
+2019,Shanghai,Nico Hulkenberg,8,20
+2019,Baku,Valtteri Bottas,1,1
+2019,Baku,Lewis Hamilton,2,2
+2019,Baku,Sebastian Vettel,3,3
+2019,Baku,Max Verstappen,4,4
+2019,Baku,Charles Leclerc,8,5
+2019,Baku,Sergio Perez,5,6
+2019,Baku,Carlos Sainz,9,7
+2019,Baku,Lando Norris,7,8
+2019,Baku,Lance Stroll,13,9
+2019,Baku,Kimi Räikkönen,0,10
+2019,Baku,Alexander Albon,11,11
+2019,Baku,Antonio Giovinazzi,17,12
+2019,Baku,Kevin Magnussen,12,13
+2019,Baku,Nico Hulkenberg,15,14
+2019,Baku,George Russell,16,15
+2019,Baku,Robert Kubica,0,16
+2019,Baku,Pierre Gasly,0,17
+2019,Baku,Romain Grosjean,14,18
+2019,Baku,Daniil Kvyat,6,19
+2019,Baku,Daniel Ricciardo,10,20
+2019,Barcelona,Lewis Hamilton,2,1
+2019,Barcelona,Valtteri Bottas,1,2
+2019,Barcelona,Max Verstappen,4,3
+2019,Barcelona,Sebastian Vettel,3,4
+2019,Barcelona,Charles Leclerc,5,5
+2019,Barcelona,Pierre Gasly,6,6
+2019,Barcelona,Kevin Magnussen,8,7
+2019,Barcelona,Carlos Sainz,12,8
+2019,Barcelona,Daniil Kvyat,9,9
+2019,Barcelona,Romain Grosjean,7,10
+2019,Barcelona,Alexander Albon,11,11
+2019,Barcelona,Daniel Ricciardo,13,12
+2019,Barcelona,Nico Hulkenberg,0,13
+2019,Barcelona,Kimi Räikkönen,14,14
+2019,Barcelona,Sergio Perez,15,15
+2019,Barcelona,Antonio Giovinazzi,18,16
+2019,Barcelona,George Russell,19,17
+2019,Barcelona,Robert Kubica,17,18
+2019,Barcelona,Lance Stroll,16,19
+2019,Barcelona,Lando Norris,10,20
+2019,Monte Carlo,Lewis Hamilton,1,1
+2019,Monte Carlo,Sebastian Vettel,4,2
+2019,Monte Carlo,Valtteri Bottas,2,3
+2019,Monte Carlo,Max Verstappen,3,4
+2019,Monte Carlo,Pierre Gasly,8,5
+2019,Monte Carlo,Carlos Sainz,9,6
+2019,Monte Carlo,Daniil Kvyat,7,7
+2019,Monte Carlo,Alexander Albon,10,8
+2019,Monte Carlo,Daniel Ricciardo,6,9
+2019,Monte Carlo,Romain Grosjean,13,10
+2019,Monte Carlo,Lando Norris,12,11
+2019,Monte Carlo,Sergio Perez,16,12
+2019,Monte Carlo,Nico Hulkenberg,11,13
+2019,Monte Carlo,Kevin Magnussen,5,14
+2019,Monte Carlo,George Russell,19,15
+2019,Monte Carlo,Lance Stroll,17,16
+2019,Monte Carlo,Kimi Räikkönen,14,17
+2019,Monte Carlo,Robert Kubica,20,18
+2019,Monte Carlo,Antonio Giovinazzi,18,19
+2019,Monte Carlo,Charles Leclerc,15,20
+2019,Montréal,Lewis Hamilton,2,1
+2019,Montréal,Sebastian Vettel,1,2
+2019,Montréal,Charles Leclerc,3,3
+2019,Montréal,Valtteri Bottas,6,4
+2019,Montréal,Max Verstappen,9,5
+2019,Montréal,Daniel Ricciardo,4,6
+2019,Montréal,Nico Hulkenberg,7,7
+2019,Montréal,Pierre Gasly,5,8
+2019,Montréal,Lance Stroll,17,9
+2019,Montréal,Daniil Kvyat,10,10
+2019,Montréal,Carlos Sainz,11,11
+2019,Montréal,Sergio Perez,15,12
+2019,Montréal,Antonio Giovinazzi,12,13
+2019,Montréal,Romain Grosjean,14,14
+2019,Montréal,Kimi Räikkönen,16,15
+2019,Montréal,George Russell,18,16
+2019,Montréal,Kevin Magnussen,0,17
+2019,Montréal,Robert Kubica,19,18
+2019,Montréal,Alexander Albon,13,19
+2019,Montréal,Lando Norris,8,20
+2019,Le Castellet,Lewis Hamilton,1,1
+2019,Le Castellet,Valtteri Bottas,2,2
+2019,Le Castellet,Charles Leclerc,3,3
+2019,Le Castellet,Max Verstappen,4,4
+2019,Le Castellet,Sebastian Vettel,7,5
+2019,Le Castellet,Carlos Sainz,6,6
+2019,Le Castellet,Kimi Räikkönen,12,7
+2019,Le Castellet,Nico Hulkenberg,13,8
+2019,Le Castellet,Lando Norris,5,9
+2019,Le Castellet,Pierre Gasly,9,10
+2019,Le Castellet,Daniel Ricciardo,8,11
+2019,Le Castellet,Sergio Perez,14,12
+2019,Le Castellet,Lance Stroll,17,13
+2019,Le Castellet,Daniil Kvyat,19,14
+2019,Le Castellet,Alexander Albon,11,15
+2019,Le Castellet,Antonio Giovinazzi,10,16
+2019,Le Castellet,Kevin Magnussen,15,17
+2019,Le Castellet,Robert Kubica,18,18
+2019,Le Castellet,George Russell,20,19
+2019,Le Castellet,Romain Grosjean,16,20
+2019,Spielberg,Max Verstappen,2,1
+2019,Spielberg,Charles Leclerc,1,2
+2019,Spielberg,Valtteri Bottas,3,3
+2019,Spielberg,Sebastian Vettel,9,4
+2019,Spielberg,Lewis Hamilton,4,5
+2019,Spielberg,Lando Norris,5,6
+2019,Spielberg,Pierre Gasly,8,7
+2019,Spielberg,Carlos Sainz,19,8
+2019,Spielberg,Kimi Räikkönen,6,9
+2019,Spielberg,Antonio Giovinazzi,7,10
+2019,Spielberg,Sergio Perez,13,11
+2019,Spielberg,Daniel Ricciardo,12,12
+2019,Spielberg,Nico Hulkenberg,15,13
+2019,Spielberg,Lance Stroll,14,14
+2019,Spielberg,Alexander Albon,18,15
+2019,Spielberg,Romain Grosjean,11,16
+2019,Spielberg,Daniil Kvyat,16,17
+2019,Spielberg,George Russell,0,18
+2019,Spielberg,Kevin Magnussen,10,19
+2019,Spielberg,Robert Kubica,17,20
+2019,Silverstone,Lewis Hamilton,2,1
+2019,Silverstone,Valtteri Bottas,1,2
+2019,Silverstone,Charles Leclerc,3,3
+2019,Silverstone,Pierre Gasly,5,4
+2019,Silverstone,Max Verstappen,4,5
+2019,Silverstone,Carlos Sainz,13,6
+2019,Silverstone,Daniel Ricciardo,7,7
+2019,Silverstone,Kimi Räikkönen,12,8
+2019,Silverstone,Daniil Kvyat,17,9
+2019,Silverstone,Nico Hulkenberg,10,10
+2019,Silverstone,Lando Norris,8,11
+2019,Silverstone,Alexander Albon,9,12
+2019,Silverstone,Lance Stroll,18,13
+2019,Silverstone,George Russell,19,14
+2019,Silverstone,Robert Kubica,20,15
+2019,Silverstone,Sebastian Vettel,6,16
+2019,Silverstone,Sergio Perez,15,17
+2019,Silverstone,Antonio Giovinazzi,11,18
+2019,Silverstone,Romain Grosjean,14,19
+2019,Silverstone,Kevin Magnussen,16,20
+2019,Hockenheim,Max Verstappen,2,1
+2019,Hockenheim,Sebastian Vettel,20,2
+2019,Hockenheim,Daniil Kvyat,14,3
+2019,Hockenheim,Lance Stroll,15,4
+2019,Hockenheim,Carlos Sainz,7,5
+2019,Hockenheim,Alexander Albon,16,6
+2019,Hockenheim,Romain Grosjean,6,7
+2019,Hockenheim,Kevin Magnussen,12,8
+2019,Hockenheim,Lewis Hamilton,1,9
+2019,Hockenheim,Robert Kubica,18,10
+2019,Hockenheim,George Russell,17,11
+2019,Hockenheim,Kimi Räikkönen,5,12
+2019,Hockenheim,Antonio Giovinazzi,11,13
+2019,Hockenheim,Pierre Gasly,4,14
+2019,Hockenheim,Valtteri Bottas,3,15
+2019,Hockenheim,Nico Hulkenberg,9,16
+2019,Hockenheim,Charles Leclerc,10,17
+2019,Hockenheim,Lando Norris,19,18
+2019,Hockenheim,Daniel Ricciardo,13,19
+2019,Hockenheim,Sergio Perez,8,20
+2019,Budapest,Lewis Hamilton,3,1
+2019,Budapest,Max Verstappen,1,2
+2019,Budapest,Sebastian Vettel,5,3
+2019,Budapest,Charles Leclerc,4,4
+2019,Budapest,Carlos Sainz,8,5
+2019,Budapest,Pierre Gasly,6,6
+2019,Budapest,Kimi Räikkönen,10,7
+2019,Budapest,Valtteri Bottas,2,8
+2019,Budapest,Lando Norris,7,9
+2019,Budapest,Alexander Albon,12,10
+2019,Budapest,Sergio Perez,16,11
+2019,Budapest,Nico Hulkenberg,11,12
+2019,Budapest,Kevin Magnussen,14,13
+2019,Budapest,Daniel Ricciardo,20,14
+2019,Budapest,Daniil Kvyat,13,15
+2019,Budapest,George Russell,15,16
+2019,Budapest,Lance Stroll,18,17
+2019,Budapest,Antonio Giovinazzi,17,18
+2019,Budapest,Robert Kubica,19,19
+2019,Budapest,Romain Grosjean,9,20
+2019,Spa-Francorchamps,Charles Leclerc,1,1
+2019,Spa-Francorchamps,Lewis Hamilton,3,2
+2019,Spa-Francorchamps,Valtteri Bottas,4,3
+2019,Spa-Francorchamps,Sebastian Vettel,2,4
+2019,Spa-Francorchamps,Alexander Albon,17,5
+2019,Spa-Francorchamps,Sergio Perez,7,6
+2019,Spa-Francorchamps,Daniil Kvyat,19,7
+2019,Spa-Francorchamps,Nico Hulkenberg,12,8
+2019,Spa-Francorchamps,Pierre Gasly,13,9
+2019,Spa-Francorchamps,Lance Stroll,16,10
+2019,Spa-Francorchamps,Lando Norris,11,11
+2019,Spa-Francorchamps,Kevin Magnussen,8,12
+2019,Spa-Francorchamps,Romain Grosjean,9,13
+2019,Spa-Francorchamps,Daniel Ricciardo,10,14
+2019,Spa-Francorchamps,George Russell,14,15
+2019,Spa-Francorchamps,Kimi Räikkönen,6,16
+2019,Spa-Francorchamps,Robert Kubica,0,17
+2019,Spa-Francorchamps,Antonio Giovinazzi,18,18
+2019,Spa-Francorchamps,Carlos Sainz,15,19
+2019,Spa-Francorchamps,Max Verstappen,5,20
+2019,Monza,Charles Leclerc,1,1
+2019,Monza,Valtteri Bottas,3,2
+2019,Monza,Lewis Hamilton,2,3
+2019,Monza,Daniel Ricciardo,5,4
+2019,Monza,Nico Hulkenberg,6,5
+2019,Monza,Alexander Albon,8,6
+2019,Monza,Sergio Perez,18,7
+2019,Monza,Max Verstappen,19,8
+2019,Monza,Antonio Giovinazzi,10,9
+2019,Monza,Lando Norris,16,10
+2019,Monza,Pierre Gasly,17,11
+2019,Monza,Lance Stroll,9,12
+2019,Monza,Sebastian Vettel,4,13
+2019,Monza,George Russell,14,14
+2019,Monza,Kimi Räikkönen,0,15
+2019,Monza,Romain Grosjean,13,16
+2019,Monza,Robert Kubica,15,17
+2019,Monza,Kevin Magnussen,11,18
+2019,Monza,Daniil Kvyat,12,19
+2019,Monza,Carlos Sainz,7,20
+2019,Singapore,Sebastian Vettel,3,1
+2019,Singapore,Charles Leclerc,1,2
+2019,Singapore,Max Verstappen,4,3
+2019,Singapore,Lewis Hamilton,2,4
+2019,Singapore,Valtteri Bottas,5,5
+2019,Singapore,Alexander Albon,6,6
+2019,Singapore,Lando Norris,9,7
+2019,Singapore,Pierre Gasly,11,8
+2019,Singapore,Nico Hulkenberg,8,9
+2019,Singapore,Antonio Giovinazzi,10,10
+2019,Singapore,Romain Grosjean,17,11
+2019,Singapore,Carlos Sainz,7,12
+2019,Singapore,Lance Stroll,16,13
+2019,Singapore,Daniel Ricciardo,20,14
+2019,Singapore,Daniil Kvyat,14,15
+2019,Singapore,Robert Kubica,19,16
+2019,Singapore,Kevin Magnussen,13,17
+2019,Singapore,Kimi Räikkönen,12,18
+2019,Singapore,Sergio Perez,15,19
+2019,Singapore,George Russell,18,20
+2019,Sochi,Lewis Hamilton,2,1
+2019,Sochi,Valtteri Bottas,4,2
+2019,Sochi,Charles Leclerc,1,3
+2019,Sochi,Max Verstappen,9,4
+2019,Sochi,Alexander Albon,0,5
+2019,Sochi,Carlos Sainz,5,6
+2019,Sochi,Sergio Perez,11,7
+2019,Sochi,Lando Norris,7,8
+2019,Sochi,Kevin Magnussen,13,9
+2019,Sochi,Nico Hulkenberg,6,10
+2019,Sochi,Lance Stroll,14,11
+2019,Sochi,Daniil Kvyat,19,12
+2019,Sochi,Kimi Räikkönen,15,13
+2019,Sochi,Pierre Gasly,16,14
+2019,Sochi,Antonio Giovinazzi,12,15
+2019,Sochi,Robert Kubica,18,16
+2019,Sochi,George Russell,17,17
+2019,Sochi,Sebastian Vettel,3,18
+2019,Sochi,Daniel Ricciardo,10,19
+2019,Sochi,Romain Grosjean,8,20
+2019,Suzuka,Valtteri Bottas,3,1
+2019,Suzuka,Sebastian Vettel,1,2
+2019,Suzuka,Lewis Hamilton,4,3
+2019,Suzuka,Alexander Albon,6,4
+2019,Suzuka,Carlos Sainz,7,5
+2019,Suzuka,Charles Leclerc,2,6
+2019,Suzuka,Pierre Gasly,9,7
+2019,Suzuka,Sergio Perez,17,8
+2019,Suzuka,Lance Stroll,12,9
+2019,Suzuka,Daniil Kvyat,14,10
+2019,Suzuka,Lando Norris,8,11
+2019,Suzuka,Kimi Räikkönen,13,12
+2019,Suzuka,Romain Grosjean,10,13
+2019,Suzuka,Antonio Giovinazzi,11,14
+2019,Suzuka,Kevin Magnussen,19,15
+2019,Suzuka,George Russell,18,16
+2019,Suzuka,Robert Kubica,0,17
+2019,Suzuka,Max Verstappen,5,18
+2019,Suzuka,Daniel Ricciardo,16,19
+2019,Suzuka,Nico Hulkenberg,15,20
+2019,Mexico City,Lewis Hamilton,3,1
+2019,Mexico City,Sebastian Vettel,2,2
+2019,Mexico City,Valtteri Bottas,6,3
+2019,Mexico City,Charles Leclerc,1,4
+2019,Mexico City,Alexander Albon,5,5
+2019,Mexico City,Max Verstappen,4,6
+2019,Mexico City,Sergio Perez,11,7
+2019,Mexico City,Daniel Ricciardo,13,8
+2019,Mexico City,Pierre Gasly,10,9
+2019,Mexico City,Nico Hulkenberg,12,10
+2019,Mexico City,Daniil Kvyat,9,11
+2019,Mexico City,Lance Stroll,16,12
+2019,Mexico City,Carlos Sainz,7,13
+2019,Mexico City,Antonio Giovinazzi,15,14
+2019,Mexico City,Kevin Magnussen,17,15
+2019,Mexico City,George Russell,19,16
+2019,Mexico City,Romain Grosjean,18,17
+2019,Mexico City,Robert Kubica,20,18
+2019,Mexico City,Kimi Räikkönen,14,19
+2019,Mexico City,Lando Norris,8,20
+2019,Austin,Valtteri Bottas,1,1
+2019,Austin,Lewis Hamilton,5,2
+2019,Austin,Max Verstappen,3,3
+2019,Austin,Charles Leclerc,4,4
+2019,Austin,Alexander Albon,6,5
+2019,Austin,Daniel Ricciardo,9,6
+2019,Austin,Lando Norris,8,7
+2019,Austin,Carlos Sainz,7,8
+2019,Austin,Nico Hulkenberg,11,9
+2019,Austin,Sergio Perez,0,10
+2019,Austin,Kimi Räikkönen,17,11
+2019,Austin,Daniil Kvyat,13,12
+2019,Austin,Lance Stroll,14,13
+2019,Austin,Antonio Giovinazzi,16,14
+2019,Austin,Romain Grosjean,15,15
+2019,Austin,Pierre Gasly,10,16
+2019,Austin,George Russell,18,17
+2019,Austin,Kevin Magnussen,12,18
+2019,Austin,Robert Kubica,19,19
+2019,Austin,Sebastian Vettel,2,20
+2019,São Paulo,Max Verstappen,1,1
+2019,São Paulo,Pierre Gasly,6,2
+2019,São Paulo,Carlos Sainz,20,3
+2019,São Paulo,Kimi Räikkönen,8,4
+2019,São Paulo,Antonio Giovinazzi,12,5
+2019,São Paulo,Daniel Ricciardo,11,6
+2019,São Paulo,Lewis Hamilton,3,7
+2019,São Paulo,Lando Norris,10,8
+2019,São Paulo,Sergio Perez,15,9
+2019,São Paulo,Daniil Kvyat,16,10
+2019,São Paulo,Kevin Magnussen,9,11
+2019,São Paulo,George Russell,18,12
+2019,São Paulo,Romain Grosjean,7,13
+2019,São Paulo,Alexander Albon,5,14
+2019,São Paulo,Nico Hulkenberg,13,15
+2019,São Paulo,Robert Kubica,19,16
+2019,São Paulo,Sebastian Vettel,2,17
+2019,São Paulo,Charles Leclerc,14,18
+2019,São Paulo,Lance Stroll,17,19
+2019,São Paulo,Valtteri Bottas,4,20
+2019,Yas Island,Lewis Hamilton,1,1
+2019,Yas Island,Max Verstappen,2,2
+2019,Yas Island,Charles Leclerc,3,3
+2019,Yas Island,Valtteri Bottas,20,4
+2019,Yas Island,Sebastian Vettel,4,5
+2019,Yas Island,Alexander Albon,5,6
+2019,Yas Island,Sergio Perez,10,7
+2019,Yas Island,Lando Norris,6,8
+2019,Yas Island,Daniil Kvyat,13,9
+2019,Yas Island,Carlos Sainz,8,10
+2019,Yas Island,Daniel Ricciardo,7,11
+2019,Yas Island,Nico Hulkenberg,9,12
+2019,Yas Island,Kimi Räikkönen,17,13
+2019,Yas Island,Kevin Magnussen,14,14
+2019,Yas Island,Romain Grosjean,15,15
+2019,Yas Island,Antonio Giovinazzi,16,16
+2019,Yas Island,George Russell,18,17
+2019,Yas Island,Pierre Gasly,11,18
+2019,Yas Island,Robert Kubica,19,19
+2019,Yas Island,Lance Stroll,12,20
+2020,Spielberg,Valtteri Bottas,1,1
+2020,Spielberg,Charles Leclerc,7,2
+2020,Spielberg,Lando Norris,3,3
+2020,Spielberg,Lewis Hamilton,5,4
+2020,Spielberg,Carlos Sainz,8,5
+2020,Spielberg,Sergio Perez,6,6
+2020,Spielberg,Pierre Gasly,12,7
+2020,Spielberg,Esteban Ocon,14,8
+2020,Spielberg,Antonio Giovinazzi,18,9
+2020,Spielberg,Sebastian Vettel,11,10
+2020,Spielberg,Nicholas Latifi,20,11
+2020,Spielberg,Daniil Kvyat,13,12
+2020,Spielberg,Alexander Albon,4,13
+2020,Spielberg,Kimi Räikkönen,19,14
+2020,Spielberg,George Russell,17,15
+2020,Spielberg,Romain Grosjean,15,16
+2020,Spielberg,Kevin Magnussen,16,17
+2020,Spielberg,Lance Stroll,9,18
+2020,Spielberg,Daniel Ricciardo,10,19
+2020,Spielberg,Max Verstappen,2,20
+2020,Spielberg,Lewis Hamilton,1,1
+2020,Spielberg,Valtteri Bottas,4,2
+2020,Spielberg,Max Verstappen,2,3
+2020,Spielberg,Alexander Albon,6,4
+2020,Spielberg,Lando Norris,9,5
+2020,Spielberg,Sergio Perez,17,6
+2020,Spielberg,Lance Stroll,12,7
+2020,Spielberg,Daniel Ricciardo,8,8
+2020,Spielberg,Carlos Sainz,3,9
+2020,Spielberg,Daniil Kvyat,13,10
+2020,Spielberg,Kimi Räikkönen,16,11
+2020,Spielberg,Kevin Magnussen,15,12
+2020,Spielberg,Romain Grosjean,0,13
+2020,Spielberg,Antonio Giovinazzi,19,14
+2020,Spielberg,Pierre Gasly,7,15
+2020,Spielberg,George Russell,11,16
+2020,Spielberg,Nicholas Latifi,18,17
+2020,Spielberg,Esteban Ocon,5,18
+2020,Spielberg,Charles Leclerc,14,19
+2020,Spielberg,Sebastian Vettel,10,20
+2020,Budapest,Lewis Hamilton,1,1
+2020,Budapest,Max Verstappen,7,2
+2020,Budapest,Valtteri Bottas,2,3
+2020,Budapest,Lance Stroll,3,4
+2020,Budapest,Alexander Albon,13,5
+2020,Budapest,Sebastian Vettel,5,6
+2020,Budapest,Sergio Perez,4,7
+2020,Budapest,Daniel Ricciardo,11,8
+2020,Budapest,Carlos Sainz,9,9
+2020,Budapest,Kevin Magnussen,0,10
+2020,Budapest,Charles Leclerc,6,11
+2020,Budapest,Daniil Kvyat,17,12
+2020,Budapest,Lando Norris,8,13
+2020,Budapest,Esteban Ocon,14,14
+2020,Budapest,Kimi Räikkönen,20,15
+2020,Budapest,Romain Grosjean,0,16
+2020,Budapest,Antonio Giovinazzi,19,17
+2020,Budapest,George Russell,12,18
+2020,Budapest,Nicholas Latifi,15,19
+2020,Budapest,Pierre Gasly,10,20
+2020,Silverstone,Lewis Hamilton,1,1
+2020,Silverstone,Max Verstappen,3,2
+2020,Silverstone,Charles Leclerc,4,3
+2020,Silverstone,Daniel Ricciardo,8,4
+2020,Silverstone,Lando Norris,5,5
+2020,Silverstone,Esteban Ocon,9,6
+2020,Silverstone,Pierre Gasly,11,7
+2020,Silverstone,Alexander Albon,12,8
+2020,Silverstone,Lance Stroll,6,9
+2020,Silverstone,Sebastian Vettel,10,10
+2020,Silverstone,Valtteri Bottas,2,11
+2020,Silverstone,George Russell,20,12
+2020,Silverstone,Carlos Sainz,7,13
+2020,Silverstone,Antonio Giovinazzi,15,14
+2020,Silverstone,Nicholas Latifi,18,15
+2020,Silverstone,Romain Grosjean,17,16
+2020,Silverstone,Kimi Räikkönen,16,17
+2020,Silverstone,Daniil Kvyat,19,18
+2020,Silverstone,Kevin Magnussen,14,19
+2020,Silverstone,Nico Hulkenberg,13,20
+2020,Silverstone,Max Verstappen,4,1
+2020,Silverstone,Lewis Hamilton,2,2
+2020,Silverstone,Valtteri Bottas,1,3
+2020,Silverstone,Charles Leclerc,8,4
+2020,Silverstone,Alexander Albon,9,5
+2020,Silverstone,Lance Stroll,6,6
+2020,Silverstone,Nico Hulkenberg,3,7
+2020,Silverstone,Esteban Ocon,14,8
+2020,Silverstone,Lando Norris,10,9
+2020,Silverstone,Daniil Kvyat,16,10
+2020,Silverstone,Pierre Gasly,7,11
+2020,Silverstone,Sebastian Vettel,11,12
+2020,Silverstone,Carlos Sainz,12,13
+2020,Silverstone,Daniel Ricciardo,5,14
+2020,Silverstone,Kimi Räikkönen,20,15
+2020,Silverstone,Romain Grosjean,13,16
+2020,Silverstone,Antonio Giovinazzi,19,17
+2020,Silverstone,George Russell,15,18
+2020,Silverstone,Nicholas Latifi,18,19
+2020,Silverstone,Kevin Magnussen,17,20
+2020,Barcelona,Lewis Hamilton,1,1
+2020,Barcelona,Max Verstappen,3,2
+2020,Barcelona,Valtteri Bottas,2,3
+2020,Barcelona,Lance Stroll,5,4
+2020,Barcelona,Sergio Perez,4,5
+2020,Barcelona,Carlos Sainz,7,6
+2020,Barcelona,Sebastian Vettel,11,7
+2020,Barcelona,Alexander Albon,6,8
+2020,Barcelona,Pierre Gasly,10,9
+2020,Barcelona,Lando Norris,8,10
+2020,Barcelona,Daniel Ricciardo,13,11
+2020,Barcelona,Daniil Kvyat,12,12
+2020,Barcelona,Esteban Ocon,15,13
+2020,Barcelona,Kimi Räikkönen,14,14
+2020,Barcelona,Kevin Magnussen,16,15
+2020,Barcelona,Antonio Giovinazzi,20,16
+2020,Barcelona,George Russell,18,17
+2020,Barcelona,Nicholas Latifi,19,18
+2020,Barcelona,Romain Grosjean,17,19
+2020,Barcelona,Charles Leclerc,9,20
+2020,Spa-Francorchamps,Lewis Hamilton,1,1
+2020,Spa-Francorchamps,Valtteri Bottas,2,2
+2020,Spa-Francorchamps,Max Verstappen,3,3
+2020,Spa-Francorchamps,Daniel Ricciardo,4,4
+2020,Spa-Francorchamps,Esteban Ocon,6,5
+2020,Spa-Francorchamps,Alexander Albon,5,6
+2020,Spa-Francorchamps,Lando Norris,10,7
+2020,Spa-Francorchamps,Pierre Gasly,12,8
+2020,Spa-Francorchamps,Lance Stroll,9,9
+2020,Spa-Francorchamps,Sergio Perez,8,10
+2020,Spa-Francorchamps,Daniil Kvyat,11,11
+2020,Spa-Francorchamps,Kimi Räikkönen,16,12
+2020,Spa-Francorchamps,Sebastian Vettel,14,13
+2020,Spa-Francorchamps,Charles Leclerc,13,14
+2020,Spa-Francorchamps,Romain Grosjean,17,15
+2020,Spa-Francorchamps,Nicholas Latifi,19,16
+2020,Spa-Francorchamps,Kevin Magnussen,20,17
+2020,Spa-Francorchamps,Antonio Giovinazzi,18,18
+2020,Spa-Francorchamps,George Russell,15,19
+2020,Spa-Francorchamps,Carlos Sainz,7,20
+2020,Monza,Pierre Gasly,10,1
+2020,Monza,Carlos Sainz,3,2
+2020,Monza,Lance Stroll,8,3
+2020,Monza,Lando Norris,6,4
+2020,Monza,Valtteri Bottas,2,5
+2020,Monza,Daniel Ricciardo,7,6
+2020,Monza,Lewis Hamilton,1,7
+2020,Monza,Esteban Ocon,12,8
+2020,Monza,Daniil Kvyat,11,9
+2020,Monza,Sergio Perez,4,10
+2020,Monza,Nicholas Latifi,20,11
+2020,Monza,Romain Grosjean,16,12
+2020,Monza,Kimi Räikkönen,14,13
+2020,Monza,George Russell,19,14
+2020,Monza,Alexander Albon,9,15
+2020,Monza,Antonio Giovinazzi,18,16
+2020,Monza,Max Verstappen,5,17
+2020,Monza,Charles Leclerc,13,18
+2020,Monza,Kevin Magnussen,15,19
+2020,Monza,Sebastian Vettel,17,20
+2020,Mugello,Lewis Hamilton,1,1
+2020,Mugello,Valtteri Bottas,2,2
+2020,Mugello,Alexander Albon,4,3
+2020,Mugello,Daniel Ricciardo,8,4
+2020,Mugello,Sergio Perez,7,5
+2020,Mugello,Lando Norris,11,6
+2020,Mugello,Daniil Kvyat,12,7
+2020,Mugello,Charles Leclerc,5,8
+2020,Mugello,Kimi Räikkönen,13,9
+2020,Mugello,Sebastian Vettel,14,10
+2020,Mugello,George Russell,18,11
+2020,Mugello,Romain Grosjean,15,12
+2020,Mugello,Lance Stroll,6,13
+2020,Mugello,Esteban Ocon,10,14
+2020,Mugello,Nicholas Latifi,19,15
+2020,Mugello,Kevin Magnussen,20,16
+2020,Mugello,Antonio Giovinazzi,17,17
+2020,Mugello,Carlos Sainz,9,18
+2020,Mugello,Max Verstappen,3,19
+2020,Mugello,Pierre Gasly,16,20
+2020,Sochi,Valtteri Bottas,3,1
+2020,Sochi,Max Verstappen,2,2
+2020,Sochi,Lewis Hamilton,1,3
+2020,Sochi,Sergio Perez,4,4
+2020,Sochi,Daniel Ricciardo,5,5
+2020,Sochi,Charles Leclerc,10,6
+2020,Sochi,Esteban Ocon,7,7
+2020,Sochi,Daniil Kvyat,11,8
+2020,Sochi,Pierre Gasly,9,9
+2020,Sochi,Alexander Albon,15,10
+2020,Sochi,Antonio Giovinazzi,17,11
+2020,Sochi,Kevin Magnussen,18,12
+2020,Sochi,Sebastian Vettel,14,13
+2020,Sochi,Kimi Räikkönen,19,14
+2020,Sochi,Lando Norris,8,15
+2020,Sochi,Nicholas Latifi,20,16
+2020,Sochi,Romain Grosjean,16,17
+2020,Sochi,George Russell,13,18
+2020,Sochi,Carlos Sainz,6,19
+2020,Sochi,Lance Stroll,12,20
+2020,Nürburgring,Lewis Hamilton,2,1
+2020,Nürburgring,Max Verstappen,3,2
+2020,Nürburgring,Daniel Ricciardo,6,3
+2020,Nürburgring,Sergio Perez,9,4
+2020,Nürburgring,Carlos Sainz,10,5
+2020,Nürburgring,Pierre Gasly,12,6
+2020,Nürburgring,Charles Leclerc,4,7
+2020,Nürburgring,Nico Hulkenberg,20,8
+2020,Nürburgring,Romain Grosjean,16,9
+2020,Nürburgring,Antonio Giovinazzi,14,10
+2020,Nürburgring,Sebastian Vettel,11,11
+2020,Nürburgring,Kimi Räikkönen,19,12
+2020,Nürburgring,Kevin Magnussen,15,13
+2020,Nürburgring,Nicholas Latifi,18,14
+2020,Nürburgring,Daniil Kvyat,13,15
+2020,Nürburgring,Lando Norris,8,16
+2020,Nürburgring,Alexander Albon,5,17
+2020,Nürburgring,Esteban Ocon,7,18
+2020,Nürburgring,Valtteri Bottas,1,19
+2020,Nürburgring,George Russell,17,20
+2020,Portimão,Lewis Hamilton,1,1
+2020,Portimão,Valtteri Bottas,2,2
+2020,Portimão,Max Verstappen,3,3
+2020,Portimão,Charles Leclerc,4,4
+2020,Portimão,Pierre Gasly,9,5
+2020,Portimão,Carlos Sainz,7,6
+2020,Portimão,Sergio Perez,5,7
+2020,Portimão,Esteban Ocon,11,8
+2020,Portimão,Daniel Ricciardo,10,9
+2020,Portimão,Sebastian Vettel,15,10
+2020,Portimão,Kimi Räikkönen,16,11
+2020,Portimão,Alexander Albon,6,12
+2020,Portimão,Lando Norris,8,13
+2020,Portimão,George Russell,14,14
+2020,Portimão,Antonio Giovinazzi,17,15
+2020,Portimão,Kevin Magnussen,19,16
+2020,Portimão,Romain Grosjean,18,17
+2020,Portimão,Nicholas Latifi,20,18
+2020,Portimão,Daniil Kvyat,13,19
+2020,Portimão,Lance Stroll,12,20
+2020,Imola,Lewis Hamilton,2,1
+2020,Imola,Valtteri Bottas,1,2
+2020,Imola,Daniel Ricciardo,5,3
+2020,Imola,Daniil Kvyat,8,4
+2020,Imola,Charles Leclerc,7,5
+2020,Imola,Sergio Perez,11,6
+2020,Imola,Carlos Sainz,10,7
+2020,Imola,Lando Norris,9,8
+2020,Imola,Kimi Räikkönen,18,9
+2020,Imola,Antonio Giovinazzi,20,10
+2020,Imola,Nicholas Latifi,19,11
+2020,Imola,Sebastian Vettel,14,12
+2020,Imola,Lance Stroll,15,13
+2020,Imola,Romain Grosjean,16,14
+2020,Imola,Alexander Albon,6,15
+2020,Imola,George Russell,13,16
+2020,Imola,Max Verstappen,3,17
+2020,Imola,Kevin Magnussen,17,18
+2020,Imola,Esteban Ocon,12,19
+2020,Imola,Pierre Gasly,4,20
+2020,Istanbul,Lewis Hamilton,6,1
+2020,Istanbul,Sergio Perez,3,2
+2020,Istanbul,Sebastian Vettel,11,3
+2020,Istanbul,Charles Leclerc,12,4
+2020,Istanbul,Carlos Sainz,15,5
+2020,Istanbul,Max Verstappen,2,6
+2020,Istanbul,Alexander Albon,4,7
+2020,Istanbul,Lando Norris,14,8
+2020,Istanbul,Lance Stroll,1,9
+2020,Istanbul,Daniel Ricciardo,5,10
+2020,Istanbul,Esteban Ocon,7,11
+2020,Istanbul,Daniil Kvyat,16,12
+2020,Istanbul,Pierre Gasly,19,13
+2020,Istanbul,Valtteri Bottas,9,14
+2020,Istanbul,Kimi Räikkönen,8,15
+2020,Istanbul,George Russell,0,16
+2020,Istanbul,Kevin Magnussen,13,17
+2020,Istanbul,Romain Grosjean,17,18
+2020,Istanbul,Nicholas Latifi,0,19
+2020,Istanbul,Antonio Giovinazzi,10,20
+2020,Sakhir,Lewis Hamilton,1,1
+2020,Sakhir,Max Verstappen,3,2
+2020,Sakhir,Alexander Albon,4,3
+2020,Sakhir,Lando Norris,9,4
+2020,Sakhir,Carlos Sainz,15,5
+2020,Sakhir,Pierre Gasly,8,6
+2020,Sakhir,Daniel Ricciardo,6,7
+2020,Sakhir,Valtteri Bottas,2,8
+2020,Sakhir,Esteban Ocon,7,9
+2020,Sakhir,Charles Leclerc,12,10
+2020,Sakhir,Daniil Kvyat,10,11
+2020,Sakhir,George Russell,14,12
+2020,Sakhir,Sebastian Vettel,11,13
+2020,Sakhir,Nicholas Latifi,20,14
+2020,Sakhir,Kimi Räikkönen,17,15
+2020,Sakhir,Antonio Giovinazzi,16,16
+2020,Sakhir,Kevin Magnussen,18,17
+2020,Sakhir,Sergio Perez,5,18
+2020,Sakhir,Lance Stroll,13,19
+2020,Sakhir,Romain Grosjean,19,20
+2020,Sakhir,Sergio Perez,5,1
+2020,Sakhir,Esteban Ocon,11,2
+2020,Sakhir,Lance Stroll,10,3
+2020,Sakhir,Carlos Sainz,8,4
+2020,Sakhir,Daniel Ricciardo,7,5
+2020,Sakhir,Alexander Albon,12,6
+2020,Sakhir,Daniil Kvyat,6,7
+2020,Sakhir,Valtteri Bottas,1,8
+2020,Sakhir,George Russell,2,9
+2020,Sakhir,Lando Norris,19,10
+2020,Sakhir,Pierre Gasly,9,11
+2020,Sakhir,Sebastian Vettel,13,12
+2020,Sakhir,Antonio Giovinazzi,14,13
+2020,Sakhir,Kimi Räikkönen,18,14
+2020,Sakhir,Kevin Magnussen,15,15
+2020,Sakhir,Jack Aitken,17,16
+2020,Sakhir,Pietro Fittipaldi,20,17
+2020,Sakhir,Nicholas Latifi,16,18
+2020,Sakhir,Max Verstappen,3,19
+2020,Sakhir,Charles Leclerc,4,20
+2020,Yas Island,Max Verstappen,1,1
+2020,Yas Island,Valtteri Bottas,2,2
+2020,Yas Island,Lewis Hamilton,3,3
+2020,Yas Island,Alexander Albon,5,4
+2020,Yas Island,Lando Norris,4,5
+2020,Yas Island,Carlos Sainz,6,6
+2020,Yas Island,Daniel Ricciardo,11,7
+2020,Yas Island,Pierre Gasly,9,8
+2020,Yas Island,Esteban Ocon,10,9
+2020,Yas Island,Lance Stroll,8,10
+2020,Yas Island,Daniil Kvyat,7,11
+2020,Yas Island,Kimi Räikkönen,15,12
+2020,Yas Island,Charles Leclerc,12,13
+2020,Yas Island,Sebastian Vettel,13,14
+2020,Yas Island,George Russell,16,15
+2020,Yas Island,Antonio Giovinazzi,14,16
+2020,Yas Island,Nicholas Latifi,18,17
+2020,Yas Island,Kevin Magnussen,20,18
+2020,Yas Island,Pietro Fittipaldi,17,19
+2020,Yas Island,Sergio Perez,19,20
+2021,Sakhir,Lewis Hamilton,2,1
+2021,Sakhir,Max Verstappen,1,2
+2021,Sakhir,Valtteri Bottas,3,3
+2021,Sakhir,Lando Norris,7,4
+2021,Sakhir,Sergio Perez,0,5
+2021,Sakhir,Charles Leclerc,4,6
+2021,Sakhir,Daniel Ricciardo,6,7
+2021,Sakhir,Carlos Sainz,8,8
+2021,Sakhir,Yuki Tsunoda,13,9
+2021,Sakhir,Lance Stroll,10,10
+2021,Sakhir,Kimi Räikkönen,14,11
+2021,Sakhir,Antonio Giovinazzi,12,12
+2021,Sakhir,Esteban Ocon,16,13
+2021,Sakhir,George Russell,15,14
+2021,Sakhir,Sebastian Vettel,20,15
+2021,Sakhir,Mick Schumacher,18,16
+2021,Sakhir,Pierre Gasly,5,17
+2021,Sakhir,Nicholas Latifi,17,18
+2021,Sakhir,Fernando Alonso,9,19
+2021,Sakhir,Nikita Mazepin,19,20
+2021,Imola,Max Verstappen,3,1
+2021,Imola,Lewis Hamilton,1,2
+2021,Imola,Lando Norris,7,3
+2021,Imola,Charles Leclerc,4,4
+2021,Imola,Carlos Sainz,11,5
+2021,Imola,Daniel Ricciardo,6,6
+2021,Imola,Pierre Gasly,5,7
+2021,Imola,Lance Stroll,10,8
+2021,Imola,Esteban Ocon,9,9
+2021,Imola,Fernando Alonso,15,10
+2021,Imola,Sergio Perez,2,11
+2021,Imola,Yuki Tsunoda,20,12
+2021,Imola,Kimi Räikkönen,16,13
+2021,Imola,Antonio Giovinazzi,17,14
+2021,Imola,Sebastian Vettel,0,15
+2021,Imola,Mick Schumacher,18,16
+2021,Imola,Nikita Mazepin,19,17
+2021,Imola,Valtteri Bottas,8,18
+2021,Imola,George Russell,12,19
+2021,Imola,Nicholas Latifi,14,20
+2021,Portimão,Lewis Hamilton,2,1
+2021,Portimão,Max Verstappen,3,2
+2021,Portimão,Valtteri Bottas,1,3
+2021,Portimão,Sergio Perez,4,4
+2021,Portimão,Lando Norris,7,5
+2021,Portimão,Charles Leclerc,8,6
+2021,Portimão,Esteban Ocon,6,7
+2021,Portimão,Fernando Alonso,13,8
+2021,Portimão,Daniel Ricciardo,16,9
+2021,Portimão,Pierre Gasly,9,10
+2021,Portimão,Carlos Sainz,5,11
+2021,Portimão,Antonio Giovinazzi,12,12
+2021,Portimão,Sebastian Vettel,10,13
+2021,Portimão,Lance Stroll,17,14
+2021,Portimão,Yuki Tsunoda,14,15
+2021,Portimão,George Russell,11,16
+2021,Portimão,Mick Schumacher,19,17
+2021,Portimão,Nicholas Latifi,18,18
+2021,Portimão,Nikita Mazepin,20,19
+2021,Portimão,Kimi Räikkönen,15,20
+2021,Barcelona,Lewis Hamilton,1,1
+2021,Barcelona,Max Verstappen,2,2
+2021,Barcelona,Valtteri Bottas,3,3
+2021,Barcelona,Charles Leclerc,4,4
+2021,Barcelona,Sergio Perez,8,5
+2021,Barcelona,Daniel Ricciardo,7,6
+2021,Barcelona,Carlos Sainz,6,7
+2021,Barcelona,Lando Norris,9,8
+2021,Barcelona,Esteban Ocon,5,9
+2021,Barcelona,Pierre Gasly,12,10
+2021,Barcelona,Lance Stroll,11,11
+2021,Barcelona,Kimi Räikkönen,17,12
+2021,Barcelona,Sebastian Vettel,13,13
+2021,Barcelona,George Russell,15,14
+2021,Barcelona,Antonio Giovinazzi,14,15
+2021,Barcelona,Nicholas Latifi,19,16
+2021,Barcelona,Fernando Alonso,10,17
+2021,Barcelona,Mick Schumacher,18,18
+2021,Barcelona,Nikita Mazepin,20,19
+2021,Barcelona,Yuki Tsunoda,16,20
+2021,Monte Carlo,Max Verstappen,2,1
+2021,Monte Carlo,Carlos Sainz,4,2
+2021,Monte Carlo,Lando Norris,5,3
+2021,Monte Carlo,Sergio Perez,9,4
+2021,Monte Carlo,Sebastian Vettel,8,5
+2021,Monte Carlo,Pierre Gasly,6,6
+2021,Monte Carlo,Lewis Hamilton,7,7
+2021,Monte Carlo,Lance Stroll,13,8
+2021,Monte Carlo,Esteban Ocon,11,9
+2021,Monte Carlo,Antonio Giovinazzi,10,10
+2021,Monte Carlo,Kimi Räikkönen,14,11
+2021,Monte Carlo,Daniel Ricciardo,12,12
+2021,Monte Carlo,Fernando Alonso,17,13
+2021,Monte Carlo,George Russell,15,14
+2021,Monte Carlo,Nicholas Latifi,18,15
+2021,Monte Carlo,Yuki Tsunoda,16,16
+2021,Monte Carlo,Nikita Mazepin,19,17
+2021,Monte Carlo,Mick Schumacher,20,18
+2021,Monte Carlo,Valtteri Bottas,3,19
+2021,Monte Carlo,Charles Leclerc,1,20
+2021,Baku,Sergio Perez,6,1
+2021,Baku,Sebastian Vettel,11,2
+2021,Baku,Pierre Gasly,4,3
+2021,Baku,Charles Leclerc,1,4
+2021,Baku,Lando Norris,9,5
+2021,Baku,Fernando Alonso,8,6
+2021,Baku,Yuki Tsunoda,7,7
+2021,Baku,Carlos Sainz,5,8
+2021,Baku,Daniel Ricciardo,13,9
+2021,Baku,Kimi Räikkönen,14,10
+2021,Baku,Antonio Giovinazzi,20,11
+2021,Baku,Valtteri Bottas,10,12
+2021,Baku,Mick Schumacher,17,13
+2021,Baku,Nikita Mazepin,18,14
+2021,Baku,Lewis Hamilton,2,15
+2021,Baku,Nicholas Latifi,16,16
+2021,Baku,George Russell,15,17
+2021,Baku,Max Verstappen,3,18
+2021,Baku,Lance Stroll,19,19
+2021,Baku,Esteban Ocon,12,20
+2021,Le Castellet,Max Verstappen,1,1
+2021,Le Castellet,Lewis Hamilton,2,2
+2021,Le Castellet,Sergio Perez,4,3
+2021,Le Castellet,Valtteri Bottas,3,4
+2021,Le Castellet,Lando Norris,8,5
+2021,Le Castellet,Daniel Ricciardo,10,6
+2021,Le Castellet,Pierre Gasly,6,7
+2021,Le Castellet,Fernando Alonso,9,8
+2021,Le Castellet,Sebastian Vettel,12,9
+2021,Le Castellet,Lance Stroll,19,10
+2021,Le Castellet,Carlos Sainz,5,11
+2021,Le Castellet,George Russell,14,12
+2021,Le Castellet,Yuki Tsunoda,0,13
+2021,Le Castellet,Esteban Ocon,11,14
+2021,Le Castellet,Antonio Giovinazzi,13,15
+2021,Le Castellet,Charles Leclerc,7,16
+2021,Le Castellet,Kimi Räikkönen,17,17
+2021,Le Castellet,Nicholas Latifi,16,18
+2021,Le Castellet,Mick Schumacher,15,19
+2021,Le Castellet,Nikita Mazepin,18,20
+2021,Spielberg,Max Verstappen,1,1
+2021,Spielberg,Lewis Hamilton,2,2
+2021,Spielberg,Valtteri Bottas,5,3
+2021,Spielberg,Sergio Perez,4,4
+2021,Spielberg,Lando Norris,3,5
+2021,Spielberg,Carlos Sainz,12,6
+2021,Spielberg,Charles Leclerc,7,7
+2021,Spielberg,Lance Stroll,9,8
+2021,Spielberg,Fernando Alonso,8,9
+2021,Spielberg,Yuki Tsunoda,11,10
+2021,Spielberg,Kimi Räikkönen,18,11
+2021,Spielberg,Sebastian Vettel,14,12
+2021,Spielberg,Daniel Ricciardo,13,13
+2021,Spielberg,Esteban Ocon,17,14
+2021,Spielberg,Antonio Giovinazzi,15,15
+2021,Spielberg,Mick Schumacher,19,16
+2021,Spielberg,Nicholas Latifi,16,17
+2021,Spielberg,Nikita Mazepin,20,18
+2021,Spielberg,George Russell,10,19
+2021,Spielberg,Pierre Gasly,6,20
+2021,Spielberg,Max Verstappen,1,1
+2021,Spielberg,Valtteri Bottas,5,2
+2021,Spielberg,Lando Norris,2,3
+2021,Spielberg,Lewis Hamilton,4,4
+2021,Spielberg,Carlos Sainz,10,5
+2021,Spielberg,Sergio Perez,3,6
+2021,Spielberg,Daniel Ricciardo,13,7
+2021,Spielberg,Charles Leclerc,12,8
+2021,Spielberg,Pierre Gasly,6,9
+2021,Spielberg,Fernando Alonso,14,10
+2021,Spielberg,George Russell,8,11
+2021,Spielberg,Yuki Tsunoda,7,12
+2021,Spielberg,Lance Stroll,9,13
+2021,Spielberg,Antonio Giovinazzi,15,14
+2021,Spielberg,Kimi Räikkönen,16,15
+2021,Spielberg,Nicholas Latifi,18,16
+2021,Spielberg,Sebastian Vettel,11,17
+2021,Spielberg,Mick Schumacher,19,18
+2021,Spielberg,Nikita Mazepin,20,19
+2021,Spielberg,Esteban Ocon,17,20
+2021,Silverstone,Lewis Hamilton,2,1
+2021,Silverstone,Charles Leclerc,4,2
+2021,Silverstone,Valtteri Bottas,3,3
+2021,Silverstone,Lando Norris,5,4
+2021,Silverstone,Daniel Ricciardo,6,5
+2021,Silverstone,Carlos Sainz,10,6
+2021,Silverstone,Fernando Alonso,7,7
+2021,Silverstone,Lance Stroll,14,8
+2021,Silverstone,Esteban Ocon,9,9
+2021,Silverstone,Yuki Tsunoda,16,10
+2021,Silverstone,Pierre Gasly,11,11
+2021,Silverstone,George Russell,12,12
+2021,Silverstone,Antonio Giovinazzi,15,13
+2021,Silverstone,Nicholas Latifi,17,14
+2021,Silverstone,Kimi Räikkönen,13,15
+2021,Silverstone,Sergio Perez,0,16
+2021,Silverstone,Nikita Mazepin,19,17
+2021,Silverstone,Mick Schumacher,18,18
+2021,Silverstone,Sebastian Vettel,8,19
+2021,Silverstone,Max Verstappen,1,20
+2021,Budapest,Esteban Ocon,8,1
+2021,Budapest,Lewis Hamilton,1,2
+2021,Budapest,Carlos Sainz,15,3
+2021,Budapest,Fernando Alonso,9,4
+2021,Budapest,Pierre Gasly,5,5
+2021,Budapest,Yuki Tsunoda,16,6
+2021,Budapest,Nicholas Latifi,18,7
+2021,Budapest,George Russell,17,8
+2021,Budapest,Max Verstappen,3,9
+2021,Budapest,Kimi Räikkönen,13,10
+2021,Budapest,Daniel Ricciardo,11,11
+2021,Budapest,Mick Schumacher,20,12
+2021,Budapest,Antonio Giovinazzi,0,13
+2021,Budapest,Nikita Mazepin,19,14
+2021,Budapest,Lando Norris,6,15
+2021,Budapest,Valtteri Bottas,2,16
+2021,Budapest,Sergio Perez,4,17
+2021,Budapest,Charles Leclerc,7,18
+2021,Budapest,Lance Stroll,12,19
+2021,Budapest,Sebastian Vettel,10,20
+2021,Spa-Francorchamps,Max Verstappen,1,1
+2021,Spa-Francorchamps,George Russell,2,2
+2021,Spa-Francorchamps,Lewis Hamilton,3,3
+2021,Spa-Francorchamps,Daniel Ricciardo,4,4
+2021,Spa-Francorchamps,Sebastian Vettel,5,5
+2021,Spa-Francorchamps,Pierre Gasly,6,6
+2021,Spa-Francorchamps,Esteban Ocon,8,7
+2021,Spa-Francorchamps,Charles Leclerc,9,8
+2021,Spa-Francorchamps,Nicholas Latifi,10,9
+2021,Spa-Francorchamps,Carlos Sainz,11,10
+2021,Spa-Francorchamps,Fernando Alonso,12,11
+2021,Spa-Francorchamps,Valtteri Bottas,13,12
+2021,Spa-Francorchamps,Antonio Giovinazzi,14,13
+2021,Spa-Francorchamps,Lando Norris,15,14
+2021,Spa-Francorchamps,Yuki Tsunoda,16,15
+2021,Spa-Francorchamps,Mick Schumacher,17,16
+2021,Spa-Francorchamps,Nikita Mazepin,18,17
+2021,Spa-Francorchamps,Kimi Räikkönen,0,18
+2021,Spa-Francorchamps,Sergio Perez,0,19
+2021,Spa-Francorchamps,Lance Stroll,19,20
+2021,Zandvoort,Max Verstappen,1,1
+2021,Zandvoort,Lewis Hamilton,2,2
+2021,Zandvoort,Valtteri Bottas,3,3
+2021,Zandvoort,Pierre Gasly,4,4
+2021,Zandvoort,Charles Leclerc,5,5
+2021,Zandvoort,Fernando Alonso,9,6
+2021,Zandvoort,Carlos Sainz,6,7
+2021,Zandvoort,Sergio Perez,0,8
+2021,Zandvoort,Esteban Ocon,8,9
+2021,Zandvoort,Lando Norris,13,10
+2021,Zandvoort,Daniel Ricciardo,10,11
+2021,Zandvoort,Lance Stroll,12,12
+2021,Zandvoort,Sebastian Vettel,15,13
+2021,Zandvoort,Antonio Giovinazzi,7,14
+2021,Zandvoort,Robert Kubica,16,15
+2021,Zandvoort,Nicholas Latifi,0,16
+2021,Zandvoort,George Russell,11,17
+2021,Zandvoort,Mick Schumacher,17,18
+2021,Zandvoort,Yuki Tsunoda,14,19
+2021,Zandvoort,Nikita Mazepin,18,20
+2021,Monza,Daniel Ricciardo,2,1
+2021,Monza,Lando Norris,3,2
+2021,Monza,Valtteri Bottas,19,3
+2021,Monza,Charles Leclerc,5,4
+2021,Monza,Sergio Perez,8,5
+2021,Monza,Carlos Sainz,6,6
+2021,Monza,Lance Stroll,9,7
+2021,Monza,Fernando Alonso,10,8
+2021,Monza,George Russell,14,9
+2021,Monza,Esteban Ocon,12,10
+2021,Monza,Nicholas Latifi,13,11
+2021,Monza,Sebastian Vettel,11,12
+2021,Monza,Antonio Giovinazzi,7,13
+2021,Monza,Robert Kubica,17,14
+2021,Monza,Mick Schumacher,18,15
+2021,Monza,Nikita Mazepin,16,16
+2021,Monza,Lewis Hamilton,4,17
+2021,Monza,Max Verstappen,1,18
+2021,Monza,Pierre Gasly,0,19
+2021,Monza,Yuki Tsunoda,0,20
+2021,Sochi,Lewis Hamilton,4,1
+2021,Sochi,Max Verstappen,20,2
+2021,Sochi,Carlos Sainz,2,3
+2021,Sochi,Daniel Ricciardo,5,4
+2021,Sochi,Valtteri Bottas,16,5
+2021,Sochi,Fernando Alonso,6,6
+2021,Sochi,Lando Norris,1,7
+2021,Sochi,Kimi Räikkönen,13,8
+2021,Sochi,Sergio Perez,8,9
+2021,Sochi,George Russell,3,10
+2021,Sochi,Lance Stroll,7,11
+2021,Sochi,Sebastian Vettel,10,12
+2021,Sochi,Pierre Gasly,11,13
+2021,Sochi,Esteban Ocon,9,14
+2021,Sochi,Charles Leclerc,19,15
+2021,Sochi,Antonio Giovinazzi,17,16
+2021,Sochi,Yuki Tsunoda,12,17
+2021,Sochi,Nikita Mazepin,15,18
+2021,Sochi,Nicholas Latifi,18,19
+2021,Sochi,Mick Schumacher,14,20
+2021,Istanbul,Valtteri Bottas,1,1
+2021,Istanbul,Max Verstappen,2,2
+2021,Istanbul,Sergio Perez,6,3
+2021,Istanbul,Charles Leclerc,3,4
+2021,Istanbul,Lewis Hamilton,11,5
+2021,Istanbul,Pierre Gasly,4,6
+2021,Istanbul,Lando Norris,7,7
+2021,Istanbul,Carlos Sainz,19,8
+2021,Istanbul,Lance Stroll,8,9
+2021,Istanbul,Esteban Ocon,12,10
+2021,Istanbul,Antonio Giovinazzi,16,11
+2021,Istanbul,Kimi Räikkönen,17,12
+2021,Istanbul,Daniel Ricciardo,20,13
+2021,Istanbul,Yuki Tsunoda,9,14
+2021,Istanbul,George Russell,13,15
+2021,Istanbul,Fernando Alonso,5,16
+2021,Istanbul,Nicholas Latifi,15,17
+2021,Istanbul,Sebastian Vettel,10,18
+2021,Istanbul,Mick Schumacher,14,19
+2021,Istanbul,Nikita Mazepin,18,20
+2021,Austin,Max Verstappen,1,1
+2021,Austin,Lewis Hamilton,2,2
+2021,Austin,Sergio Perez,3,3
+2021,Austin,Charles Leclerc,4,4
+2021,Austin,Daniel Ricciardo,6,5
+2021,Austin,Valtteri Bottas,9,6
+2021,Austin,Carlos Sainz,5,7
+2021,Austin,Lando Norris,7,8
+2021,Austin,Yuki Tsunoda,10,9
+2021,Austin,Sebastian Vettel,18,10
+2021,Austin,Antonio Giovinazzi,12,11
+2021,Austin,Lance Stroll,13,12
+2021,Austin,Kimi Räikkönen,15,13
+2021,Austin,George Russell,20,14
+2021,Austin,Nicholas Latifi,14,15
+2021,Austin,Mick Schumacher,16,16
+2021,Austin,Nikita Mazepin,17,17
+2021,Austin,Fernando Alonso,19,18
+2021,Austin,Esteban Ocon,11,19
+2021,Austin,Pierre Gasly,8,20
+2021,Mexico City,Max Verstappen,3,1
+2021,Mexico City,Lewis Hamilton,2,2
+2021,Mexico City,Sergio Perez,4,3
+2021,Mexico City,Pierre Gasly,5,4
+2021,Mexico City,Charles Leclerc,8,5
+2021,Mexico City,Carlos Sainz,6,6
+2021,Mexico City,Sebastian Vettel,9,7
+2021,Mexico City,Kimi Räikkönen,10,8
+2021,Mexico City,Fernando Alonso,12,9
+2021,Mexico City,Lando Norris,18,10
+2021,Mexico City,Antonio Giovinazzi,11,11
+2021,Mexico City,Daniel Ricciardo,7,12
+2021,Mexico City,Esteban Ocon,19,13
+2021,Mexico City,Lance Stroll,20,14
+2021,Mexico City,Valtteri Bottas,1,15
+2021,Mexico City,George Russell,16,16
+2021,Mexico City,Nicholas Latifi,13,17
+2021,Mexico City,Nikita Mazepin,15,18
+2021,Mexico City,Mick Schumacher,14,19
+2021,Mexico City,Yuki Tsunoda,17,20
+2021,São Paulo,Lewis Hamilton,10,1
+2021,São Paulo,Max Verstappen,2,2
+2021,São Paulo,Valtteri Bottas,1,3
+2021,São Paulo,Sergio Perez,4,4
+2021,São Paulo,Charles Leclerc,6,5
+2021,São Paulo,Carlos Sainz,3,6
+2021,São Paulo,Pierre Gasly,7,7
+2021,São Paulo,Esteban Ocon,8,8
+2021,São Paulo,Fernando Alonso,12,9
+2021,São Paulo,Lando Norris,5,10
+2021,São Paulo,Sebastian Vettel,9,11
+2021,São Paulo,Kimi Räikkönen,0,12
+2021,São Paulo,George Russell,17,13
+2021,São Paulo,Antonio Giovinazzi,13,14
+2021,São Paulo,Yuki Tsunoda,15,15
+2021,São Paulo,Nicholas Latifi,16,16
+2021,São Paulo,Nikita Mazepin,19,17
+2021,São Paulo,Mick Schumacher,18,18
+2021,São Paulo,Daniel Ricciardo,11,19
+2021,São Paulo,Lance Stroll,14,20
+2021,Lusail,Lewis Hamilton,1,1
+2021,Lusail,Max Verstappen,7,2
+2021,Lusail,Fernando Alonso,3,3
+2021,Lusail,Sergio Perez,11,4
+2021,Lusail,Esteban Ocon,9,5
+2021,Lusail,Lance Stroll,12,6
+2021,Lusail,Carlos Sainz,5,7
+2021,Lusail,Charles Leclerc,13,8
+2021,Lusail,Lando Norris,4,9
+2021,Lusail,Sebastian Vettel,10,10
+2021,Lusail,Pierre Gasly,2,11
+2021,Lusail,Daniel Ricciardo,14,12
+2021,Lusail,Yuki Tsunoda,8,13
+2021,Lusail,Kimi Räikkönen,16,14
+2021,Lusail,Antonio Giovinazzi,18,15
+2021,Lusail,Mick Schumacher,19,16
+2021,Lusail,George Russell,15,17
+2021,Lusail,Nikita Mazepin,20,18
+2021,Lusail,Nicholas Latifi,17,19
+2021,Lusail,Valtteri Bottas,6,20
+2021,Jeddah,Lewis Hamilton,1,1
+2021,Jeddah,Max Verstappen,3,2
+2021,Jeddah,Valtteri Bottas,2,3
+2021,Jeddah,Esteban Ocon,9,4
+2021,Jeddah,Daniel Ricciardo,11,5
+2021,Jeddah,Pierre Gasly,6,6
+2021,Jeddah,Charles Leclerc,4,7
+2021,Jeddah,Carlos Sainz,15,8
+2021,Jeddah,Antonio Giovinazzi,10,9
+2021,Jeddah,Lando Norris,7,10
+2021,Jeddah,Lance Stroll,18,11
+2021,Jeddah,Nicholas Latifi,16,12
+2021,Jeddah,Fernando Alonso,13,13
+2021,Jeddah,Yuki Tsunoda,8,14
+2021,Jeddah,Kimi Räikkönen,12,15
+2021,Jeddah,Sebastian Vettel,17,16
+2021,Jeddah,Sergio Perez,5,17
+2021,Jeddah,Nikita Mazepin,20,18
+2021,Jeddah,George Russell,14,19
+2021,Jeddah,Mick Schumacher,19,20
+2021,Yas Island,Max Verstappen,1,1
+2021,Yas Island,Lewis Hamilton,2,2
+2021,Yas Island,Carlos Sainz,5,3
+2021,Yas Island,Yuki Tsunoda,8,4
+2021,Yas Island,Pierre Gasly,12,5
+2021,Yas Island,Valtteri Bottas,6,6
+2021,Yas Island,Lando Norris,3,7
+2021,Yas Island,Fernando Alonso,11,8
+2021,Yas Island,Esteban Ocon,9,9
+2021,Yas Island,Charles Leclerc,7,10
+2021,Yas Island,Sebastian Vettel,15,11
+2021,Yas Island,Daniel Ricciardo,10,12
+2021,Yas Island,Lance Stroll,13,13
+2021,Yas Island,Mick Schumacher,19,14
+2021,Yas Island,Sergio Perez,4,15
+2021,Yas Island,Nicholas Latifi,16,16
+2021,Yas Island,Antonio Giovinazzi,14,17
+2021,Yas Island,George Russell,17,18
+2021,Yas Island,Kimi Räikkönen,18,19
+2022,Sakhir,Charles Leclerc,1,1
+2022,Sakhir,Carlos Sainz,3,2
+2022,Sakhir,Lewis Hamilton,5,3
+2022,Sakhir,George Russell,9,4
+2022,Sakhir,Kevin Magnussen,7,5
+2022,Sakhir,Valtteri Bottas,6,6
+2022,Sakhir,Esteban Ocon,11,7
+2022,Sakhir,Yuki Tsunoda,16,8
+2022,Sakhir,Fernando Alonso,8,9
+2022,Sakhir,Guanyu Zhou,15,10
+2022,Sakhir,Mick Schumacher,12,11
+2022,Sakhir,Lance Stroll,19,12
+2022,Sakhir,Alexander Albon,14,13
+2022,Sakhir,Daniel Ricciardo,18,14
+2022,Sakhir,Lando Norris,13,15
+2022,Sakhir,Nicholas Latifi,20,16
+2022,Sakhir,Nico Hulkenberg,17,17
+2022,Sakhir,Sergio Perez,4,18
+2022,Sakhir,Max Verstappen,2,19
+2022,Sakhir,Pierre Gasly,10,20
+2022,Jeddah,Max Verstappen,4,1
+2022,Jeddah,Charles Leclerc,2,2
+2022,Jeddah,Carlos Sainz,3,3
+2022,Jeddah,Sergio Perez,1,4
+2022,Jeddah,George Russell,6,5
+2022,Jeddah,Esteban Ocon,5,6
+2022,Jeddah,Lando Norris,11,7
+2022,Jeddah,Pierre Gasly,9,8
+2022,Jeddah,Kevin Magnussen,10,9
+2022,Jeddah,Lewis Hamilton,15,10
+2022,Jeddah,Guanyu Zhou,12,11
+2022,Jeddah,Nico Hulkenberg,17,12
+2022,Jeddah,Lance Stroll,13,13
+2022,Jeddah,Alexander Albon,16,14
+2022,Jeddah,Valtteri Bottas,8,15
+2022,Jeddah,Fernando Alonso,7,16
+2022,Jeddah,Daniel Ricciardo,14,17
+2022,Jeddah,Nicholas Latifi,18,18
+2022,Jeddah,Yuki Tsunoda,19,19
+2022,Melbourne,Charles Leclerc,1,1
+2022,Melbourne,Sergio Perez,3,2
+2022,Melbourne,George Russell,6,3
+2022,Melbourne,Lewis Hamilton,5,4
+2022,Melbourne,Lando Norris,4,5
+2022,Melbourne,Daniel Ricciardo,7,6
+2022,Melbourne,Esteban Ocon,8,7
+2022,Melbourne,Valtteri Bottas,12,8
+2022,Melbourne,Pierre Gasly,11,9
+2022,Melbourne,Alexander Albon,20,10
+2022,Melbourne,Guanyu Zhou,14,11
+2022,Melbourne,Lance Stroll,19,12
+2022,Melbourne,Mick Schumacher,15,13
+2022,Melbourne,Kevin Magnussen,16,14
+2022,Melbourne,Yuki Tsunoda,13,15
+2022,Melbourne,Nicholas Latifi,18,16
+2022,Melbourne,Fernando Alonso,10,17
+2022,Melbourne,Max Verstappen,2,18
+2022,Melbourne,Sebastian Vettel,17,19
+2022,Melbourne,Carlos Sainz,9,20
+2022,Imola,Max Verstappen,1,1
+2022,Imola,Sergio Perez,3,2
+2022,Imola,Lando Norris,5,3
+2022,Imola,George Russell,11,4
+2022,Imola,Valtteri Bottas,7,5
+2022,Imola,Charles Leclerc,2,6
+2022,Imola,Yuki Tsunoda,12,7
+2022,Imola,Sebastian Vettel,13,8
+2022,Imola,Kevin Magnussen,8,9
+2022,Imola,Lance Stroll,15,10
+2022,Imola,Alexander Albon,18,11
+2022,Imola,Pierre Gasly,17,12
+2022,Imola,Lewis Hamilton,14,13
+2022,Imola,Esteban Ocon,16,14
+2022,Imola,Guanyu Zhou,0,15
+2022,Imola,Nicholas Latifi,19,16
+2022,Imola,Mick Schumacher,10,17
+2022,Imola,Daniel Ricciardo,6,18
+2022,Imola,Fernando Alonso,9,19
+2022,Imola,Carlos Sainz,4,20
+2022,Miami,Max Verstappen,3,1
+2022,Miami,Charles Leclerc,1,2
+2022,Miami,Carlos Sainz,2,3
+2022,Miami,Sergio Perez,4,4
+2022,Miami,George Russell,12,5
+2022,Miami,Lewis Hamilton,6,6
+2022,Miami,Valtteri Bottas,5,7
+2022,Miami,Esteban Ocon,20,8
+2022,Miami,Alexander Albon,18,9
+2022,Miami,Lance Stroll,0,10
+2022,Miami,Fernando Alonso,11,11
+2022,Miami,Yuki Tsunoda,9,12
+2022,Miami,Daniel Ricciardo,14,13
+2022,Miami,Nicholas Latifi,19,14
+2022,Miami,Mick Schumacher,15,15
+2022,Miami,Kevin Magnussen,16,16
+2022,Miami,Sebastian Vettel,0,17
+2022,Miami,Pierre Gasly,7,18
+2022,Miami,Lando Norris,8,19
+2022,Miami,Guanyu Zhou,17,20
+2022,Barcelona,Max Verstappen,2,1
+2022,Barcelona,Sergio Perez,5,2
+2022,Barcelona,George Russell,4,3
+2022,Barcelona,Carlos Sainz,3,4
+2022,Barcelona,Lewis Hamilton,6,5
+2022,Barcelona,Valtteri Bottas,7,6
+2022,Barcelona,Esteban Ocon,12,7
+2022,Barcelona,Lando Norris,11,8
+2022,Barcelona,Fernando Alonso,20,9
+2022,Barcelona,Yuki Tsunoda,13,10
+2022,Barcelona,Sebastian Vettel,16,11
+2022,Barcelona,Daniel Ricciardo,9,12
+2022,Barcelona,Pierre Gasly,14,13
+2022,Barcelona,Mick Schumacher,10,14
+2022,Barcelona,Lance Stroll,17,15
+2022,Barcelona,Nicholas Latifi,19,16
+2022,Barcelona,Kevin Magnussen,8,17
+2022,Barcelona,Alexander Albon,18,18
+2022,Barcelona,Guanyu Zhou,15,19
+2022,Barcelona,Charles Leclerc,1,20
+2022,Monaco,Sergio Perez,3,1
+2022,Monaco,Carlos Sainz,2,2
+2022,Monaco,Max Verstappen,4,3
+2022,Monaco,Charles Leclerc,1,4
+2022,Monaco,George Russell,6,5
+2022,Monaco,Lando Norris,5,6
+2022,Monaco,Fernando Alonso,7,7
+2022,Monaco,Lewis Hamilton,8,8
+2022,Monaco,Valtteri Bottas,12,9
+2022,Monaco,Sebastian Vettel,9,10
+2022,Monaco,Pierre Gasly,17,11
+2022,Monaco,Esteban Ocon,10,12
+2022,Monaco,Daniel Ricciardo,14,13
+2022,Monaco,Lance Stroll,18,14
+2022,Monaco,Nicholas Latifi,19,15
+2022,Monaco,Guanyu Zhou,20,16
+2022,Monaco,Yuki Tsunoda,11,17
+2022,Monaco,Alexander Albon,16,18
+2022,Monaco,Mick Schumacher,15,19
+2022,Monaco,Kevin Magnussen,13,20
+2022,Baku,Max Verstappen,3,1
+2022,Baku,Sergio Perez,2,2
+2022,Baku,George Russell,5,3
+2022,Baku,Lewis Hamilton,7,4
+2022,Baku,Pierre Gasly,6,5
+2022,Baku,Sebastian Vettel,9,6
+2022,Baku,Fernando Alonso,10,7
+2022,Baku,Daniel Ricciardo,12,8
+2022,Baku,Lando Norris,11,9
+2022,Baku,Esteban Ocon,13,10
+2022,Baku,Valtteri Bottas,15,11
+2022,Baku,Alexander Albon,17,12
+2022,Baku,Yuki Tsunoda,8,13
+2022,Baku,Mick Schumacher,20,14
+2022,Baku,Nicholas Latifi,18,15
+2022,Baku,Lance Stroll,19,16
+2022,Baku,Kevin Magnussen,16,17
+2022,Baku,Guanyu Zhou,14,18
+2022,Baku,Charles Leclerc,1,19
+2022,Baku,Carlos Sainz,4,20
+2022,Montréal,Max Verstappen,1,1
+2022,Montréal,Carlos Sainz,3,2
+2022,Montréal,Lewis Hamilton,4,3
+2022,Montréal,George Russell,8,4
+2022,Montréal,Charles Leclerc,19,5
+2022,Montréal,Esteban Ocon,7,6
+2022,Montréal,Valtteri Bottas,11,7
+2022,Montréal,Guanyu Zhou,10,8
+2022,Montréal,Fernando Alonso,2,9
+2022,Montréal,Lance Stroll,17,10
+2022,Montréal,Daniel Ricciardo,9,11
+2022,Montréal,Sebastian Vettel,16,12
+2022,Montréal,Alexander Albon,12,13
+2022,Montréal,Pierre Gasly,15,14
+2022,Montréal,Lando Norris,14,15
+2022,Montréal,Nicholas Latifi,18,16
+2022,Montréal,Kevin Magnussen,5,17
+2022,Montréal,Yuki Tsunoda,20,18
+2022,Montréal,Mick Schumacher,6,19
+2022,Montréal,Sergio Perez,13,20
+2022,Silverstone,Carlos Sainz,1,1
+2022,Silverstone,Sergio Perez,4,2
+2022,Silverstone,Lewis Hamilton,5,3
+2022,Silverstone,Charles Leclerc,3,4
+2022,Silverstone,Fernando Alonso,7,5
+2022,Silverstone,Lando Norris,6,6
+2022,Silverstone,Max Verstappen,2,7
+2022,Silverstone,Mick Schumacher,19,8
+2022,Silverstone,Sebastian Vettel,18,9
+2022,Silverstone,Kevin Magnussen,17,10
+2022,Silverstone,Lance Stroll,20,11
+2022,Silverstone,Nicholas Latifi,10,12
+2022,Silverstone,Daniel Ricciardo,14,13
+2022,Silverstone,Yuki Tsunoda,13,14
+2022,Silverstone,Esteban Ocon,15,15
+2022,Silverstone,Pierre Gasly,11,16
+2022,Silverstone,Valtteri Bottas,12,17
+2022,Silverstone,George Russell,8,18
+2022,Silverstone,Guanyu Zhou,9,19
+2022,Silverstone,Alexander Albon,16,20
+2022,Spielberg,Charles Leclerc,2,1
+2022,Spielberg,Max Verstappen,1,2
+2022,Spielberg,Lewis Hamilton,8,3
+2022,Spielberg,George Russell,4,4
+2022,Spielberg,Esteban Ocon,6,5
+2022,Spielberg,Mick Schumacher,9,6
+2022,Spielberg,Lando Norris,10,7
+2022,Spielberg,Kevin Magnussen,7,8
+2022,Spielberg,Daniel Ricciardo,11,9
+2022,Spielberg,Fernando Alonso,19,10
+2022,Spielberg,Valtteri Bottas,0,11
+2022,Spielberg,Alexander Albon,15,12
+2022,Spielberg,Lance Stroll,12,13
+2022,Spielberg,Guanyu Zhou,13,14
+2022,Spielberg,Pierre Gasly,14,15
+2022,Spielberg,Yuki Tsunoda,16,16
+2022,Spielberg,Sebastian Vettel,18,17
+2022,Spielberg,Carlos Sainz,3,18
+2022,Spielberg,Nicholas Latifi,17,19
+2022,Spielberg,Sergio Perez,5,20
+2022,Le Castellet,Max Verstappen,2,1
+2022,Le Castellet,Lewis Hamilton,4,2
+2022,Le Castellet,George Russell,6,3
+2022,Le Castellet,Sergio Perez,3,4
+2022,Le Castellet,Carlos Sainz,19,5
+2022,Le Castellet,Fernando Alonso,7,6
+2022,Le Castellet,Lando Norris,5,7
+2022,Le Castellet,Esteban Ocon,10,8
+2022,Le Castellet,Daniel Ricciardo,9,9
+2022,Le Castellet,Lance Stroll,15,10
+2022,Le Castellet,Sebastian Vettel,12,11
+2022,Le Castellet,Pierre Gasly,14,12
+2022,Le Castellet,Alexander Albon,13,13
+2022,Le Castellet,Valtteri Bottas,11,14
+2022,Le Castellet,Mick Schumacher,17,15
+2022,Le Castellet,Guanyu Zhou,16,16
+2022,Le Castellet,Nicholas Latifi,18,17
+2022,Le Castellet,Kevin Magnussen,20,18
+2022,Le Castellet,Charles Leclerc,1,19
+2022,Le Castellet,Yuki Tsunoda,8,20
+2022,Budapest,Max Verstappen,10,1
+2022,Budapest,Lewis Hamilton,7,2
+2022,Budapest,George Russell,1,3
+2022,Budapest,Carlos Sainz,2,4
+2022,Budapest,Sergio Perez,11,5
+2022,Budapest,Charles Leclerc,3,6
+2022,Budapest,Lando Norris,4,7
+2022,Budapest,Fernando Alonso,6,8
+2022,Budapest,Esteban Ocon,5,9
+2022,Budapest,Sebastian Vettel,18,10
+2022,Budapest,Lance Stroll,14,11
+2022,Budapest,Pierre Gasly,0,12
+2022,Budapest,Guanyu Zhou,12,13
+2022,Budapest,Mick Schumacher,15,14
+2022,Budapest,Daniel Ricciardo,9,15
+2022,Budapest,Kevin Magnussen,13,16
+2022,Budapest,Alexander Albon,17,17
+2022,Budapest,Nicholas Latifi,19,18
+2022,Budapest,Yuki Tsunoda,16,19
+2022,Budapest,Valtteri Bottas,8,20
+2022,Spa-Francorchamps,Max Verstappen,14,1
+2022,Spa-Francorchamps,Sergio Perez,2,2
+2022,Spa-Francorchamps,Carlos Sainz,1,3
+2022,Spa-Francorchamps,George Russell,5,4
+2022,Spa-Francorchamps,Fernando Alonso,3,5
+2022,Spa-Francorchamps,Charles Leclerc,15,6
+2022,Spa-Francorchamps,Esteban Ocon,16,7
+2022,Spa-Francorchamps,Sebastian Vettel,10,8
+2022,Spa-Francorchamps,Pierre Gasly,0,9
+2022,Spa-Francorchamps,Alexander Albon,6,10
+2022,Spa-Francorchamps,Lance Stroll,9,11
+2022,Spa-Francorchamps,Lando Norris,17,12
+2022,Spa-Francorchamps,Yuki Tsunoda,0,13
+2022,Spa-Francorchamps,Guanyu Zhou,18,14
+2022,Spa-Francorchamps,Daniel Ricciardo,7,15
+2022,Spa-Francorchamps,Kevin Magnussen,12,16
+2022,Spa-Francorchamps,Mick Schumacher,19,17
+2022,Spa-Francorchamps,Nicholas Latifi,11,18
+2022,Spa-Francorchamps,Valtteri Bottas,13,19
+2022,Spa-Francorchamps,Lewis Hamilton,4,20
+2022,Zandvoort,Max Verstappen,1,1
+2022,Zandvoort,George Russell,6,2
+2022,Zandvoort,Charles Leclerc,2,3
+2022,Zandvoort,Lewis Hamilton,4,4
+2022,Zandvoort,Sergio Perez,5,5
+2022,Zandvoort,Fernando Alonso,13,6
+2022,Zandvoort,Lando Norris,7,7
+2022,Zandvoort,Carlos Sainz,3,8
+2022,Zandvoort,Esteban Ocon,12,9
+2022,Zandvoort,Lance Stroll,10,10
+2022,Zandvoort,Pierre Gasly,11,11
+2022,Zandvoort,Alexander Albon,15,12
+2022,Zandvoort,Mick Schumacher,8,13
+2022,Zandvoort,Sebastian Vettel,19,14
+2022,Zandvoort,Kevin Magnussen,18,15
+2022,Zandvoort,Guanyu Zhou,14,16
+2022,Zandvoort,Daniel Ricciardo,17,17
+2022,Zandvoort,Nicholas Latifi,20,18
+2022,Zandvoort,Valtteri Bottas,16,19
+2022,Zandvoort,Yuki Tsunoda,9,20
+2022,Monza,Max Verstappen,7,1
+2022,Monza,Charles Leclerc,1,2
+2022,Monza,George Russell,2,3
+2022,Monza,Carlos Sainz,18,4
+2022,Monza,Lewis Hamilton,19,5
+2022,Monza,Sergio Perez,13,6
+2022,Monza,Lando Norris,3,7
+2022,Monza,Pierre Gasly,5,8
+2022,Monza,Nyck De Vries,8,9
+2022,Monza,Guanyu Zhou,9,10
+2022,Monza,Esteban Ocon,14,11
+2022,Monza,Mick Schumacher,17,12
+2022,Monza,Valtteri Bottas,15,13
+2022,Monza,Yuki Tsunoda,20,14
+2022,Monza,Nicholas Latifi,10,15
+2022,Monza,Kevin Magnussen,16,16
+2022,Monza,Daniel Ricciardo,4,17
+2022,Monza,Lance Stroll,12,18
+2022,Monza,Fernando Alonso,6,19
+2022,Monza,Sebastian Vettel,11,20
