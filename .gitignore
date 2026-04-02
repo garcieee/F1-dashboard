@@ -1,4 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+venv/
+.env
+
+# Training data — too large for GitHub
+training/data_finishing.csv
+training/data_laptime.csv
+training/data_overtake.csv
+training/data_constructor.csv
+
+# FastF1 cache — very large, never commit this
 training/cache/
+
+# Trained model files — commit these when ready to deploy,
+# but add them for now since they can be regenerated
+# models/finishing.pkl
+# models/laptime.pkl
+# models/overtake.pkl
+# models/constructor.pkl
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
 /venv/
 *__pycache__/
 *.pyc

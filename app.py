@@ -1,24 +1,79 @@
 from flask import Flask, render_template, request
 import random
-
+import joblib
+import numpy as np
 app = Flask(__name__)
 
 # ── Data for dropdowns ────────────────────────────────────────────────────────
 
 DRIVERS = [
-    "Max Verstappen", "Sergio Perez", "Charles Leclerc", "Carlos Sainz",
-    "Lewis Hamilton", "George Russell", "Lando Norris", "Oscar Piastri",
-    "Fernando Alonso", "Lance Stroll", "Esteban Ocon", "Pierre Gasly",
-    "Valtteri Bottas", "Zhou Guanyu", "Kevin Magnussen", "Nico Hulkenberg",
-    "Yuki Tsunoda", "Daniel Ricciardo", "Alexander Albon", "Logan Sargeant",
+    "Alexander Albon",
+    "Antonio Giovinazzi",
+    "Brendon Hartley",
+    "Carlos Sainz",
+    "Charles Leclerc",
+    "Daniel Ricciardo",
+    "Daniil Kvyat",
+    "Esteban Ocon",
+    "Fernando Alonso",
+    "George Russell",
+    "Guanyu Zhou",
+    "Jack Aitken",
+    "Kevin Magnussen",
+    "Kimi Räikkönen",
+    "Lance Stroll",
+    "Lando Norris",
+    "Lewis Hamilton",
+    "Marcus Ericsson",
+    "Max Verstappen",
+    "Mick Schumacher",
+    "Nicholas Latifi",
+    "Nico Hulkenberg",
+    "Nikita Mazepin",
+    "Nyck De Vries",
+    "Pierre Gasly",
+    "Pietro Fittipaldi",
+    "Robert Kubica",
+    "Romain Grosjean",
+    "Sebastian Vettel",
+    "Sergey Sirotkin",
+    "Sergio Perez",
+    "Stoffel Vandoorne",
+    "Valtteri Bottas",
+    "Yuki Tsunoda",
 ]
-
 CIRCUITS = [
-    "Bahrain", "Saudi Arabia", "Australia", "Japan", "China",
-    "Miami", "Emilia Romagna", "Monaco", "Canada", "Spain",
-    "Austria", "Great Britain", "Hungary", "Belgium", "Netherlands",
-    "Italy (Monza)", "Azerbaijan", "Singapore", "United States (COTA)",
-    "Mexico", "Brazil", "Las Vegas", "Qatar", "Abu Dhabi",
+    "Austin",
+    "Baku",
+    "Barcelona",
+    "Budapest",
+    "Hockenheim",
+    "Imola",
+    "Istanbul",
+    "Jeddah",
+    "Le Castellet",
+    "Lusail",
+    "Melbourne",
+    "Mexico City",
+    "Miami",
+    "Monaco",
+    "Montréal",
+    "Monza",
+    "Mugello",
+    "Nürburgring",
+    "Portimão",
+    "Sakhir",
+    "Shanghai",
+    "Silverstone",
+    "Singapore",
+    "Sochi",
+    "Spa-Francorchamps",
+    "Spielberg",
+    "Suzuka",
+    "São Paulo",
+    "Yas Island",
+    "Yas Marina",
+    "Zandvoort",
 ]
 
 TIRE_COMPOUNDS = ["Soft", "Medium", "Hard", "Intermediate", "Wet"]
@@ -33,14 +88,42 @@ CONSTRUCTORS = [
     "Alfa Romeo", "Haas",
 ]
 
+# ── Load trained models ────────────────────────────────────────────────────────
+
+try:
+    _finishing = joblib.load("models/finishing.pkl")
+    FINISHING_MODEL  = _finishing["model"]
+    FINISHING_LE_DRV = _finishing["le_driver"]
+    FINISHING_LE_CIR = _finishing["le_circuit"]
+    print("✓ Finishing model loaded")
+except Exception as e:
+    FINISHING_MODEL = None
+    print(f"✗ Finishing model not loaded: {e}")
+
 # ── Dummy prediction helpers ──────────────────────────────────────────────────
 
-def dummy_finishing_position(driver, circuit, season):
-    """Return a fake finishing position and confidence."""
-    seed = hash(f"{driver}{circuit}{season}") % 20
-    position = (seed % 10) + 1
-    confidence = round(random.uniform(62, 94), 1)
-    return position, confidence
+def predict_finishing_position(driver, circuit, season):
+    if FINISHING_MODEL is None:
+        seed = hash(f"{driver}{circuit}{season}") % 20
+        return (seed % 10) + 1, 55.0
+
+    try:
+        driver_enc  = FINISHING_LE_DRV.transform([driver])[0]
+        circuit_enc = FINISHING_LE_CIR.transform([circuit])[0]
+
+        features = np.array([[driver_enc, circuit_enc, int(season), 10]])
+        position = int(FINISHING_MODEL.predict(features)[0])
+
+        proba      = FINISHING_MODEL.predict_proba(features)[0]
+        classes    = list(FINISHING_MODEL.classes_)
+        confidence = round(float(proba[classes.index(position)]) * 100, 1) \
+                     if position in classes else 50.0
+
+        return position, confidence
+
+    except ValueError:
+        seed = hash(f"{driver}{circuit}{season}") % 20
+        return (seed % 10) + 1, 50.0
 
 
 def dummy_lap_time(driver, compound, lap_number):
@@ -98,7 +181,7 @@ def finishing():
         circuit = request.form.get("circuit")
         season  = request.form.get("season")
         inputs  = {"driver": driver, "circuit": circuit, "season": season}
-        position, confidence = dummy_finishing_position(driver, circuit, season)
+        position, confidence = predict_finishing_position(driver, circuit, season)
         suffix = {1: "st", 2: "nd", 3: "rd"}.get(position, "th")
         result = {
             "position": position,

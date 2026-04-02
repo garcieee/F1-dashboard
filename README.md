@@ -1,27 +1,41 @@
-# F1-dashboard
-F1 Dashboard is a machine learning-based prediction system for Formula 1 racing. The system allows users to select race inputs such as driver, circuit, tire compound, and lap number, then uses trained machine learning models to generate predictions about race outcomes and performance.
+# F1 Dashboard
+
+A machine learning-powered web dashboard for Formula 1 race predictions. Built with Flask and trained on real FastF1 telemetry data (2018–2024).
+
+## Status
+
+| Feature | Status |
+|---|---|
+| Finishing position predictor | Live — real RandomForest model |
+| Lap time estimator | Dummy logic (model not yet trained) |
+| Overtake & safety car probability | Dummy logic (model not yet trained) |
+| Constructor standings projector | Dummy logic (model not yet trained) |
 
 ## Folder Structure
 
 ```
-f1dashboard/
-├── app.py                  ← Flask app + dummy prediction logic
-├── requirements.txt
-├── models/                 ← Drop your trained .pkl files here
-│   ├── finishing.pkl
-│   ├── laptime.pkl
-│   ├── overtake.pkl
-│   └── constructor.pkl
+F1-dashboard/
+├── app.py                        ← Flask app with real finishing model logic
+├── models/
+│   └── finishing.pkl             ← Trained RandomForest model (2018–2024)
+├── training/
+│   ├── cache/                    ← FastF1 cache (gitignored)
+│   ├── data_finishing.csv        ← Training data fetched via FastF1 (gitignored)
+│   ├── export_model1.py          ← Trains on full dataset and exports finishing.pkl
+│   └── train_model1_finishing.py ← Training script with evaluation metrics
 ├── templates/
-│   ├── base.html           ← Shared layout, navbar, Tailwind CDN
-│   ├── index.html          ← Home / dashboard landing
-│   ├── finishing.html      ← Finishing position predictor
-│   ├── laptime.html        ← Lap time estimator
-│   ├── overtake.html       ← Overtake & safety car probability
-│   └── constructor.html    ← Constructor championship projector
-└── static/
-    ├── css/style.css
-    └── js/main.js
+│   ├── base.html                 ← Shared layout, navbar, Tailwind CDN
+│   ├── index.html                ← Dashboard landing page
+│   ├── finishing.html            ← Finishing position predictor
+│   ├── laptime.html              ← Lap time estimator
+│   ├── overtake.html             ← Overtake & safety car probability
+│   └── constructor.html          ← Constructor championship projector
+├── static/
+│   ├── css/style.css
+│   └── js/main.js
+├── requirements.txt
+├── .gitignore
+└── README.md
 ```
 
 ## Setup
@@ -31,14 +45,29 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Then open http://127.0.0.1:5000
+Open http://127.0.0.1:5001
 
-## Swapping in Real Models
+## Model: Finishing Position
 
-The dummy logic lives in `app.py` inside four helper functions:
-- `dummy_finishing_position()` → replace with `joblib.load('models/finishing.pkl').predict()`
-- `dummy_lap_time()`          → replace with `joblib.load('models/laptime.pkl').predict()`
-- `dummy_overtake_safety()`   → replace with `joblib.load('models/overtake.pkl').predict_proba()`
-- `dummy_constructor_standings()` → replace with `joblib.load('models/constructor.pkl').predict()`
+**Algorithm:** RandomForestClassifier (200 trees, max depth 12)
+**Data:** FastF1 race results 2018–2024
+**Features:** driver, circuit, season, grid position
+**Target:** finishing position (1–20)
 
-Make sure your input features are encoded to match what the model was trained on.
+### Retrain from scratch
+
+```bash
+# 1. Fetch data and train (resumes from existing CSV if present)
+python training/train_model1_finishing.py
+
+# 2. Export final model trained on full dataset
+python training/export_model1.py
+```
+
+The training script fetches data round-by-round and saves after every race, so it's safe to interrupt and resume.
+
+## Adding New Models
+
+1. Add a training script to `training/`
+2. Export the model as a `.pkl` to `models/`
+3. Load it in `app.py` and replace the relevant `dummy_*` function with real prediction logic

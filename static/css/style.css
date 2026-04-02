@@ -1,0 +1,11 @@
+/* static/css/style.css — additional overrides */
+
+/* No page load animation - instant display */
+body { opacity: 1; }
+
+/* Number input override (for any future number inputs) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+/* Selection colour */
+::selection { background: rgba(232,0,45,0.3); color: #fff; }
