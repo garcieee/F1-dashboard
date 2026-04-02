@@ -3,8 +3,13 @@ import random
 import joblib
 import numpy as np
 import os
+import datetime
 
 app = Flask(__name__)
+
+# ── Seasons ───────────────────────────────────────────────────────────────────
+_current_year = datetime.datetime.now().year
+SEASONS = [str(_current_year), str(_current_year + 1)]
 
 # ── Data for dropdowns ────────────────────────────────────────────────────────
 
@@ -81,8 +86,6 @@ CIRCUITS = [
 
 TIRE_COMPOUNDS = ["Soft", "Medium", "Hard", "Intermediate", "Wet"]
 
-SEASONS = [str(y) for y in range(2018, 2026)]
-
 WEATHER_CONDITIONS = ["Dry", "Overcast", "Light Rain", "Heavy Rain", "Mixed"]
 
 CONSTRUCTORS = [
@@ -105,8 +108,7 @@ except Exception as e:
 
 # ── Prediction functions ───────────────────────────────────────────────────────
 
-def predict_finishing_position(driver, circuit, season):
-    """Use trained Random Forest. Falls back to dummy if model not loaded."""
+def predict_finishing_position(driver, circuit, season, grid_pos=10):
     if FINISHING_MODEL is None:
         seed = hash(f"{driver}{circuit}{season}") % 20
         return (seed % 10) + 1, 55.0
@@ -115,8 +117,8 @@ def predict_finishing_position(driver, circuit, season):
         driver_enc  = FINISHING_LE_DRV.transform([driver])[0]
         circuit_enc = FINISHING_LE_CIR.transform([circuit])[0]
 
-        features = np.array([[driver_enc, circuit_enc, int(season), 10]])
-        position = int(FINISHING_MODEL.predict(features)[0])
+        features   = np.array([[driver_enc, circuit_enc, int(season), int(grid_pos)]])
+        position   = int(FINISHING_MODEL.predict(features)[0])
 
         proba      = FINISHING_MODEL.predict_proba(features)[0]
         classes    = list(FINISHING_MODEL.classes_)
@@ -126,9 +128,25 @@ def predict_finishing_position(driver, circuit, season):
         return position, confidence
 
     except ValueError:
-        # Driver or circuit not seen during training
         seed = hash(f"{driver}{circuit}{season}") % 20
         return (seed % 10) + 1, 50.0
+
+
+def predict_position_sweep(driver, circuit, season):
+    """Returns predicted finishing position for every grid slot P1–P20."""
+    if FINISHING_MODEL is None:
+        return None
+    try:
+        driver_enc  = FINISHING_LE_DRV.transform([driver])[0]
+        circuit_enc = FINISHING_LE_CIR.transform([circuit])[0]
+        sweep = []
+        for grid in range(1, 21):
+            features = np.array([[driver_enc, circuit_enc, int(season), grid]])
+            pos = int(FINISHING_MODEL.predict(features)[0])
+            sweep.append({"grid": grid, "predicted": pos})
+        return sweep
+    except ValueError:
+        return None
 
 
 def dummy_lap_time(driver, compound, lap_number):
@@ -136,18 +154,18 @@ def dummy_lap_time(driver, compound, lap_number):
         "Soft": 88000, "Medium": 89500, "Hard": 91000,
         "Intermediate": 95000, "Wet": 102000,
     }.get(compound, 89000)
-    variance = random.randint(-800, 800)
+    variance    = random.randint(-800, 800)
     lap_penalty = int(lap_number) * random.randint(20, 60)
-    total_ms = base_ms + variance + lap_penalty
-    minutes = total_ms // 60000
-    seconds = (total_ms % 60000) / 1000
+    total_ms    = base_ms + variance + lap_penalty
+    minutes     = total_ms // 60000
+    seconds     = (total_ms % 60000) / 1000
     return f"{minutes}:{seconds:06.3f}", total_ms
 
 
 def dummy_overtake_safety(circuit, weather):
-    seed = hash(f"{circuit}{weather}") % 100
+    seed     = hash(f"{circuit}{weather}") % 100
     overtake = max(10, min(90, seed + random.randint(-10, 10)))
-    safety = max(5, min(70, (100 - seed) // 2 + random.randint(-5, 5)))
+    safety   = max(5,  min(70, (100 - seed) // 2 + random.randint(-5, 5)))
     return overtake, safety
 
 
@@ -158,8 +176,8 @@ def dummy_constructor_standings(season):
         "Alfa Romeo", "Haas",
     ]
     random.seed(hash(season))
-    base_pts = [600, 560, 530, 490, 340, 220, 130, 80, 50, 30]
-    variance = [random.randint(-30, 30) for _ in constructors]
+    base_pts  = [600, 560, 530, 490, 340, 220, 130, 80, 50, 30]
+    variance  = [random.randint(-30, 30) for _ in constructors]
     standings = sorted(
         zip(constructors, [b + v for b, v in zip(base_pts, variance)]),
         key=lambda x: -x[1]
@@ -179,11 +197,19 @@ def finishing():
     result = None
     inputs = {}
     if request.method == "POST":
-        driver  = request.form.get("driver")
-        circuit = request.form.get("circuit")
-        season  = request.form.get("season")
-        inputs  = {"driver": driver, "circuit": circuit, "season": season}
-        position, confidence = predict_finishing_position(driver, circuit, season)
+        driver   = request.form.get("driver")
+        circuit  = request.form.get("circuit")
+        season   = request.form.get("season")
+        grid_pos = request.form.get("grid_pos", 10)
+        inputs   = {
+            "driver":   driver,
+            "circuit":  circuit,
+            "season":   season,
+            "grid_pos": grid_pos,
+        }
+        position, confidence = predict_finishing_position(
+            driver, circuit, season, grid_pos
+        )
         suffix = {1: "st", 2: "nd", 3: "rd"}.get(position, "th")
         result = {
             "position":   position,
@@ -191,6 +217,7 @@ def finishing():
             "suffix":     suffix,
             "confidence": confidence,
             "model_live": FINISHING_MODEL is not None,
+            "sweep":      predict_position_sweep(driver, circuit, season),
         }
     return render_template(
         "finishing.html",

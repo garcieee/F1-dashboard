@@ -49,6 +49,16 @@
           </select>
         </div>
 
+        <div class="mb-5">
+          <label class="f1-label" for="grid_pos">Expected Grid Position</label>
+          <select class="f1-select" name="grid_pos" id="grid_pos" required>
+            <option value="" disabled {% if not inputs.grid_pos %}selected{% endif %}>Select qualifying position…</option>
+            {% for p in range(1, 21) %}
+            <option value="{{ p }}" {% if inputs.grid_pos|string == p|string %}selected{% endif %}>P{{ p }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
         <div class="mb-8">
           <label class="f1-label" for="season">Season</label>
           <select class="f1-select" name="season" id="season" required>
@@ -86,6 +96,7 @@
         <span class="pulse-dot"></span> PREDICTION OUTPUT
       </div>
 
+      <!-- Big position -->
       <div class="flex items-end gap-4 mb-8">
         <div>
           <div class="font-mono text-xs text-f1muted mb-1 tracking-widest">PREDICTED POSITION</div>
@@ -105,9 +116,15 @@
 
       <hr class="hud-line mb-6" />
 
+      <!-- Input summary -->
       <div class="font-mono text-xs text-f1muted mb-4 tracking-widest">INPUT SUMMARY</div>
-      <div class="grid grid-cols-3 gap-4">
-        {% for label, val in [("Driver", inputs.driver), ("Circuit", inputs.circuit), ("Season", inputs.season)] %}
+      <div class="grid grid-cols-2 gap-3 mb-6">
+        {% for label, val in [
+          ("Driver",   inputs.driver),
+          ("Circuit",  inputs.circuit),
+          ("Grid",     "P" ~ inputs.grid_pos),
+          ("Season",   inputs.season)
+        ] %}
         <div class="p-3" style="background:#0F1117; border:1px solid #252B3B;">
           <div class="text-xs text-f1muted mb-1">{{ label }}</div>
           <div class="font-ui font-600 text-f1bright text-sm">{{ val }}</div>
@@ -115,7 +132,8 @@
         {% endfor %}
       </div>
 
-      <div class="mt-6">
+      <!-- Confidence bar -->
+      <div>
         <div class="flex justify-between font-mono text-xs text-f1muted mb-2">
           <span>MODEL CONFIDENCE</span>
           <span class="text-f1bright">{{ result.confidence }}%</span>
@@ -123,15 +141,56 @@
         <div class="h-2 bg-f1border rounded-none overflow-hidden">
           <div class="h-full bg-f1red confidence-bar"
                data-confidence="{{ result.confidence }}"
-               style="width:{{ result.confidence }}%;"></div>
+               style="width:0%;"></div>
         </div>
       </div>
 
-      <!-- Model status badge -->
+      <!-- Grid sweep visualiser -->
+      {% if result.sweep %}
+      <div class="mt-6">
+        <div class="font-mono text-xs text-f1muted tracking-widest mb-3">
+          PREDICTED FINISH BY GRID POSITION — {{ inputs.driver }}
+        </div>
+        <div class="space-y-1">
+          {% for row in result.sweep %}
+          {% set is_selected = row.grid|string == inputs.grid_pos|string %}
+          <div class="flex items-center gap-3" style="opacity: {{ '1' if is_selected else '0.4' }};">
+
+            <!-- Grid label -->
+            <div class="font-mono text-xs w-7 text-right shrink-0 {{ 'text-f1bright' if is_selected else 'text-f1muted' }}">
+              P{{ row.grid }}
+            </div>
+
+            <!-- Bar — length represents finish quality (shorter finish = longer bar) -->
+            <div class="flex-1 h-1.5 bg-f1border overflow-hidden">
+              <div class="h-full sweep-bar"
+                   data-width="{{ ((21 - row.predicted) / 20 * 100)|round }}"
+                   data-selected="{{ 'true' if is_selected else 'false' }}"
+                   data-delay="{{ (loop.index0 * 0.03)|round(2) }}"
+                   style="width:0%; background: {{ '#C0392B' if is_selected else '#3A4055' }};">
+              </div>
+            </div>
+
+            <!-- Predicted finish -->
+            <div class="font-mono text-xs w-7 shrink-0 {{ 'text-f1bright' if is_selected else 'text-f1muted' }}">
+              P{{ row.predicted }}
+            </div>
+
+          </div>
+          {% endfor %}
+        </div>
+        <div class="flex justify-between font-mono text-xs text-f1muted mt-2 pt-2 border-t border-f1border">
+          <span>Grid (start)</span>
+          <span>Predicted finish</span>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Model status -->
       <div class="mt-5 flex items-center gap-2">
         {% if result.model_live %}
         <span class="data-badge" style="color:#2E8B57; background:rgba(46,139,87,0.1); border-color:rgba(46,139,87,0.25);">
-          ✓ LIVE MODEL — RandomForest 2018–2024
+          ✓ LIVE MODEL — RandomForest 2018–2022
         </span>
         {% else %}
         <span class="data-badge">⚠ DUMMY MODEL — models/finishing.pkl not found</span>
@@ -155,13 +214,14 @@
     </div>
     {% endif %}
 
+    <!-- How it works -->
     <div class="panel p-5 mt-6" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 16px 100%, 0 calc(100% - 16px));">
       <div class="font-mono text-xs text-f1muted tracking-widest mb-4">HOW IT WORKS</div>
       <div class="space-y-3">
         {% for step, desc in [
-          ("01 · Feature Encoding", "Driver, circuit, and season are label-encoded into numeric IDs."),
+          ("01 · Feature Encoding", "Driver, circuit, season and grid position are label-encoded into numeric IDs."),
           ("02 · Random Forest", "An ensemble of 200 decision trees votes on the most likely finishing position."),
-          ("03 · Output", "The majority class (P1–P20) is returned with a confidence score.")
+          ("03 · Grid Sweep", "The model re-runs for all 20 grid slots to show how starting position affects the outcome.")
         ] %}
         <div class="flex gap-3">
           <div class="font-mono text-xs text-f1red shrink-0 mt-0.5">{{ step.split("·")[0] }}</div>
@@ -181,12 +241,25 @@
 {% block scripts %}
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    // Confidence bar
     const bar = document.querySelector('.confidence-bar');
     if (bar) {
-      const val = bar.dataset.confidence;
-      bar.style.width = '0%';
-      setTimeout(() => { bar.style.transition = 'width 1s ease'; bar.style.width = val + '%'; }, 100);
+      const val = parseFloat(bar.dataset.confidence);
+      setTimeout(() => {
+        bar.style.transition = 'width 1s ease';
+        bar.style.width = val + '%';
+      }, 150);
     }
+
+    // Sweep bars — staggered animation
+    document.querySelectorAll('.sweep-bar').forEach(el => {
+      const width = el.dataset.width;
+      const delay = parseFloat(el.dataset.delay);
+      setTimeout(() => {
+        el.style.transition = 'width 0.5s ease';
+        el.style.width = width + '%';
+      }, 300 + delay * 1000);
+    });
   });
 
   document.getElementById('predictForm').addEventListener('submit', function() {
