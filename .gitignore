@@ -14,13 +14,6 @@ training/data_constructor.csv
 # FastF1 cache — very large, never commit this
 training/cache/
 
-# Trained model files — commit these when ready to deploy,
-# but add them for now since they can be regenerated
-models/finishing.pkl
-models/laptime.pkl
-models/overtake.pkl
-models/constructor.pkl
-
 # OS files
 .DS_Store
 Thumbs.db
