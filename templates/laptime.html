@@ -12,7 +12,7 @@
     Lap Time <span class="accent">Estimator</span>
   </h1>
   <p class="font-ui text-f1dim max-w-xl">
-    Linear Regression · Estimate a driver's lap time based on tire compound and lap number.
+    Ridge Regression · Estimate a driver's lap time based on circuit, tire compound, and lap number.
   </p>
 </div>
 
@@ -39,6 +39,18 @@
           </select>
         </div>
 
+        <!-- Circuit (needed by Model 2) -->
+        <div class="mb-5">
+          <label class="f1-label" for="circuit">Circuit</label>
+          <select class="f1-select" name="circuit" id="circuit" required
+                  onchange="syncVizCircuit(this.value)">
+            <option value="" disabled {% if not inputs.circuit %}selected{% endif %}>Select circuit…</option>
+            {% for c in circuits %}
+            <option value="{{ c }}" {% if inputs.get('circuit') == c %}selected{% endif %}>{{ c }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
         <div class="mb-5">
           <label class="f1-label" for="compound">Tire Compound</label>
           <select class="f1-select" name="compound" id="compound" required>
@@ -53,18 +65,28 @@
         <div class="flex gap-3 mb-5 flex-wrap">
           {% for name, color in [("Soft","#C0392B"),("Medium","#C9A227"),("Hard","#B0B4C0"),("Inter","#2E8B57"),("Wet","#2563EB")] %}
           <div class="flex items-center gap-1.5 font-mono text-xs text-f1muted">
-            <span class="inline-block w-3 h-3 rounded-full compound-dot" data-color="{{ color }}"></span>
+            <span class="inline-block w-3 h-3 rounded-full" style="background:{{ color }};"></span>
             {{ name }}
           </div>
           {% endfor %}
         </div>
 
-        <div class="mb-8">
+        <div class="mb-5">
           <label class="f1-label" for="lap_number">Lap Number</label>
           <select class="f1-select" name="lap_number" id="lap_number" required>
             <option value="" disabled {% if not inputs.lap_number %}selected{% endif %}>Select lap…</option>
             {% for l in laps %}
             <option value="{{ l }}" {% if inputs.lap_number|string == l|string %}selected{% endif %}>Lap {{ l }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <!-- Season (needed by Model 2) -->
+        <div class="mb-8">
+          <label class="f1-label" for="season">Season</label>
+          <select class="f1-select" name="season" id="season" required>
+            {% for s in seasons %}
+            <option value="{{ s }}" {% if inputs.get('season')|string == s %}selected{% endif %}>{{ s }}</option>
             {% endfor %}
           </select>
         </div>
@@ -76,9 +98,15 @@
       </form>
 
       <div class="mt-6 pt-5 border-t border-f1border font-mono text-xs text-f1muted space-y-1">
-        <div class="flex justify-between"><span>Algorithm</span><span class="text-f1bright">Linear Regression</span></div>
+        <div class="flex justify-between"><span>Algorithm</span><span class="text-f1bright">Ridge Regression</span></div>
         <div class="flex justify-between"><span>Type</span><span class="text-f1bright">Regression</span></div>
         <div class="flex justify-between"><span>Output</span><span class="text-f1bright">mm:ss.mmm</span></div>
+        <div class="flex justify-between">
+          <span>Model</span>
+          <span class="{% if result and result.model_live %}text-green-400{% else %}text-f1red{% endif %}">
+            {% if result and result.model_live %}● Live{% else %}● Dummy{% endif %}
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -87,7 +115,7 @@
   <div class="lg:col-span-3 flex flex-col gap-6">
 
     {% if result %}
-    <!-- Result -->
+    <!-- Result card -->
     <div class="panel p-8 result-glow relative"
          style="clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));">
       <span class="bracket bracket-tl"></span>
@@ -103,7 +131,7 @@
           {{ result.lap_time }}
         </div>
         <div class="font-mono text-sm text-f1dim mt-2">
-          {{ result.lap_ms }} ms &nbsp;·&nbsp;
+          {{ result.lap_ms | int }} ms &nbsp;·&nbsp;
           Compound:
           <span style="color:{% if result.compound == 'Soft' %}#C0392B{% elif result.compound == 'Medium' %}#C9A227{% elif result.compound == 'Hard' %}#B0B4C0{% elif result.compound == 'Intermediate' %}#2E8B57{% else %}#2563EB{% endif %};">
             ● {{ result.compound }}
@@ -114,8 +142,14 @@
       <hr class="hud-line mb-5" />
 
       <div class="font-mono text-xs text-f1muted mb-3 tracking-widest">INPUT SUMMARY</div>
-      <div class="grid grid-cols-3 gap-3 mb-5">
-        {% for label, val in [("Driver", inputs.driver), ("Compound", inputs.compound), ("Lap", inputs.lap_number)] %}
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-5">
+        {% for label, val in [
+          ("Driver",   inputs.driver),
+          ("Circuit",  inputs.get("circuit", "—")),
+          ("Compound", inputs.compound),
+          ("Lap",      inputs.lap_number),
+          ("Season",   inputs.get("season", "—")),
+        ] %}
         <div class="p-3" style="background:#0F1117; border:1px solid #252B3B;">
           <div class="text-xs text-f1muted mb-1">{{ label }}</div>
           <div class="font-ui font-600 text-f1bright text-sm">{{ val }}</div>
@@ -126,7 +160,7 @@
       <!-- Tire deg bar -->
       <div>
         <div class="flex justify-between font-mono text-xs text-f1muted mb-2">
-          <span>TIRE DEGRADATION</span>
+          <span>TIRE DEGRADATION INDICATOR</span>
           <span class="text-f1bright">Lap {{ inputs.lap_number }}</span>
         </div>
         <div class="flex gap-1">
@@ -139,15 +173,60 @@
         </div>
       </div>
 
+      {% if not result.model_live %}
       <p class="mt-5 font-mono text-xs text-f1muted">
-        ⚠ Dummy model active. Swap <code class="text-f1bright">models/laptime.pkl</code> to enable real predictions.
+        ⚠ Dummy model active. Run <code class="text-f1bright">train_model2_laptime.py</code>
+        then <code class="text-f1bright">export_model2.py</code> to enable real predictions.
       </p>
+      {% endif %}
+    </div>
+
+    <!-- Lap progression chart -->
+    {% if sweep %}
+    <div class="panel p-6 relative" style="clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);">
+      <div class="font-mono text-xs text-f1muted tracking-widest mb-4 flex items-center justify-between">
+        <span class="flex items-center gap-2">
+          <span class="pulse-dot"></span> LAP TIME PROGRESSION
+        </span>
+        <span class="text-f1bright">{{ inputs.compound }} · {{ inputs.get("circuit","") }}</span>
+      </div>
+
+      <div style="position:relative; height:200px;">
+        <canvas id="sweep-chart"></canvas>
+      </div>
+
+      <!-- Stats row -->
+      {% set times = sweep | map(attribute='lap_time_ms') | list %}
+      {% set fastest_ms = times | min %}
+      {% set slowest_ms = times | max %}
+      {% set avg_ms = (times | sum / times | length) | round(0) | int %}
+      {% set fastest_entry = sweep | selectattr('lap_time_ms','equalto', fastest_ms) | first %}
+
+      <div class="grid grid-cols-3 gap-3 mt-5">
+        <div class="p-3 text-center" style="background:#0F1117; border:1px solid #252B3B;">
+          <div class="font-mono text-xs text-f1muted mb-1">FASTEST LAP</div>
+          <div class="font-mono text-f1bright font-bold">{{ fastest_entry.lap_time_str }}</div>
+          <div class="font-mono text-xs text-f1muted mt-1">Lap {{ fastest_entry.lap }}</div>
+        </div>
+        <div class="p-3 text-center" style="background:#0F1117; border:1px solid #252B3B;">
+          <div class="font-mono text-xs text-f1muted mb-1">AVG LAP TIME</div>
+          {% set m = avg_ms // 60000 %}{% set s = (avg_ms % 60000) / 1000 %}
+          <div class="font-mono text-f1bright font-bold">{{ m }}:{{ "%.3f" | format(s) }}</div>
+        </div>
+        <div class="p-3 text-center" style="background:#0F1117; border:1px solid #252B3B;">
+          <div class="font-mono text-xs text-f1muted mb-1">DEGRADATION</div>
+          <div class="font-mono font-bold" style="color:#C0392B;">
+            +{{ "%.3f" | format((slowest_ms - fastest_ms) / 1000) }}s
+          </div>
+          <div class="font-mono text-xs text-f1muted mt-1">L1 → L{{ sweep | length }}</div>
+        </div>
+      </div>
     </div>
     {% endif %}
+    {% endif %}
 
-    <!-- ── Inline circuit lap visualiser ── -->
+    <!-- Inline circuit lap visualiser (unchanged from your version) -->
     <div class="panel relative overflow-hidden" style="min-height:300px; clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);">
-      <!-- Header -->
       <div class="flex items-center justify-between px-5 pt-5 pb-3 border-b border-f1border">
         <div class="font-mono text-xs text-f1muted tracking-widest flex items-center gap-2">
           <span class="pulse-dot" id="sim-dot"></span>
@@ -163,40 +242,27 @@
         </div>
       </div>
 
-      <!-- SVG canvas -->
       <div class="relative" style="height:380px;">
         <svg id="lap-svg" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg"
              preserveAspectRatio="xMidYMid meet"
              style="position:absolute; inset:0; width:100%; height:100%;" fill="none">
-          <!-- Track outline (wider, faint fill to suggest asphalt) -->
-          <path id="lap-track-bg" d="" stroke="#252B3B" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
-          <!-- Track line -->
-          <path id="lap-track" d="" stroke="#3A4055" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-          <!-- Racing line -->
-          <path id="lap-racing-line" d="" stroke="#C0392B" stroke-width="1" stroke-dasharray="8 6" opacity="0.4"/>
-          <!-- Pit lane -->
-          <path id="lap-pit" d="" stroke="#7A8395" stroke-width="2" stroke-dasharray="5 4" opacity="0.5"/>
-          <!-- Sector markers will be added by JS -->
+          <path id="lap-track-bg"    d="" stroke="#252B3B" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="lap-track"       d="" stroke="#3A4055" stroke-width="6"  stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="lap-racing-line" d="" stroke="#C0392B" stroke-width="1"  stroke-dasharray="8 6" opacity="0.4"/>
+          <path id="lap-pit"         d="" stroke="#7A8395" stroke-width="2"  stroke-dasharray="5 4" opacity="0.5"/>
           <g id="sector-markers"></g>
-          <!-- Car dot (driven by CSS offset-path) -->
           <circle id="lap-car" r="6" fill="#D95A4A" opacity="0">
             <animate attributeName="opacity" values="0;1" dur="0.3s" begin="0.5s" fill="freeze"/>
           </circle>
         </svg>
-
-        <!-- Lap counter overlay -->
         <div class="absolute bottom-3 left-4 font-mono text-xs text-f1muted">
           <span class="text-f1bright" id="lap-counter">—</span> / <span id="lap-total">—</span> laps
         </div>
-
-        <!-- Speed indicator -->
         <div class="absolute bottom-3 right-4 font-mono text-xs text-f1muted flex items-center gap-2">
-          <span>SPEED</span>
-          <span class="text-f1bright" id="speed-readout">— km/h</span>
+          <span>SPEED</span><span class="text-f1bright" id="speed-readout">— km/h</span>
         </div>
       </div>
 
-      <!-- Play controls -->
       <div class="px-5 pb-5 pt-3 border-t border-f1border flex items-center gap-4">
         <button id="play-btn" onclick="toggleSim()"
           class="font-mono text-xs text-f1muted border border-f1border px-4 py-1.5 hover:text-f1bright hover:border-f1red transition-colors">
@@ -214,7 +280,6 @@
     </div>
 
     {% if not result %}
-    <!-- Placeholder for result -->
     <div class="panel p-8 flex flex-col items-center justify-center min-h-36 text-center"
          style="border-style: dashed; clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));">
       <div class="font-mono text-xs text-f1muted tracking-widest mb-2">AWAITING PREDICTION</div>
@@ -249,62 +314,57 @@
   </div>
 </div>
 
+{% if sweep %}
+<script>const SWEEP_DATA = {{ sweep | tojson }};</script>
+{% endif %}
+
 {% endblock %}
 
 {% block scripts %}
 <script>
 /* ── Form submit feedback ── */
-document.getElementById('predictForm').addEventListener('submit', function() {
+document.getElementById('predictForm').addEventListener('submit', function () {
   const btn = document.getElementById('submitBtn');
   btn.disabled = true;
   document.getElementById('btnText').textContent = 'Processing…';
   btn.style.opacity = '0.7';
 });
 
-/* ════════════════════════════════════════════════════
-   LAP SIMULATION ENGINE (inline circuit visualiser)
-════════════════════════════════════════════════════ */
+/* ── Sync form circuit → viz label ── */
+function syncVizCircuit(val) {
+  const label = document.getElementById('circuit-name-label');
+  if (label) label.textContent = val;
+}
 
-// Re-use the CIRCUIT_PATHS object defined in base.html
+/* ── Lap simulation engine ── */
 let simRunning  = false;
 let simFrame    = null;
-let simProgress = 0;       // 0–1
-let simSpeed    = 1.0;     // multiplier
+let simProgress = 0;
+let simSpeed    = 1.0;
 let lapTotalMs  = {{ result.lap_ms if result else 90000 }};
 let elapsedMs   = 0;
-
-const SVG_NS = 'http://www.w3.org/2000/svg';
+const SVG_NS    = 'http://www.w3.org/2000/svg';
 let pathLength  = 0;
-let svgPath     = null;   // the SVGPathElement for getPointAtLength
+let svgPath     = null;
 
-/* Build or update the inline SVG */
 function buildInlineCircuit(name) {
-  // Use getCircuitData for fuzzy name matching
   const data = (typeof getCircuitData === 'function')
     ? getCircuitData(name)
-    : ((typeof CIRCUIT_PATHS !== 'undefined' && CIRCUIT_PATHS[name])
-        ? CIRCUIT_PATHS[name]
-        : (typeof CIRCUIT_PATHS !== 'undefined' ? CIRCUIT_PATHS['Italy (Monza)'] : null));
+    : (typeof CIRCUIT_PATHS !== 'undefined'
+        ? (CIRCUIT_PATHS[name] || CIRCUIT_PATHS['Italy (Monza)'])
+        : null);
   if (!data) return;
 
-  // Apply circuit's native viewBox for accurate centering
   const svg = document.getElementById('lap-svg');
-  if (svg) {
-    svg.setAttribute('viewBox', data.viewBox || '144 144 512 512');
-  }
+  if (svg) svg.setAttribute('viewBox', data.viewBox || '144 144 512 512');
 
-  const trackBg   = document.getElementById('lap-track-bg');
-  const track     = document.getElementById('lap-track');
-  const racingLine= document.getElementById('lap-racing-line');
-  const pit       = document.getElementById('lap-pit');
-  const carEl     = document.getElementById('lap-car');
+  ['lap-track-bg', 'lap-track', 'lap-racing-line'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.setAttribute('d', data.track);
+  });
+  const pit = document.getElementById('lap-pit');
+  if (pit) pit.setAttribute('d', data.pit || '');
 
-  if (trackBg)    trackBg.setAttribute('d', data.track);
-  if (track)      track.setAttribute('d', data.track);
-  if (racingLine) racingLine.setAttribute('d', data.track);
-  if (pit)        pit.setAttribute('d', data.pit || '');
-
-  // Keep a reference SVGPathElement for getPointAtLength
   const ghost = document.createElementNS(SVG_NS, 'path');
   ghost.setAttribute('d', data.track);
   document.getElementById('lap-svg').appendChild(ghost);
@@ -323,36 +383,30 @@ function buildInlineCircuit(name) {
 
 function updateCarPosition(frac) {
   if (!svgPath) return;
-  const len = frac * pathLength;
-  const pt  = svgPath.getPointAtLength(len);
-  const carEl = document.getElementById('lap-car');
-  if (carEl) {
-    carEl.setAttribute('cx', pt.x);
-    carEl.setAttribute('cy', pt.y);
-  }
+  const pt  = svgPath.getPointAtLength(frac * pathLength);
+  const car = document.getElementById('lap-car');
+  if (car) { car.setAttribute('cx', pt.x); car.setAttribute('cy', pt.y); }
 }
 
 function updateReadouts() {
-  const lapEl  = document.getElementById('lap-counter');
-  const totEl  = document.getElementById('lap-total');
-  const spdEl  = document.getElementById('speed-readout');
-  const timeEl = document.getElementById('elapsed-time');
-  const prog   = document.getElementById('progress-bar');
-
-  if (lapEl)  lapEl.textContent  = '1';
-  if (totEl)  totEl.textContent  = '{{ inputs.lap_number if inputs.lap_number else "—" }}';
-
-  // Fake speed based on compound
-  const compound = '{{ inputs.compound if inputs.compound else "Medium" }}';
-  const baseSpeeds = { Soft: 312, Medium: 295, Hard: 278, Intermediate: 240, Wet: 200 };
-  const spd = (baseSpeeds[compound] || 290) + Math.round(Math.sin(simProgress * 20) * 18);
+  const compound    = '{{ inputs.compound if inputs.compound else "Medium" }}';
+  const baseSpeeds  = { Soft: 312, Medium: 295, Hard: 278, Intermediate: 240, Wet: 200 };
+  const spd         = (baseSpeeds[compound] || 290) + Math.round(Math.sin(simProgress * 20) * 18);
+  const spdEl       = document.getElementById('speed-readout');
   if (spdEl) spdEl.textContent = spd + ' km/h';
 
   const ms  = Math.min(elapsedMs, lapTotalMs);
   const min = Math.floor(ms / 60000);
   const sec = ((ms % 60000) / 1000).toFixed(3).padStart(6, '0');
-  if (timeEl) timeEl.textContent = min + ':' + sec;
+  const tel = document.getElementById('elapsed-time');
+  if (tel) tel.textContent = min + ':' + sec;
 
+  const lapEl = document.getElementById('lap-counter');
+  const totEl = document.getElementById('lap-total');
+  if (lapEl) lapEl.textContent = '1';
+  if (totEl) totEl.textContent = '{{ inputs.lap_number if inputs.lap_number else "—" }}';
+
+  const prog = document.getElementById('progress-bar');
   if (prog) prog.style.width = (simProgress * 100).toFixed(2) + '%';
 }
 
@@ -360,21 +414,17 @@ let lastTs = null;
 function simTick(ts) {
   if (!simRunning) return;
   if (!lastTs) lastTs = ts;
-  const delta = (ts - lastTs) / 1000; // seconds
+  const delta = (ts - lastTs) / 1000;
   lastTs = ts;
-
   elapsedMs   += delta * 1000 * simSpeed;
   simProgress  = Math.min(elapsedMs / lapTotalMs, 1);
-
   updateCarPosition(simProgress);
   updateReadouts();
-
   if (simProgress < 1) {
     simFrame = requestAnimationFrame(simTick);
   } else {
-    simRunning = false;
-    lastTs = null;
-    document.getElementById('play-btn').textContent = '▶ PLAY';
+    simRunning = false; lastTs = null;
+    document.getElementById('play-btn').textContent   = '▶ PLAY';
     document.getElementById('sim-status').textContent = 'LAP COMPLETE';
   }
 }
@@ -384,8 +434,7 @@ function toggleSim() {
   simRunning = !simRunning;
   const btn = document.getElementById('play-btn');
   if (simRunning) {
-    btn.textContent = '⏸ PAUSE';
-    lastTs = null;
+    btn.textContent = '⏸ PAUSE'; lastTs = null;
     simFrame = requestAnimationFrame(simTick);
   } else {
     btn.textContent = '▶ PLAY';
@@ -394,33 +443,86 @@ function toggleSim() {
 }
 
 function resetSim() {
-  simRunning  = false;
-  simProgress = 0;
-  elapsedMs   = 0;
-  lastTs      = null;
+  simRunning = false; simProgress = 0; elapsedMs = 0; lastTs = null;
   if (simFrame) cancelAnimationFrame(simFrame);
-  document.getElementById('play-btn').textContent = '▶ PLAY';
+  document.getElementById('play-btn').textContent   = '▶ PLAY';
   document.getElementById('sim-status').textContent = 'LAP SIMULATION';
-  updateCarPosition(0);
-  updateReadouts();
+  updateCarPosition(0); updateReadouts();
   const prog = document.getElementById('progress-bar');
-  if (prog) prog.style.width = '0%';
-  const timeEl = document.getElementById('elapsed-time');
-  if (timeEl) timeEl.textContent = '0:00.000';
+  const tel  = document.getElementById('elapsed-time');
+  if (prog) prog.style.width   = '0%';
+  if (tel)  tel.textContent    = '0:00.000';
 }
 
-/* ── Init ── */
 document.addEventListener('DOMContentLoaded', () => {
   const sel = document.getElementById('viz-circuit');
   buildInlineCircuit(sel ? sel.value : 'Italy (Monza)');
+  if (sel) sel.addEventListener('change', () => {
+    buildInlineCircuit(sel.value);
+    if (typeof renderCircuit === 'function') renderCircuit(sel.value);
+  });
+});
 
-  if (sel) {
-    sel.addEventListener('change', () => {
-      buildInlineCircuit(sel.value);
-      // Also update the background map
-      if (typeof renderCircuit === 'function') renderCircuit(sel.value);
+/* ── Lap progression chart ── */
+{% if sweep %}
+document.addEventListener('DOMContentLoaded', function () {
+  const canvas = document.getElementById('sweep-chart');
+  if (!canvas || typeof SWEEP_DATA === 'undefined') return;
+
+  const labels = SWEEP_DATA.map(d => 'L' + d.lap);
+  const times  = SWEEP_DATA.map(d => parseFloat((d.lap_time_ms / 1000).toFixed(3)));
+
+  function buildChart() {
+    new Chart(canvas, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Lap time (s)',
+          data: times,
+          borderColor: '#C0392B',
+          backgroundColor: 'rgba(192,57,43,.08)',
+          borderWidth: 2,
+          pointRadius: 0,
+          pointHoverRadius: 4,
+          fill: true,
+          tension: 0.3,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: {
+            ticks: { color: '#6b7280', font: { size: 10 }, maxTicksLimit: 12 },
+            grid:  { color: '#1e2436' },
+          },
+          y: {
+            ticks: {
+              color: '#6b7280', font: { size: 10 },
+              callback: v => {
+                const m = Math.floor(v / 60);
+                const s = (v % 60).toFixed(1);
+                return m + ':' + String(s).padStart(4, '0');
+              }
+            },
+            grid: { color: '#1e2436' },
+          }
+        }
+      }
     });
   }
+
+  if (window.Chart) {
+    buildChart();
+  } else {
+    const s = document.createElement('script');
+    s.src   = 'https://cdn.jsdelivr.net/npm/chart.js';
+    s.onload = buildChart;
+    document.head.appendChild(s);
+  }
 });
+{% endif %}
 </script>
 {% endblock %}
