@@ -87,7 +87,7 @@
   <div class="lg:col-span-3">
 
     {% if result %}
-    <div class="panel p-8 result-glow relative"
+    <div class="panel p-8 result-glow relative mb-6"
          style="clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));">
       <span class="bracket bracket-tl"></span>
       <span class="bracket bracket-br"></span>
@@ -99,7 +99,7 @@
       <!-- Big position -->
       <div class="flex items-end gap-4 mb-8">
         <div>
-          <div class="font-mono text-xs text-f1muted mb-1 tracking-widest">PREDICTED POSITION</div>
+          <div class="font-mono text-xs text-f1muted mb-1 tracking-widest">PREDICTED FINISH</div>
           <div class="font-display font-800 leading-none" style="font-size:7rem; color:#C0392B; line-height:1;">
             P{{ result.position }}
           </div>
@@ -108,8 +108,10 @@
           <div class="font-display font-700 text-2xl text-f1bright">
             {{ result.position }}{{ result.suffix }} place
           </div>
-          <div class="font-mono text-sm text-f1dim mt-1">
-            Confidence: <span class="text-f1bright">{{ result.confidence }}%</span>
+          <div class="font-mono text-xs text-f1dim mt-2 leading-relaxed">
+            Starting from
+            <span class="text-f1bright font-600">P{{ inputs.grid_pos }}</span>
+            at {{ inputs.circuit }}
           </div>
         </div>
       </div>
@@ -132,59 +134,20 @@
         {% endfor %}
       </div>
 
-      <!-- Confidence bar -->
-      <div>
-        <div class="flex justify-between font-mono text-xs text-f1muted mb-2">
-          <span>MODEL CONFIDENCE</span>
-          <span class="text-f1bright">{{ result.confidence }}%</span>
+      <!-- Confidence bar — clarified label -->
+      <div class="mb-2">
+        <div class="flex justify-between font-mono text-xs text-f1muted mb-1">
+          <span>HOW SURE THE MODEL IS THAT {{ inputs.driver|upper }} FINISHES P{{ result.position }}</span>
         </div>
-        <div class="h-2 bg-f1border rounded-none overflow-hidden">
-          <div class="h-full bg-f1red confidence-bar"
-               data-confidence="{{ result.confidence }}"
-               style="width:0%;"></div>
-        </div>
-      </div>
-
-      <!-- Grid sweep visualiser -->
-      {% if result.sweep %}
-      <div class="mt-6">
-        <div class="font-mono text-xs text-f1muted tracking-widest mb-3">
-          PREDICTED FINISH BY GRID POSITION — {{ inputs.driver }}
-        </div>
-        <div class="space-y-1">
-          {% for row in result.sweep %}
-          {% set is_selected = row.grid|string == inputs.grid_pos|string %}
-          <div class="flex items-center gap-3" style="opacity: {{ '1' if is_selected else '0.4' }};">
-
-            <!-- Grid label -->
-            <div class="font-mono text-xs w-7 text-right shrink-0 {{ 'text-f1bright' if is_selected else 'text-f1muted' }}">
-              P{{ row.grid }}
-            </div>
-
-            <!-- Bar — length represents finish quality (shorter finish = longer bar) -->
-            <div class="flex-1 h-1.5 bg-f1border overflow-hidden">
-              <div class="h-full sweep-bar"
-                   data-width="{{ ((21 - row.predicted) / 20 * 100)|round }}"
-                   data-selected="{{ 'true' if is_selected else 'false' }}"
-                   data-delay="{{ (loop.index0 * 0.03)|round(2) }}"
-                   style="width:0%; background: {{ '#C0392B' if is_selected else '#3A4055' }};">
-              </div>
-            </div>
-
-            <!-- Predicted finish -->
-            <div class="font-mono text-xs w-7 shrink-0 {{ 'text-f1bright' if is_selected else 'text-f1muted' }}">
-              P{{ row.predicted }}
-            </div>
-
+        <div class="flex items-center gap-3">
+          <div class="flex-1 h-2 bg-f1border rounded-none overflow-hidden">
+            <div class="h-full bg-f1red confidence-bar"
+                 data-confidence="{{ result.confidence }}"
+                 style="width:0%;"></div>
           </div>
-          {% endfor %}
-        </div>
-        <div class="flex justify-between font-mono text-xs text-f1muted mt-2 pt-2 border-t border-f1border">
-          <span>Grid (start)</span>
-          <span>Predicted finish</span>
+          <span class="font-mono text-sm text-f1bright shrink-0">{{ result.confidence }}%</span>
         </div>
       </div>
-      {% endif %}
 
       <!-- Model status -->
       <div class="mt-5 flex items-center gap-2">
@@ -198,10 +161,182 @@
       </div>
     </div>
 
+    <!-- ── Grid Sweep — collapsible dropdown ── -->
+    {% if result.sweep %}
+    {% set top3 = result.sweep | sort(attribute='predicted') | list %}
+    <div class="panel mb-6" style="clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);">
+      <!-- Toggle header -->
+      <button type="button" id="sweepToggle"
+              class="w-full flex items-center justify-between p-5 text-left"
+              onclick="toggleSweep()">
+        <div class="flex items-center gap-3">
+          <div class="font-mono text-xs text-f1muted tracking-widest">BEST STARTING POSITIONS FOR {{ inputs.driver|upper }}</div>
+        </div>
+        <div class="flex items-center gap-4">
+          <!-- Top 3 pill preview -->
+          <div class="flex gap-1.5">
+            {% for row in top3[:3] %}
+            <span class="font-mono text-xs px-2 py-0.5"
+                  style="background:rgba(192,57,43,0.12); border:1px solid rgba(192,57,43,0.25); color:#C0392B;">
+              P{{ row.grid }}→P{{ row.predicted }}
+            </span>
+            {% endfor %}
+          </div>
+          <svg id="sweepChevron" width="14" height="14" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" class="text-f1muted transition-transform duration-200">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+      </button>
+
+      <!-- Collapsible content -->
+      <div id="sweepContent" class="hidden px-5 pb-5">
+        <div class="pt-2 border-t border-f1border">
+
+          <!-- Top 3 highlight cards -->
+          <div class="grid grid-cols-3 gap-3 mb-5 mt-4">
+            {% for row in top3[:3] %}
+            {% set medal_colors = ['#F59E0B', '#94A3B8', '#B45309'] %}
+            {% set medal_labels = ['BEST', '2ND', '3RD'] %}
+            <div class="p-3 text-center"
+                 style="background:#0F1117; border:1px solid #252B3B;">
+              <div class="font-mono text-xs mb-1" style="color: {{ medal_colors[loop.index0] }};">
+                {{ medal_labels[loop.index0] }}
+              </div>
+              <div class="font-mono text-xs text-f1muted mb-1">Start P{{ row.grid }}</div>
+              <div class="font-display font-700 text-2xl" style="color: {{ medal_colors[loop.index0] }};">
+                P{{ row.predicted }}
+              </div>
+              <div class="font-mono text-xs text-f1muted mt-1">predicted finish</div>
+            </div>
+            {% endfor %}
+          </div>
+
+          <!-- Full 20-row sweep -->
+          <div class="font-mono text-xs text-f1muted tracking-widest mb-3">ALL GRID POSITIONS</div>
+          <div class="space-y-1">
+            {% for row in result.sweep %}
+            {% set is_selected = row.grid|string == inputs.grid_pos|string %}
+            <div class="flex items-center gap-3" style="opacity: {{ '1' if is_selected else '0.4' }};">
+              <div class="font-mono text-xs w-7 text-right shrink-0 {{ 'text-f1bright' if is_selected else 'text-f1muted' }}">
+                P{{ row.grid }}
+              </div>
+              <div class="flex-1 h-1.5 bg-f1border overflow-hidden">
+                <div class="h-full sweep-bar"
+                     data-width="{{ ((21 - row.predicted) / 20 * 100)|round }}"
+                     data-delay="{{ (loop.index0 * 0.025)|round(3) }}"
+                     style="width:0%; background: {{ '#C0392B' if is_selected else '#3A4055' }};">
+                </div>
+              </div>
+              <div class="font-mono text-xs w-7 shrink-0 {{ 'text-f1bright' if is_selected else 'text-f1muted' }}">
+                P{{ row.predicted }}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="flex justify-between font-mono text-xs text-f1muted mt-2 pt-2 border-t border-f1border">
+            <span>Grid (start)</span>
+            <span>Predicted finish</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- ── Full Race Standings ── -->
+    {% if result.standings %}
+    <div class="panel p-6 relative"
+         style="clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);">
+      <span class="bracket bracket-tl"></span>
+
+      <div class="font-mono text-xs text-f1muted tracking-widest mb-5 flex items-center justify-between">
+        <span class="flex items-center gap-2">
+          <span class="pulse-dot"></span>
+          PREDICTED RACE STANDINGS — {{ inputs.circuit|upper }}, {{ inputs.season }}
+        </span>
+        <span class="text-f1dim">20 DRIVERS</span>
+      </div>
+
+      <!-- Header row -->
+      <div class="grid font-mono text-xs text-f1muted mb-2 pb-2 border-b border-f1border"
+           style="grid-template-columns: 2rem 1fr 3rem;">
+        <span>POS</span>
+        <span class="pl-3">DRIVER</span>
+        <span class="text-right">GRID</span>
+      </div>
+
+      <!-- Driver rows -->
+      <div class="space-y-0.5" id="standingsRows">
+        {% for row in result.standings %}
+        {% set is_sel = row.selected %}
+        <div class="standings-row grid items-center py-1.5 px-0 transition-colors"
+             style="grid-template-columns: 2rem 1fr 3rem;
+                    opacity: 0;
+                    animation: fadeSlideIn 0.35s ease forwards;
+                    animation-delay: {{ (loop.index0 * 0.04)|round(2) }}s;
+                    {% if is_sel %}background: rgba(192,57,43,0.07); border-left: 2px solid #C0392B; padding-left: 6px;{% endif %}">
+
+          <div class="font-mono text-sm font-700
+            {% if loop.index == 1 %}text-yellow-400
+            {% elif loop.index == 2 %}text-slate-300
+            {% elif loop.index == 3 %}text-amber-600
+            {% elif is_sel %}text-f1red
+            {% else %}text-f1muted{% endif %}">
+            {{ row.position }}
+          </div>
+
+          <div class="pl-3 flex items-center gap-2">
+            {% if loop.index <= 3 %}
+            <span class="w-1.5 h-1.5 rounded-full shrink-0
+              {% if loop.index == 1 %}bg-yellow-400
+              {% elif loop.index == 2 %}bg-slate-300
+              {% else %}bg-amber-600{% endif %}"></span>
+            {% elif is_sel %}
+            <span class="w-1.5 h-1.5 rounded-full shrink-0 bg-f1red"></span>
+            {% else %}
+            <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#252B3B;"></span>
+            {% endif %}
+
+            <span class="font-ui text-sm font-{{ '700' if is_sel else '400' }}
+                         {{ 'text-f1bright' if is_sel else 'text-f1dim' }}">
+              {{ row.driver }}
+            </span>
+
+            {% if is_sel %}
+            <span class="font-mono text-xs px-1.5 py-0.5 ml-1"
+                  style="background:rgba(192,57,43,0.15); border:1px solid rgba(192,57,43,0.3); color:#C0392B;">
+              YOU
+            </span>
+            {% endif %}
+          </div>
+
+          <div class="text-right font-mono text-xs {{ 'text-f1bright' if is_sel else 'text-f1muted' }}">
+            P{{ row.grid }}
+          </div>
+
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="mt-4 pt-3 border-t border-f1border font-mono text-xs text-f1muted flex items-center gap-4">
+        <span class="flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-f1red inline-block"></span>
+          Your selected driver
+        </span>
+        <span class="flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-yellow-400 inline-block"></span>
+          Podium finishers
+        </span>
+        <span class="ml-auto text-f1dim">Grid = qualifying position</span>
+      </div>
+    </div>
+    {% endif %}
+
     {% else %}
     <div class="panel p-8 flex flex-col items-center justify-center min-h-64 text-center"
          style="border-style: dashed; clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));">
-      <div class="w-16 h-16 flex items-center justify-center mb-4" style="background:rgba(192,57,43,0.08); border:1px solid rgba(192,57,43,0.15);">
+      <div class="w-16 h-16 flex items-center justify-center mb-4"
+           style="background:rgba(192,57,43,0.08); border:1px solid rgba(192,57,43,0.15);">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="1.2" opacity="0.6">
           <path d="M3 17l3-8 4 4 3-6 4 8"/><circle cx="20" cy="17" r="2"/>
           <path d="M3 20h18"/>
@@ -209,7 +344,8 @@
       </div>
       <div class="font-mono text-xs text-f1muted tracking-widest mb-2">AWAITING INPUT</div>
       <p class="font-ui text-f1dim text-sm">
-        Fill in the parameters and click<br/><span class="text-f1bright font-600">Run Prediction</span> to generate output.
+        Fill in the parameters and click<br/>
+        <span class="text-f1bright font-600">Run Prediction</span> to generate output.
       </p>
     </div>
     {% endif %}
@@ -219,9 +355,10 @@
       <div class="font-mono text-xs text-f1muted tracking-widest mb-4">HOW IT WORKS</div>
       <div class="space-y-3">
         {% for step, desc in [
-          ("01 · Feature Encoding", "Driver, circuit, season and grid position are label-encoded into numeric IDs."),
-          ("02 · Random Forest", "An ensemble of 200 decision trees votes on the most likely finishing position."),
-          ("03 · Grid Sweep", "The model re-runs for all 20 grid slots to show how starting position affects the outcome.")
+          ("01 · Feature Encoding",    "Driver, circuit, season and grid position are label-encoded into numeric IDs."),
+          ("02 · Random Forest",       "An ensemble of 200 decision trees votes on the most likely finishing position."),
+          ("03 · Grid Sweep",          "The model re-runs all 20 grid slots to find the best starting positions for that driver and circuit."),
+          ("04 · Full Race Standings", "All 20 race-grid drivers are predicted simultaneously, then ranked to simulate the full race result.")
         ] %}
         <div class="flex gap-3">
           <div class="font-mono text-xs text-f1red shrink-0 mt-0.5">{{ step.split("·")[0] }}</div>
@@ -233,12 +370,19 @@
         {% endfor %}
       </div>
     </div>
+
   </div>
 </div>
 
 {% endblock %}
 
 {% block scripts %}
+<style>
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateX(-8px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+</style>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     // Confidence bar
@@ -250,22 +394,33 @@
         bar.style.width = val + '%';
       }, 150);
     }
-
-    // Sweep bars — staggered animation
-    document.querySelectorAll('.sweep-bar').forEach(el => {
-      const width = el.dataset.width;
-      const delay = parseFloat(el.dataset.delay);
-      setTimeout(() => {
-        el.style.transition = 'width 0.5s ease';
-        el.style.width = width + '%';
-      }, 300 + delay * 1000);
-    });
   });
 
-  document.getElementById('predictForm').addEventListener('submit', function() {
+  function toggleSweep() {
+    const content  = document.getElementById('sweepContent');
+    const chevron  = document.getElementById('sweepChevron');
+    const isHidden = content.classList.contains('hidden');
+
+    content.classList.toggle('hidden');
+    chevron.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+
+    // Animate bars only when first opened
+    if (isHidden) {
+      document.querySelectorAll('.sweep-bar').forEach(el => {
+        const width = el.dataset.width;
+        const delay = parseFloat(el.dataset.delay);
+        setTimeout(() => {
+          el.style.transition = 'width 0.45s ease';
+          el.style.width = width + '%';
+        }, delay * 1000);
+      });
+    }
+  }
+
+  document.getElementById('predictForm').addEventListener('submit', function () {
     const btn  = document.getElementById('submitBtn');
     const text = document.getElementById('btnText');
-    btn.disabled = true;
+    btn.disabled     = true;
     text.textContent = 'Processing…';
     btn.style.opacity = '0.7';
   });

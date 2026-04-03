@@ -84,10 +84,8 @@ CIRCUITS = [
     "Zandvoort",
 ]
 
-TIRE_COMPOUNDS = ["Soft", "Medium", "Hard", "Intermediate", "Wet"]
-
+TIRE_COMPOUNDS    = ["Soft", "Medium", "Hard", "Intermediate", "Wet"]
 WEATHER_CONDITIONS = ["Dry", "Overcast", "Light Rain", "Heavy Rain", "Mixed"]
-
 CONSTRUCTORS = [
     "Red Bull", "Mercedes", "Ferrari", "McLaren",
     "Aston Martin", "Alpine", "Williams", "AlphaTauri",
@@ -97,7 +95,7 @@ CONSTRUCTORS = [
 # ── Load trained models ────────────────────────────────────────────────────────
 
 try:
-    _finishing = joblib.load("models/finishing.pkl")
+    _finishing       = joblib.load("models/finishing.pkl")
     FINISHING_MODEL  = _finishing["model"]
     FINISHING_LE_DRV = _finishing["le_driver"]
     FINISHING_LE_CIR = _finishing["le_circuit"]
@@ -106,34 +104,29 @@ except Exception as e:
     FINISHING_MODEL = None
     print(f"✗ Finishing model not loaded: {e}")
 
-# ── Prediction functions ───────────────────────────────────────────────────────
+# ── Prediction helpers ────────────────────────────────────────────────────────
 
 def predict_finishing_position(driver, circuit, season, grid_pos=10):
     if FINISHING_MODEL is None:
         seed = hash(f"{driver}{circuit}{season}") % 20
         return (seed % 10) + 1, 55.0
-
     try:
         driver_enc  = FINISHING_LE_DRV.transform([driver])[0]
         circuit_enc = FINISHING_LE_CIR.transform([circuit])[0]
-
-        features   = np.array([[driver_enc, circuit_enc, int(season), int(grid_pos)]])
-        position   = int(FINISHING_MODEL.predict(features)[0])
-
-        proba      = FINISHING_MODEL.predict_proba(features)[0]
-        classes    = list(FINISHING_MODEL.classes_)
-        confidence = round(float(proba[classes.index(position)]) * 100, 1) \
-                     if position in classes else 50.0
-
+        features    = np.array([[driver_enc, circuit_enc, int(season), int(grid_pos)]])
+        position    = int(FINISHING_MODEL.predict(features)[0])
+        proba       = FINISHING_MODEL.predict_proba(features)[0]
+        classes     = list(FINISHING_MODEL.classes_)
+        confidence  = round(float(proba[classes.index(position)]) * 100, 1) \
+                      if position in classes else 50.0
         return position, confidence
-
     except ValueError:
         seed = hash(f"{driver}{circuit}{season}") % 20
         return (seed % 10) + 1, 50.0
 
 
 def predict_position_sweep(driver, circuit, season):
-    """Returns predicted finishing position for every grid slot P1–P20."""
+    """P1–P20 grid sweep for a single driver."""
     if FINISHING_MODEL is None:
         return None
     try:
@@ -149,39 +142,91 @@ def predict_position_sweep(driver, circuit, season):
         return None
 
 
-def dummy_lap_time(driver, compound, lap_number):
-    base_ms = {
-        "Soft": 88000, "Medium": 89500, "Hard": 91000,
-        "Intermediate": 95000, "Wet": 102000,
-    }.get(compound, 89000)
-    variance    = random.randint(-800, 800)
-    lap_penalty = int(lap_number) * random.randint(20, 60)
-    total_ms    = base_ms + variance + lap_penalty
-    minutes     = total_ms // 60000
-    seconds     = (total_ms % 60000) / 1000
-    return f"{minutes}:{seconds:06.3f}", total_ms
+# Top-20 grid used for the full race standings simulation.
+# These are the 20 drivers that appear most in the 2018-2022 dataset.
+RACE_GRID = [
+    "Lewis Hamilton",
+    "Max Verstappen",
+    "Valtteri Bottas",
+    "Sebastian Vettel",
+    "Charles Leclerc",
+    "Sergio Perez",
+    "Carlos Sainz",
+    "Lando Norris",
+    "Daniel Ricciardo",
+    "Fernando Alonso",
+    "Pierre Gasly",
+    "Esteban Ocon",
+    "Lance Stroll",
+    "Kimi Räikkönen",
+    "Antonio Giovinazzi",
+    "George Russell",
+    "Yuki Tsunoda",
+    "Nicholas Latifi",
+    "Nikita Mazepin",
+    "Mick Schumacher",
+]
 
 
-def dummy_overtake_safety(circuit, weather):
-    seed     = hash(f"{circuit}{weather}") % 100
-    overtake = max(10, min(90, seed + random.randint(-10, 10)))
-    safety   = max(5,  min(70, (100 - seed) // 2 + random.randint(-5, 5)))
-    return overtake, safety
+def predict_full_standings(selected_driver, circuit, season, selected_grid_pos):
+    """
+    Simulate a full 20-driver race.
+    - Each RACE_GRID driver gets the grid slot matching their index (1-based),
+      EXCEPT the selected driver who is swapped into selected_grid_pos.
+    - Returns a list of dicts sorted by predicted finish, de-duped by position
+      (ties resolved by grid position).
+    """
+    selected_grid_pos = int(selected_grid_pos)
 
+    # Build starting grid: slot → driver
+    grid = list(RACE_GRID)  # index 0 = P1, etc.
 
-def dummy_constructor_standings(season):
-    constructors = [
-        "McLaren", "Ferrari", "Red Bull", "Mercedes",
-        "Aston Martin", "Alpine", "Williams", "AlphaTauri",
-        "Alfa Romeo", "Haas",
-    ]
-    random.seed(hash(season))
-    base_pts  = [600, 560, 530, 490, 340, 220, 130, 80, 50, 30]
-    variance  = [random.randint(-30, 30) for _ in constructors]
-    standings = sorted(
-        zip(constructors, [b + v for b, v in zip(base_pts, variance)]),
-        key=lambda x: -x[1]
-    )
+    # If the selected driver is already in RACE_GRID, remove them first
+    if selected_driver in grid:
+        grid.remove(selected_driver)
+    else:
+        # Drop last driver to keep 20 total
+        grid = grid[:19]
+
+    # Insert selected driver at their chosen grid slot (1-based → 0-based index)
+    insert_idx = min(selected_grid_pos - 1, len(grid))
+    grid.insert(insert_idx, selected_driver)
+
+    # Predict finish for every driver
+    raw = []
+    for slot, driver in enumerate(grid, start=1):
+        if FINISHING_MODEL is not None:
+            try:
+                driver_enc  = FINISHING_LE_DRV.transform([driver])[0]
+                circuit_enc = FINISHING_LE_CIR.transform([circuit])[0]
+                features    = np.array([[driver_enc, circuit_enc, int(season), slot]])
+                predicted   = int(FINISHING_MODEL.predict(features)[0])
+            except ValueError:
+                predicted = slot  # fallback: finish = start
+        else:
+            # Dummy: hash-based deterministic finish
+            predicted = ((hash(f"{driver}{circuit}{season}{slot}") % 20) + 1)
+
+        raw.append({
+            "driver":    driver,
+            "grid":      slot,
+            "predicted": predicted,
+            "selected":  driver == selected_driver,
+        })
+
+    # Sort by predicted finish; break ties by grid position
+    raw.sort(key=lambda x: (x["predicted"], x["grid"]))
+
+    # Assign final positions 1–20 (handles duplicate predictions cleanly)
+    standings = []
+    for final_pos, entry in enumerate(raw, start=1):
+        standings.append({
+            "position": final_pos,
+            "driver":   entry["driver"],
+            "grid":     entry["grid"],
+            "selected": entry["selected"],
+        })
+
     return standings
 
 
@@ -218,6 +263,7 @@ def finishing():
             "confidence": confidence,
             "model_live": FINISHING_MODEL is not None,
             "sweep":      predict_position_sweep(driver, circuit, season),
+            "standings":  predict_full_standings(driver, circuit, season, grid_pos),
         }
     return render_template(
         "finishing.html",
@@ -236,11 +282,7 @@ def laptime():
         lap      = request.form.get("lap_number")
         inputs   = {"driver": driver, "compound": compound, "lap_number": lap}
         lap_str, lap_ms = dummy_lap_time(driver, compound, lap)
-        result = {
-            "lap_time": lap_str,
-            "lap_ms":   lap_ms,
-            "compound": compound,
-        }
+        result  = {"lap_time": lap_str, "lap_ms": lap_ms, "compound": compound}
     return render_template(
         "laptime.html",
         drivers=DRIVERS, compounds=TIRE_COMPOUNDS,
@@ -258,10 +300,7 @@ def overtake():
         weather = request.form.get("weather")
         inputs  = {"circuit": circuit, "weather": weather}
         ov_pct, sc_pct = dummy_overtake_safety(circuit, weather)
-        result = {
-            "overtake_pct": ov_pct,
-            "safety_pct":   sc_pct,
-        }
+        result  = {"overtake_pct": ov_pct, "safety_pct": sc_pct}
     return render_template(
         "overtake.html",
         circuits=CIRCUITS, weathers=WEATHER_CONDITIONS,
@@ -277,12 +316,50 @@ def constructor():
         season = request.form.get("season")
         inputs = {"season": season}
         standings = dummy_constructor_standings(season)
-        result = {"season": season, "standings": standings}
+        result    = {"season": season, "standings": standings}
     return render_template(
         "constructor.html",
         seasons=SEASONS,
         result=result, inputs=inputs,
     )
+
+
+# ── Dummy helpers (Models 2–4) ────────────────────────────────────────────────
+
+def dummy_lap_time(driver, compound, lap_number):
+    base_ms = {
+        "Soft": 88000, "Medium": 89500, "Hard": 91000,
+        "Intermediate": 95000, "Wet": 102000,
+    }.get(compound, 89000)
+    variance    = random.randint(-800, 800)
+    lap_penalty = int(lap_number) * random.randint(20, 60)
+    total_ms    = base_ms + variance + lap_penalty
+    minutes     = total_ms // 60000
+    seconds     = (total_ms % 60000) / 1000
+    return f"{minutes}:{seconds:06.3f}", total_ms
+
+
+def dummy_overtake_safety(circuit, weather):
+    seed     = hash(f"{circuit}{weather}") % 100
+    overtake = max(10, min(90, seed + random.randint(-10, 10)))
+    safety   = max(5,  min(70, (100 - seed) // 2 + random.randint(-5, 5)))
+    return overtake, safety
+
+
+def dummy_constructor_standings(season):
+    constructors = [
+        "McLaren", "Ferrari", "Red Bull", "Mercedes",
+        "Aston Martin", "Alpine", "Williams", "AlphaTauri",
+        "Alfa Romeo", "Haas",
+    ]
+    random.seed(hash(season))
+    base_pts  = [600, 560, 530, 490, 340, 220, 130, 80, 50, 30]
+    variance  = [random.randint(-30, 30) for _ in constructors]
+    standings = sorted(
+        zip(constructors, [b + v for b, v in zip(base_pts, variance)]),
+        key=lambda x: -x[1]
+    )
+    return standings
 
 
 # ── Entry point ───────────────────────────────────────────────────────────────
