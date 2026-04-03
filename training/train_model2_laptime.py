@@ -1,11 +1,11 @@
 # training/train_model2_laptime.py
 # ─────────────────────────────────────────────────────────────────────────────
-# Fetch FastF1 lap data (2018–2024) and train a Linear Regression lap-time model.
-# Saves data incrementally so it is safe to interrupt and resume.
+# Fetch FastF1 lap data (2018 → current season) and train a Ridge Regression
+# lap-time model. Saves data incrementally so it is safe to interrupt and resume.
 # Run:  python training/train_model2_laptime.py
 # ─────────────────────────────────────────────────────────────────────────────
 
-import os, time
+import os, time, datetime
 import fastf1
 import pandas as pd
 import numpy as np
@@ -21,24 +21,30 @@ CSV_PATH   = os.path.join(BASE_DIR, "data_laptime.csv")
 os.makedirs(CACHE_PATH, exist_ok=True)
 fastf1.Cache.enable_cache(CACHE_PATH)
 
+# Fetch up to and including the current calendar year so 2025, 2026, etc.
+# are automatically included when you re-run the script in future seasons.
+_current_year = datetime.datetime.now().year
+FETCH_UNTIL   = max(_current_year, 2025)
+
 # ── Resume from existing CSV if present ──────────────────────────────────────
 if os.path.exists(CSV_PATH):
-    df_existing = pd.read_csv(CSV_PATH)
-    records     = df_existing.to_dict("records")
+    df_existing  = pd.read_csv(CSV_PATH)
+    records      = df_existing.to_dict("records")
     seasons_done = sorted(df_existing["season"].unique().tolist())
     last_done    = int(max(seasons_done)) if seasons_done else 2017
     print(f"Found existing CSV — {len(records)} rows, seasons: {seasons_done}")
     start_year = last_done + 1
-    print(f"Resuming from {start_year}...")
+    print(f"Resuming from {start_year} → {FETCH_UNTIL}...")
 else:
     records    = []
     start_year = 2018
-    print("No existing data — starting fresh from 2018.")
+    print(f"No existing data — starting fresh from 2018 → {FETCH_UNTIL}.")
 
 VALID_COMPOUNDS = {"SOFT", "MEDIUM", "HARD", "INTERMEDIATE", "WET"}
 call_count = 0
+today = pd.Timestamp(datetime.datetime.now().date())
 
-for year in range(start_year, 2025):
+for year in range(start_year, FETCH_UNTIL + 1):
     try:
         schedule = fastf1.get_event_schedule(year, include_testing=False)
         call_count += 1
@@ -46,7 +52,13 @@ for year in range(start_year, 2025):
         print(f"  Could not get schedule for {year}: {e}")
         continue
 
-    for _, event in schedule.iterrows():
+    # Only process rounds that have already taken place
+    past_events = schedule[pd.to_datetime(schedule["EventDate"]) <= today]
+    if past_events.empty:
+        print(f"  No completed rounds for {year} yet — skipping")
+        continue
+
+    for _, event in past_events.iterrows():
         round_number = event["RoundNumber"]
         circuit_name = event["Location"]
 
