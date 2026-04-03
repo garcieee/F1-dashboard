@@ -54,20 +54,4 @@ Open http://127.0.0.1:5001
 **Features:** driver, circuit, season, grid position
 **Target:** finishing position (1–20)
 
-### Retrain from scratch
-
-```bash
-# 1. Fetch data and train (resumes from existing CSV if present)
-python training/train_model1_finishing.py
-
-# 2. Export final model trained on full dataset
-python training/export_model1.py
-```
-
 The training script fetches data round-by-round and saves after every race, so it's safe to interrupt and resume.
-
-## Adding New Models
-
-1. Add a training script to `training/`
-2. Export the model as a `.pkl` to `models/`
-3. Load it in `app.py` and replace the relevant `dummy_*` function with real prediction logic
