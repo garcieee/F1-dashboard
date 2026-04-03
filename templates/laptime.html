@@ -164,15 +164,16 @@
       </div>
 
       <!-- SVG canvas -->
-      <div class="relative" style="height:240px;">
+      <div class="relative" style="height:380px;">
         <svg id="lap-svg" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg"
+             preserveAspectRatio="xMidYMid meet"
              style="position:absolute; inset:0; width:100%; height:100%;" fill="none">
           <!-- Track outline (wider, faint fill to suggest asphalt) -->
-          <path id="lap-track-bg" d="" stroke="#252B3B" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="lap-track-bg" d="" stroke="#252B3B" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
           <!-- Track line -->
-          <path id="lap-track" d="" stroke="#3A4055" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="lap-track" d="" stroke="#3A4055" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
           <!-- Racing line -->
-          <path id="lap-racing-line" d="" stroke="#C0392B" stroke-width="1.5" stroke-dasharray="8 6" opacity="0.4"/>
+          <path id="lap-racing-line" d="" stroke="#C0392B" stroke-width="1" stroke-dasharray="8 6" opacity="0.4"/>
           <!-- Pit lane -->
           <path id="lap-pit" d="" stroke="#7A8395" stroke-width="2" stroke-dasharray="5 4" opacity="0.5"/>
           <!-- Sector markers will be added by JS -->
@@ -278,10 +279,19 @@ let svgPath     = null;   // the SVGPathElement for getPointAtLength
 
 /* Build or update the inline SVG */
 function buildInlineCircuit(name) {
-  const data = (typeof CIRCUIT_PATHS !== 'undefined' && CIRCUIT_PATHS[name])
-    ? CIRCUIT_PATHS[name]
-    : (typeof CIRCUIT_PATHS !== 'undefined' ? CIRCUIT_PATHS['Italy (Monza)'] : null);
+  // Use getCircuitData for fuzzy name matching
+  const data = (typeof getCircuitData === 'function')
+    ? getCircuitData(name)
+    : ((typeof CIRCUIT_PATHS !== 'undefined' && CIRCUIT_PATHS[name])
+        ? CIRCUIT_PATHS[name]
+        : (typeof CIRCUIT_PATHS !== 'undefined' ? CIRCUIT_PATHS['Italy (Monza)'] : null));
   if (!data) return;
+
+  // Apply circuit's native viewBox for accurate centering
+  const svg = document.getElementById('lap-svg');
+  if (svg) {
+    svg.setAttribute('viewBox', data.viewBox || '144 144 512 512');
+  }
 
   const trackBg   = document.getElementById('lap-track-bg');
   const track     = document.getElementById('lap-track');
