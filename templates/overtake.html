@@ -33,8 +33,7 @@
         <!-- Circuit -->
         <div class="mb-5">
           <label class="f1-label" for="circuit">Circuit</label>
-          <select class="f1-select" name="circuit" id="circuit" required
-                  onchange="updateMap(this.value)">
+          <select class="f1-select" name="circuit" id="circuit" required>
             <option value="" disabled {% if not inputs.circuit %}selected{% endif %}>Select circuit…</option>
             {% for c in circuits %}
             <option value="{{ c }}" {% if inputs.circuit == c %}selected{% endif %}>{{ c }}</option>
@@ -53,26 +52,6 @@
           </select>
         </div>
 
-        <!-- Weather visual key -->
-        <div class="grid grid-cols-5 gap-1 mb-6">
-          {% for name, icon, color in [
-            ("Dry",        "☀",  "#F5C400"),
-            ("Overcast",   "⛅", "#8A9BB0"),
-            ("Light Rain", "🌦", "#60A0D0"),
-            ("Heavy Rain", "🌧", "#2563EB"),
-            ("Mixed",      "🌩", "#9B6FD4"),
-          ] %}
-          <div class="flex flex-col items-center gap-1 p-2 rounded"
-               style="background:{{ color }}11; border:1px solid {{ color }}33;">
-            <span style="font-size:1.1rem;">{{ icon }}</span>
-            <span class="font-mono text-center leading-tight"
-                  style="font-size:.55rem; color:{{ color }}; letter-spacing:.04em;">
-              {{ name }}
-            </span>
-          </div>
-          {% endfor %}
-        </div>
-
         <button type="submit" class="f1-btn w-full" id="submitBtn">
           <span id="btnText">Run Prediction</span>
         </button>
@@ -81,8 +60,8 @@
 
       <div class="mt-6 pt-5 border-t border-f1border font-mono text-xs text-f1muted space-y-1">
         <div class="flex justify-between"><span>Algorithm</span><span class="text-f1bright">Logistic Regression</span></div>
-        <div class="flex justify-between"><span>Type</span><span class="text-f1bright">Binary Classification</span></div>
-        <div class="flex justify-between"><span>Outputs</span><span class="text-f1bright">Overtake % · SC %</span></div>
+        <div class="flex justify-between"><span>Type</span><span class="text-f1bright">Binary Probability</span></div>
+        <div class="flex justify-between"><span>Outputs</span><span class="text-f1bright">2 probabilities</span></div>
         <div class="flex justify-between">
           <span>Model</span>
           <span class="{% if result and result.model_live %}text-green-400{% else %}text-f1red{% endif %}">
@@ -91,66 +70,12 @@
         </div>
       </div>
     </div>
-
-    <!-- Circuit map -->
-    <div class="panel p-4 mt-4 relative" style="clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);">
-      <div class="font-mono text-xs text-f1muted tracking-widest mb-3 flex items-center justify-between">
-        <span>CIRCUIT MAP</span>
-        <span id="map-circuit-label" class="text-f1bright" style="font-size:.7rem;">
-          {{ inputs.circuit if inputs.circuit else "—" }}
-        </span>
-      </div>
-      <div style="background:#08090A; border-radius:4px; overflow:hidden;">
-        <svg id="circuit-svg" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg"
-             style="width:100%; height:160px;" fill="none">
-          <path id="circuit-track-bg" d="" stroke="#1e2436" stroke-width="14"
-                stroke-linecap="round" stroke-linejoin="round"/>
-          <path id="circuit-track"    d="" stroke="#2d3450" stroke-width="10"
-                stroke-linecap="round" stroke-linejoin="round"/>
-          <path id="circuit-racing"   d="" stroke="#C0392B" stroke-width="2"
-                fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/>
-          <path id="circuit-pit"      d="" stroke="#4a5280" stroke-width="3"
-                fill="none" stroke-dasharray="4,3" opacity=".6"/>
-        </svg>
-      </div>
-
-      <!-- Overtake context badge for the selected circuit -->
-      {% if result %}
-      <div class="mt-3 grid grid-cols-2 gap-2">
-        <div class="p-2 text-center" style="background:#0a0d14; border:1px solid #1e2436;">
-          <div class="font-mono text-xs text-f1muted mb-1" style="font-size:.6rem;">OVERTAKE RATING</div>
-          <div class="font-mono font-bold
-            {% if result.overtake_pct >= 65 %}text-green-400
-            {% elif result.overtake_pct >= 40 %}text-yellow-400
-            {% else %}text-f1dim{% endif %}"
-            style="font-size:.85rem;">
-            {% if result.overtake_pct >= 65 %}HIGH
-            {% elif result.overtake_pct >= 40 %}MED
-            {% else %}LOW{% endif %}
-          </div>
-        </div>
-        <div class="p-2 text-center" style="background:#0a0d14; border:1px solid #1e2436;">
-          <div class="font-mono text-xs text-f1muted mb-1" style="font-size:.6rem;">SC RISK</div>
-          <div class="font-mono font-bold
-            {% if result.safety_pct >= 50 %}text-yellow-400
-            {% elif result.safety_pct >= 25 %}text-orange-400
-            {% else %}text-green-400{% endif %}"
-            style="font-size:.85rem;">
-            {% if result.safety_pct >= 50 %}LIKELY
-            {% elif result.safety_pct >= 25 %}POSSIBLE
-            {% else %}UNLIKELY{% endif %}
-          </div>
-        </div>
-      </div>
-      {% endif %}
-    </div>
   </div>
 
-  <!-- ── Right pane ── -->
-  <div class="lg:col-span-3 flex flex-col gap-6">
+  <!-- ── Result pane ── -->
+  <div class="lg:col-span-3">
 
     {% if result %}
-    <!-- ── Result card ── -->
     <div class="panel p-8 result-glow relative"
          style="clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));">
       <span class="bracket bracket-tl"></span>
@@ -160,10 +85,10 @@
         <span class="pulse-dot"></span> PREDICTION OUTPUT
       </div>
 
-      <!-- Dual gauge row -->
-      <div class="grid grid-cols-2 gap-6 mb-6">
+      <!-- Two big probability gauges -->
+      <div class="grid grid-cols-2 gap-6 mb-8">
 
-        <!-- Overtake gauge -->
+        <!-- Overtake % -->
         <div class="text-center">
           <div class="font-mono text-xs text-f1muted mb-3 tracking-widest">OVERTAKE PROB.</div>
           <div class="relative inline-flex items-center justify-center mb-3">
@@ -187,7 +112,7 @@
           <div class="font-mono text-xs text-f1muted tracking-wider">Overtake Activity</div>
         </div>
 
-        <!-- Safety Car gauge -->
+        <!-- Safety Car % -->
         <div class="text-center">
           <div class="font-mono text-xs text-f1muted mb-3 tracking-widest">SAFETY CAR PROB.</div>
           <div class="relative inline-flex items-center justify-center mb-3">
@@ -212,11 +137,11 @@
         </div>
       </div>
 
-      <hr class="hud-line mb-5" />
+      <hr class="hud-line mb-6" />
 
       <!-- Input summary -->
-      <div class="font-mono text-xs text-f1muted mb-3 tracking-widest">INPUT SUMMARY</div>
-      <div class="grid grid-cols-2 gap-3 mb-5">
+      <div class="font-mono text-xs text-f1muted mb-4 tracking-widest">INPUT SUMMARY</div>
+      <div class="grid grid-cols-2 gap-4 mb-6">
         {% for label, val in [("Circuit", inputs.circuit), ("Weather", inputs.weather)] %}
         <div class="p-3" style="background:#08090A; border:1px solid #1E2330;">
           <div class="text-xs text-f1muted mb-1">{{ label }}</div>
@@ -250,74 +175,14 @@
       </div>
 
       {% if not result.model_live %}
-      <p class="mt-5 font-mono text-xs text-f1muted">
+      <p class="mt-6 font-mono text-xs text-f1muted">
         ⚠ Dummy model active. Run <code class="text-f1bright">train_model3_overtake.py</code>
         then <code class="text-f1bright">export_model3.py</code> to enable trained predictions.
       </p>
       {% endif %}
     </div>
 
-    <!-- ── Circuit context card ── -->
-    <div class="panel p-5 relative" style="clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);">
-      <div class="font-mono text-xs text-f1muted tracking-widest mb-4">CIRCUIT OVERTAKE CONTEXT</div>
-
-      <!-- Known overtake difficulty scale -->
-      {% set circuit_ov = {
-        "Monaco":           10, "Singapore":        18, "Hungary":          22,
-        "Barcelona":        28, "Zandvoort":        30, "Sochi":            35,
-        "Austin":           55, "Silverstone":      58, "Spielberg":        62,
-        "Spa-Francorchamps":65, "Monza":            72, "Baku":             75,
-        "Sakhir":           60, "Melbourne":        45, "Suzuka":           40,
-        "São Paulo":        55, "Mexico City":      48, "Yas Island":       42,
-        "Yas Marina":       42, "Jeddah":           50, "Shanghai":         52,
-        "Imola":            35, "Portimão":         45, "Mugello":          38,
-        "Nürburgring":      50, "Hockenheim":       55, "Istanbul":         52,
-        "Budapest":         22, "Montréal":         58, "Lusail":           55,
-        "Le Castellet":     40, "Miami":            48, "Baku":             75,
-      } %}
-      {% set ov_rating = circuit_ov.get(inputs.circuit, 45) %}
-
-      <div class="flex items-center gap-3 mb-3">
-        <div class="font-ui text-f1bright font-600">{{ inputs.circuit }}</div>
-        <div class="flex-1 h-1 bg-f1border overflow-hidden rounded">
-          <div class="h-full bg-f1red rounded" style="width:{{ ov_rating }}%;"></div>
-        </div>
-        <div class="font-mono text-xs text-f1muted">{{ ov_rating }}/100</div>
-      </div>
-
-      <p class="font-mono text-xs text-f1muted leading-relaxed">
-        {% if ov_rating >= 65 %}
-          High-speed circuit with long straights and heavy braking zones. Historically one of the best circuits for overtaking opportunities.
-        {% elif ov_rating >= 45 %}
-          Medium overtake difficulty. A mix of technical corners and passing zones — racing can be competitive but requires a strong strategy.
-        {% elif ov_rating >= 30 %}
-          Technically demanding layout limits overtaking. Track position and qualifying are critical here.
-        {% else %}
-          One of the hardest circuits to overtake on. Expect strategy and pit-stop timing to decide race outcomes more than on-track passes.
-        {% endif %}
-      </p>
-
-      <!-- Weather impact row -->
-      <div class="mt-4 pt-4 border-t border-f1border">
-        <div class="font-mono text-xs text-f1muted mb-2 tracking-widest">WEATHER IMPACT</div>
-        <div class="font-mono text-xs text-f1dim leading-relaxed">
-          {% if inputs.weather == "Dry" %}
-            Dry conditions — predictable grip levels. Overtaking relies on car performance and DRS.
-          {% elif inputs.weather == "Overcast" %}
-            Overcast — cooler track surface may affect tyre performance and create strategy variation.
-          {% elif inputs.weather == "Light Rain" %}
-            Light rain increases unpredictability — more position changes expected due to varied wet-tyre timing.
-          {% elif inputs.weather == "Heavy Rain" %}
-            Heavy rain significantly elevates safety car probability. Wet racing produces high position volatility.
-          {% else %}
-            Mixed conditions are the most unpredictable — expect multiple safety car periods and large grid reshuffles.
-          {% endif %}
-        </div>
-      </div>
-    </div>
-
     {% else %}
-    <!-- Awaiting input -->
     <div class="panel p-8 flex flex-col items-center justify-center min-h-64 text-center"
          style="border-style: dashed; clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));">
       <div class="w-16 h-16 flex items-center justify-center mb-4"
@@ -335,29 +200,16 @@
     </div>
     {% endif %}
 
-    <!-- How it works -->
-    <div class="panel p-5" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 16px 100%, 0 calc(100% - 16px));">
-      <div class="font-mono text-xs text-f1muted tracking-widest mb-3">HOW IT WORKS</div>
-      <div class="font-mono text-xs text-f1dim leading-relaxed space-y-2">
-        <p>Two <span class="text-f1bright">Logistic Regression</span> classifiers trained on FastF1 race data (2018–2024).</p>
-        <div class="grid grid-cols-2 gap-4 mt-2">
-          <div>
-            <div class="text-f1muted mb-1 tracking-widest" style="font-size:.65rem;">OVERTAKE MODEL</div>
-            <ul style="list-style:none; padding:0; color:#6b7280;">
-              <li>· Feature: circuit + weather</li>
-              <li>· Target: avg position changes</li>
-              <li>· Output: high / low activity %</li>
-            </ul>
-          </div>
-          <div>
-            <div class="text-f1muted mb-1 tracking-widest" style="font-size:.65rem;">SAFETY CAR MODEL</div>
-            <ul style="list-style:none; padding:0; color:#6b7280;">
-              <li>· Feature: circuit + weather</li>
-              <li>· Target: SC deployed (yes/no)</li>
-              <li>· Output: deployment probability %</li>
-            </ul>
-          </div>
-        </div>
+    <!-- Context info -->
+    <div class="panel p-5 mt-6" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 16px 100%, 0 calc(100% - 16px));">
+      <div class="font-mono text-xs text-f1muted tracking-widest mb-4">CIRCUIT OVERTAKING FACTORS</div>
+      <div class="grid grid-cols-2 gap-3 font-mono text-xs text-f1muted">
+        <div class="flex gap-2"><span class="text-f1red">·</span> DRS Zone Count</div>
+        <div class="flex gap-2"><span class="text-f1red">·</span> Circuit Length</div>
+        <div class="flex gap-2"><span class="text-f1red">·</span> Rainfall Fraction</div>
+        <div class="flex gap-2"><span class="text-f1red">·</span> Wind Speed</div>
+        <div class="flex gap-2"><span class="text-f1red">·</span> Lap Time Spread</div>
+        <div class="flex gap-2"><span class="text-f1red">·</span> Tyre Compound Diversity</div>
       </div>
     </div>
 
@@ -368,7 +220,6 @@
 
 {% block scripts %}
 <script>
-/* ── Form submit feedback ── */
 document.getElementById('predictForm').addEventListener('submit', function () {
   const btn = document.getElementById('submitBtn');
   btn.disabled = true;
@@ -379,7 +230,7 @@ document.getElementById('predictForm').addEventListener('submit', function () {
 /* ── Animate bars on load ── */
 {% if result %}
 window.addEventListener('DOMContentLoaded', function () {
-  setTimeout(() => {
+  setTimeout(function () {
     const barOv = document.getElementById('bar-overtake');
     const barSc = document.getElementById('bar-sc');
     if (barOv) barOv.style.width = '{{ result.overtake_pct }}%';
@@ -387,39 +238,5 @@ window.addEventListener('DOMContentLoaded', function () {
   }, 100);
 });
 {% endif %}
-
-/* ── Circuit map update (uses CIRCUIT_PATHS from base.html) ── */
-function updateMap(circuitName) {
-  if (typeof CIRCUIT_PATHS === 'undefined' && typeof getCircuitData === 'undefined') return;
-
-  const data = (typeof getCircuitData === 'function')
-    ? getCircuitData(circuitName)
-    : (CIRCUIT_PATHS[circuitName] || null);
-
-  const label = document.getElementById('map-circuit-label');
-  if (label) label.textContent = circuitName;
-
-  if (!data) return;
-
-  const svg = document.getElementById('circuit-svg');
-  if (svg && data.viewBox) svg.setAttribute('viewBox', data.viewBox);
-
-  const ids = {
-    'circuit-track-bg': data.track,
-    'circuit-track':    data.track,
-    'circuit-racing':   data.track,
-    'circuit-pit':      data.pit || '',
-  };
-  for (const [id, d] of Object.entries(ids)) {
-    const el = document.getElementById(id);
-    if (el) el.setAttribute('d', d);
-  }
-}
-
-/* ── Init map on page load ── */
-document.addEventListener('DOMContentLoaded', function () {
-  const sel = document.getElementById('circuit');
-  if (sel && sel.value) updateMap(sel.value);
-});
 </script>
 {% endblock %}

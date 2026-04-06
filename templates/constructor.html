@@ -48,26 +48,33 @@
       </form>
 
       <div class="mt-6 pt-5 border-t border-f1border font-mono text-xs text-f1muted space-y-1">
-        <div class="flex justify-between"><span>Algorithm</span><span class="text-f1bright">Linear Regression</span></div>
+        <div class="flex justify-between"><span>Algorithm</span><span class="text-f1bright">Ridge Regression</span></div>
         <div class="flex justify-between"><span>Type</span><span class="text-f1bright">Ranking + Points</span></div>
         <div class="flex justify-between"><span>Constructors</span><span class="text-f1bright">10 teams</span></div>
+        <div class="flex justify-between">
+          <span>Model</span>
+          <span class="{% if result and result.model_live %}text-green-400{% else %}text-f1red{% endif %}">
+            {% if result and result.model_live %}● Live{% else %}● Dummy{% endif %}
+          </span>
+        </div>
       </div>
     </div>
 
     <!-- Info box -->
-    <div class="panel p-5 mt-6" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 16px 100%, 0 calc(100% - 16px));">
+    <div class="panel p-5 mt-4" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 16px 100%, 0 calc(100% - 16px));">
       <div class="font-mono text-xs text-f1muted tracking-widest mb-3">PROJECTION BASIS</div>
       <div class="space-y-2 font-mono text-xs text-f1muted">
-        <div class="flex gap-2"><span class="text-f1red">·</span> Historical points trends per team</div>
-        <div class="flex gap-2"><span class="text-f1red">·</span> Season-over-season performance delta</div>
-        <div class="flex gap-2"><span class="text-f1red">·</span> Constructor consistency scoring</div>
-        <div class="flex gap-2"><span class="text-f1red">·</span> Mid-season upgrade factor modeling</div>
+        <div class="flex gap-2"><span class="text-f1red">·</span> Prior season points &amp; rank</div>
+        <div class="flex gap-2"><span class="text-f1red">·</span> 2-year points momentum trend</div>
+        <div class="flex gap-2"><span class="text-f1red">·</span> Points per race (pace normalised)</div>
+        <div class="flex gap-2"><span class="text-f1red">·</span> Season regulation era factor</div>
+        <div class="flex gap-2"><span class="text-f1red">·</span> Calendar length adjustment</div>
       </div>
     </div>
   </div>
 
   <!-- ── Result pane ── -->
-  <div class="lg:col-span-3">
+  <div class="lg:col-span-3 flex flex-col gap-6">
 
     {% if result %}
     <div class="panel p-6 result-glow relative"
@@ -83,23 +90,25 @@
         {{ result.season }} <span style="color:#C0392B;">Season</span> Standings
       </div>
 
-      <!-- Find max points for bar scaling -->
-      {% set max_pts = result.standings[0][1] %}
+      <!-- Max points for bar scaling -->
+      {% set max_pts = result.standings[0].points %}
 
       <!-- Standings table -->
       <div class="space-y-2">
-        {% for team, pts in result.standings %}
-        {% set rank = loop.index %}
-        {% set bar_pct = (pts / max_pts * 100) | round(1) %}
+        {% for row in result.standings %}
+        {% set rank    = row.position %}
+        {% set team    = row.team %}
+        {% set pts     = row.points %}
+        {% set bar_pct = (pts / max_pts * 100) | round(1) if max_pts > 0 else 0 %}
 
-        <div class=\"relative flex items-center gap-3 py-3 px-3 transition-colors hover:bg-white/[0.02] rank-row\"
-             data-rank=\"{{ rank }}\"
-             style=\"border:1px solid #1E2330;\">
+        <div class="relative flex items-center gap-3 py-3 px-3 transition-colors hover:bg-white/[0.02] rank-row"
+             data-rank="{{ rank }}"
+             style="border:1px solid #1E2330;">
 
           <!-- Rank badge -->
-          <div class=\"font-display font-700 text-xl w-8 text-center shrink-0 rank-badge\"
-               data-rank=\"{{ rank }}\"
-               style=\"color:#3A3F50;\">
+          <div class="font-display font-700 text-xl w-8 text-center shrink-0 rank-badge"
+               data-rank="{{ rank }}"
+               style="color:#3A3F50;">
             P{{ rank }}
           </div>
 
@@ -119,7 +128,7 @@
               <div class="h-full transition-all duration-700 rank-bar"
                    data-pct="{{ bar_pct }}"
                    data-rank="{{ rank }}"
-                   data-delay="{{ (loop.index0 * 0.06)|round(2) }}"
+                   data-delay="{{ (loop.index0 * 0.06) | round(2) }}"
                    style="width:0%; background:#3A3F50;">
               </div>
             </div>
@@ -135,17 +144,51 @@
         {% endfor %}
       </div>
 
+      {% if not result.model_live %}
       <p class="mt-6 font-mono text-xs text-f1muted">
-        ⚠ Dummy model active. Swap <code class="text-f1bright">models/constructor.pkl</code> to enable trained predictions.
+        ⚠ Dummy model active. Run <code class="text-f1bright">train_model4_constructor.py</code>
+        then <code class="text-f1bright">export_model4.py</code> to enable trained predictions.
       </p>
+      {% endif %}
+    </div>
+
+    <!-- How it works -->
+    <div class="panel p-5" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 16px 100%, 0 calc(100% - 16px));">
+      <div class="font-mono text-xs text-f1muted tracking-widest mb-3">HOW IT WORKS</div>
+      <div class="font-mono text-xs text-f1dim leading-relaxed space-y-2">
+        <p><span class="text-f1bright">Ridge Regression</span> trained on FastF1 constructor points data (2018–present). Only complete seasons are used — in-progress seasons are excluded from training to prevent point-total inflation.</p>
+        <div class="grid grid-cols-2 gap-4 mt-2">
+          <div>
+            <div class="text-f1muted mb-1 tracking-widest" style="font-size:.65rem;">FEATURES</div>
+            <ul style="list-style:none; padding:0; color:#6b7280;">
+              <li>· Constructor identity</li>
+              <li>· Prior season points</li>
+              <li>· Prior season rank</li>
+              <li>· 2-year momentum trend</li>
+            </ul>
+          </div>
+          <div>
+            <div class="text-f1muted mb-1 tracking-widest" style="font-size:.65rem;">OUTPUT</div>
+            <ul style="list-style:none; padding:0; color:#6b7280;">
+              <li>· Projected final points</li>
+              <li>· Predicted P1–P10 ranking</li>
+              <li>· Championship winner</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
 
     {% else %}
+    <!-- Awaiting input -->
     <div class="panel p-8 flex flex-col items-center justify-center min-h-80 text-center"
          style="border-style: dashed; clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));">
-      <div class="w-16 h-16 flex items-center justify-center mb-4" style="background:rgba(232,0,45,0.08); border:1px solid rgba(232,0,45,0.15);">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="1.2" opacity="0.6">
-          <rect x="3" y="12" width="4" height="9"/><rect x="10" y="7" width="4" height="14"/>
+      <div class="w-16 h-16 flex items-center justify-center mb-4"
+           style="background:rgba(232,0,45,0.08); border:1px solid rgba(232,0,45,0.15);">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+             stroke="#C0392B" stroke-width="1.2" opacity="0.6">
+          <rect x="3" y="12" width="4" height="9"/>
+          <rect x="10" y="7" width="4" height="14"/>
           <rect x="17" y="3" width="4" height="18"/>
         </svg>
       </div>
@@ -155,6 +198,7 @@
       </p>
     </div>
     {% endif %}
+
   </div>
 </div>
 
@@ -162,35 +206,31 @@
 
 {% block scripts %}
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.rank-row').forEach(el => {
-      const rank = parseInt(el.dataset.rank);
-      if (rank === 1) el.style.borderColor = 'rgba(232,0,45,0.3)';
-    });
-    document.querySelectorAll('.rank-badge').forEach(el => {
-      const rank = parseInt(el.dataset.rank);
-      if (rank === 1) el.style.color = '#C0392B';
-      else if (rank === 2) el.style.color = '#C0C0C0';
-      else if (rank === 3) el.style.color = '#CD7F32';
-    });
-    document.querySelectorAll('.rank-bar').forEach(el => {
-      const pct = parseFloat(el.dataset.pct);
-      const rank = parseInt(el.dataset.rank);
-      el.style.width = pct + '%';
-      const delay = parseFloat(el.dataset.delay);
-      el.style.transitionDelay = delay + 's';
-      if (rank === 1) el.style.background = '#C0392B';
-      else if (rank === 2) el.style.background = '#C0C0C0';
-      else if (rank === 3) el.style.background = '#CD7F32';
-    });
+document.getElementById('predictForm').addEventListener('submit', function () {
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  document.getElementById('btnText').textContent = 'Processing…';
+  btn.style.opacity = '0.7';
+});
+
+/* ── Animate rank bars + colour badges on load ── */
+document.addEventListener('DOMContentLoaded', function () {
+  const PODIUM = { 1: '#C0392B', 2: '#C0C0C0', 3: '#CD7F32' };
+
+  document.querySelectorAll('.rank-bar').forEach(function (bar) {
+    const pct   = parseFloat(bar.dataset.pct)   || 0;
+    const delay = parseFloat(bar.dataset.delay) || 0;
+    const rank  = parseInt(bar.dataset.rank)    || 99;
+    setTimeout(function () {
+      bar.style.width      = pct + '%';
+      bar.style.background = PODIUM[rank] || '#3A3F50';
+    }, delay * 1000 + 100);
   });
 
-  document.getElementById('predictForm').addEventListener('submit', function() {
-    const btn  = document.getElementById('submitBtn');
-    const text = document.getElementById('btnText');
-    btn.disabled = true;
-    text.textContent = 'Processing…';
-    btn.style.opacity = '0.7';
+  document.querySelectorAll('.rank-badge').forEach(function (badge) {
+    const rank  = parseInt(badge.dataset.rank) || 99;
+    if (PODIUM[rank]) badge.style.color = PODIUM[rank];
   });
+});
 </script>
 {% endblock %}
