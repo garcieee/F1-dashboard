@@ -14,7 +14,7 @@
 # Run:  python training/train_model3_overtake.py
 # ─────────────────────────────────────────────────────────────────────────────
 
-import os, time
+import os, time, datetime
 import fastf1
 import pandas as pd
 import numpy as np
@@ -206,7 +206,7 @@ else:
 
 call_count = 0
 
-for year in range(start_year, 2025):
+for year in range(start_year, datetime.datetime.now().year + 1):
     try:
         schedule   = fastf1.get_event_schedule(year, include_testing=False)
         call_count += 1

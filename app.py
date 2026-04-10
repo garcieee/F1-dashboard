@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 # ── Seasons ───────────────────────────────────────────────────────────────────
 _current_year = datetime.datetime.now().year
-SEASONS = [str(_current_year), str(_current_year + 1)]
+SEASONS = [str(y) for y in range(2018, _current_year + 2)]
 
 # ── Dropdowns ─────────────────────────────────────────────────────────────────
 
@@ -527,4 +527,4 @@ def constructor():
 # ── Entry point ───────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5001)
+    app.run(debug=False, port=5001)

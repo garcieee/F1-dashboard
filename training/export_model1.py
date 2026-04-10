@@ -33,7 +33,7 @@ joblib.dump({
     "model":      model,
     "le_driver":  le_driver,
     "le_circuit": le_circuit,
-}, out_path)
+}, out_path, compress=3)
 
 print(f"Saved to {out_path}")
 print(f"Drivers known to model: {list(le_driver.classes_)}")
