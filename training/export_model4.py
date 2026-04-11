@@ -68,8 +68,11 @@ pipe.fit(X, y)
 # ── Build the "latest known data" lookup for inference ───────────────────────
 # At prediction time (user picks a future season), app.py needs to look up
 # each team's most recent prev_points, prev_rank, etc.
-# We store the latest complete season's stats per constructor.
-latest_season = df["season"].max()
+# Use the last *complete* season (rounds_counted >= 20) as the baseline so
+# partial in-progress seasons don't produce unrealistically low point baselines.
+complete_seasons = df.groupby("season")["rounds_counted"].max()
+complete_seasons = complete_seasons[complete_seasons >= 20].index
+latest_season = int(max(complete_seasons)) if len(complete_seasons) > 0 else int(df["season"].max())
 latest = (df[df["season"] == latest_season]
           .set_index("constructor")[["total_points", "rank", "rounds_counted"]]
           .rename(columns={

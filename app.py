@@ -14,18 +14,23 @@ SEASONS = [str(y) for y in range(_current_year, _current_year + 2)]
 # ── Dropdowns ─────────────────────────────────────────────────────────────────
 
 DRIVERS = [
-    "Alexander Albon", "Antonio Giovinazzi", "Brendon Hartley",
-    "Carlos Sainz", "Charles Leclerc", "Daniel Ricciardo",
-    "Daniil Kvyat", "Esteban Ocon", "Fernando Alonso",
-    "George Russell", "Guanyu Zhou", "Jack Aitken",
-    "Kevin Magnussen", "Kimi Räikkönen", "Lance Stroll",
-    "Lando Norris", "Lewis Hamilton", "Marcus Ericsson",
-    "Max Verstappen", "Mick Schumacher", "Nicholas Latifi",
-    "Nico Hulkenberg", "Nikita Mazepin", "Nyck De Vries",
-    "Pierre Gasly", "Pietro Fittipaldi", "Robert Kubica",
-    "Romain Grosjean", "Sebastian Vettel", "Sergey Sirotkin",
-    "Sergio Perez", "Stoffel Vandoorne", "Valtteri Bottas",
-    "Yuki Tsunoda",
+    # Current / recent grid (2023–2026)
+    "Alexander Albon", "Andrea Kimi Antonelli", "Carlos Sainz",
+    "Charles Leclerc", "Esteban Ocon", "Fernando Alonso",
+    "Franco Colapinto", "Gabriel Bortoleto", "George Russell",
+    "Isack Hadjar", "Jack Doohan", "Jack Aitken",
+    "Lance Stroll", "Lando Norris", "Lewis Hamilton",
+    "Liam Lawson", "Logan Sargeant", "Max Verstappen",
+    "Nico Hulkenberg", "Nyck De Vries", "Oliver Bearman",
+    "Oscar Piastri", "Pierre Gasly", "Sergio Perez",
+    "Valtteri Bottas", "Yuki Tsunoda",
+    # Historical grid (2018–2022, covered by training data)
+    "Antonio Giovinazzi", "Brendon Hartley", "Daniel Ricciardo",
+    "Daniil Kvyat", "Guanyu Zhou", "Kevin Magnussen",
+    "Kimi Räikkönen", "Marcus Ericsson", "Mick Schumacher",
+    "Nicholas Latifi", "Nikita Mazepin", "Pietro Fittipaldi",
+    "Robert Kubica", "Romain Grosjean", "Sebastian Vettel",
+    "Sergey Sirotkin", "Stoffel Vandoorne",
 ]
 
 CIRCUITS = [
