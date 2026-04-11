@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 # ── Seasons ───────────────────────────────────────────────────────────────────
 _current_year = datetime.datetime.now().year
-SEASONS = [str(y) for y in range(2018, _current_year + 2)]
+SEASONS = [str(y) for y in range(_current_year, _current_year + 2)]
 
 # ── Dropdowns ─────────────────────────────────────────────────────────────────
 
